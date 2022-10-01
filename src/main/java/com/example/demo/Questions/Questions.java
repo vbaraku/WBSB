@@ -10,75 +10,81 @@ import java.util.Set;
 public class Questions {
 	
 	@Id
-	@Column(name = "Id")
-	private Integer id;
-	
-	@Column(name = "thematic_element", length = 1000)
-	private String thematicElement;
-	
-	@Column(name = "sub_element", length = 1000)
-	private String subElement;
-	
-	
-	@Column(name = "Statement", length = 1000)
-	private String statement;
-	
-	@Column(name = "Explanation", length = 5500)
-	private String explanation;
+//	@Column()
+	private Integer id; //CRUD
 
-	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL)
-	private Set<Answers> answers;
-	public Questions(){}
-	
-	public Questions(Integer id, String thematicElement, String subElement, String statement, String explanation) {
-		super();
-		this.id = id;
-		this.thematicElement = thematicElement;
-		this.subElement = subElement;
-		this.statement = statement;
-		this.explanation = explanation;
-	}
+	private Integer questionCount;
 
-	public Integer getId() {
-		return id;
-	}
+	@Column(length = 1000)
+	private String category;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	@Column(length = 5500)
+	private String text;
 
-	public String getThematicElement() {
-		return thematicElement;
-	}
+	@Column (length = 32)
+	private String language;
 
-	public void setThematicElement(String thematicElement) {
-		this.thematicElement = thematicElement;
-	}
+	private Set<Countries> countries;
 
-	public String getSubElement() {
-		return subElement;
-	}
+	//Worth considering adding a year here, in case they want user to be able
+	//to filter only questions of a specific year, rather than just answers
 
-	public void setSubElement(String subElement) {
-		this.subElement = subElement;
-	}
 
-	public String getStatement() {
-		return statement;
-	}
 
-	public void setStatement(String statement) {
-		this.statement = statement;
-	}
-
-	public String getExplanation() {
-		return explanation;
-	}
-
-	public void setExplanation(String explanation) {
-		this.explanation = explanation;
-	}
-
+//
+//	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY,
+//			cascade = CascadeType.ALL)
+//	private Set<Answers> answers;
+//	public Questions(){}
+//
+//	public Questions(Integer id, String thematicElement, String subElement, String statement, String explanation) {
+//		super();
+//		this.id = id;
+//		this.thematicElement = thematicElement;
+//		this.subElement = subElement;
+//		this.statement = statement;
+//		this.explanation = explanation;
+//	}
+//
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
+//
+//	public String getThematicElement() {
+//		return thematicElement;
+//	}
+//
+//	public void setThematicElement(String thematicElement) {
+//		this.thematicElement = thematicElement;
+//	}
+//
+//	public String getSubElement() {
+//		return subElement;
+//	}
+//
+//	public void setSubElement(String subElement) {
+//		this.subElement = subElement;
+//	}
+//
+//	public String getStatement() {
+//		return statement;
+//	}
+//
+//	public void setStatement(String statement) {
+//		this.statement = statement;
+//	}
+//
+//	public String getExplanation() {
+//		return explanation;
+//	}
+//
+//	public void setExplanation(String explanation) {
+//		this.explanation = explanation;
+//	}
+//
 
 }
