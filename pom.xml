@@ -61,6 +61,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>11.0.2</version>
@@ -140,24 +146,24 @@
 				</executions>
 			</plugin>
 
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<configuration>
-							<target>
-								<copy todir="${project.build.directory}/src/main/resources/static">
-									<fileset dir="${project.basedir}/frontend/skeleton/build"/>
-								</copy>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<artifactId>maven-antrun-plugin</artifactId>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>generate-resources</phase>-->
+<!--						<configuration>-->
+<!--							<target>-->
+<!--								<copy todir="${project.build.directory}/src/main/resources/static">-->
+<!--									<fileset dir="${project.basedir}/frontend/skeleton/build"/>-->
+<!--								</copy>-->
+<!--							</target>-->
+<!--						</configuration>-->
+<!--						<goals>-->
+<!--							<goal>run</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 

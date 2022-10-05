@@ -5,12 +5,11 @@ import { CssBaseline, StyledEngineProvider } from "@mui/material";
 
 import axios from "axios";
 import Cookies from "universal-cookie";
+import UploadForm from "./components/UploadForm";
 // routing
 // import Routes from './routes';
 
-// defaultTheme
-import themes from "./themes/themes";
-// import themes from 'themes';
+
 
 // ==============================|| APP ||============================== //
 
@@ -31,11 +30,7 @@ const App = () => {
   //     }
   // );
   return (
-    <div>
-      {/* <Locales /> */}
-      hello
-      {/* <Locales /> */}
-    </div>
+		<UploadForm></UploadForm>
   );
 };
 
