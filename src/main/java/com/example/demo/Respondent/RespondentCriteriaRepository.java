@@ -59,7 +59,7 @@ public class RespondentCriteriaRepository {
         Root<Respondent> respondentRoot = criteriaQuery.from(Respondent.class);
 
 
-        Join<Respondent, Answer> answers = respondentRoot.join("answers", JoinType.RIGHT);
+        Join<Respondent, Answer> answers = respondentRoot.join("answers", JoinType.INNER);
 //        Join<Questions, Answers> questions = answers.join("question", JoinType.INNER);
         Predicate predicate = getPredicate(respondentCriteria, respondentRoot, answers);
 
@@ -101,12 +101,6 @@ public class RespondentCriteriaRepository {
 
 
 
-        if (userSearchCriteria.getAge() != null) {
-            predicateList.add(
-                    cb.equal(userRoot.get("age"), userSearchCriteria.getAge())
-            );
-        }
-
         if (userSearchCriteria.getGender() != null) {
             predicateList.add(
                     cb.equal(userRoot.get("gender"), userSearchCriteria.getGender())
@@ -135,6 +129,28 @@ public class RespondentCriteriaRepository {
                 cb.equal(answerRoot.get("question"), userSearchCriteria.getQuestionId())
         );
 
+        if (userSearchCriteria.getYear() != null){
+            predicateList.add(
+                    cb.equal(userRoot.get("year"), userSearchCriteria.getYear())
+            );
+        }
+
+        String age = userSearchCriteria.getAge();
+        if(age != null){
+            Predicate predicate;
+
+            if(age.equals("65+")) {
+                predicate = cb.greaterThanOrEqualTo(userRoot.get("age"),65);
+            }else{
+                String[] ages = age.split("-");
+                int startAge = Integer.parseInt(ages[0]);
+                int endAge = Integer.parseInt(ages[1]);
+                predicate = cb.between(userRoot.get("age"),startAge, endAge);
+            }
+            predicateList.add(
+predicate
+            );
+        }
         return cb.and(predicateList.toArray(new Predicate[0]));
 
     }

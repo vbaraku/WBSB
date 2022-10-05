@@ -1,12 +1,6 @@
-import { useSelector } from "react-redux";
-
-import { ThemeProvider } from "@mui/material/styles";
-import { CssBaseline, StyledEngineProvider } from "@mui/material";
-
-import axios from "axios";
-import Cookies from "universal-cookie";
 import UploadForm from "./components/UploadForm";
 import QuestionNav from "./components/QuestionNav";
+import Graphs from "./components/Graphs";
 // routing
 // import Routes from './routes';
 
@@ -31,7 +25,8 @@ const App = () => {
   return (
     <>
       <UploadForm></UploadForm>
-      <QuestionNav></QuestionNav>
+      {/* <QuestionNav></QuestionNav> */}
+      <Graphs></Graphs>
     </>
   );
 };
