@@ -7,8 +7,10 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import com.example.demo.DRUser.Respondent;
-import com.example.demo.DRUser.RespondentRepository;
+import com.example.demo.Respondent.Respondent;
+import com.example.demo.Respondent.RespondentCriteria;
+import com.example.demo.Respondent.RespondentCriteriaRepository;
+import com.example.demo.Respondent.RespondentRepository;
 import com.example.demo.Question.Question;
 import com.example.demo.Question.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +32,21 @@ public class AnswerController {
 
     AnswerRepository answerRepository;
 
+    RespondentCriteriaRepository respondentCriteriaRepository;
+
     @PersistenceContext
     EntityManager entityManager;
 
     @Autowired
     public AnswerController(QuestionRepository questionRepository,
                             RespondentRepository respondentRepository,
-                            AnswerRepository answerRepository) {
+                            AnswerRepository answerRepository,
+                            RespondentCriteriaRepository respondentCriteriaRepository
+    ) {
         this.questionRepository = questionRepository;
         this.respondentRepository = respondentRepository;
         this.answerRepository = answerRepository;
+        this.respondentCriteriaRepository = respondentCriteriaRepository;
     }
 
     public AnswerController() {
@@ -61,7 +68,7 @@ public class AnswerController {
     public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file) {
 
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "ISO-8859-1"));
             String line = reader.readLine();
             List<Question> questions = insertQuestions(line);
 
@@ -69,7 +76,7 @@ public class AnswerController {
             List<Respondent> respondents = new ArrayList<>();
             List<Answer> answers = new ArrayList<>();
             int count = 0;
-            while ((line = reader.readLine()) != null && count < 5) {
+            while ((line = reader.readLine()) != null) {
                 row = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
                 Respondent respondent = new Respondent(
                         row.get(0),
@@ -77,8 +84,11 @@ public class AnswerController {
                         row.get(2),
                         row.get(3),
                         row.get(4),
-                        row.get(5)
+                        row.get(5),
+                        2021
                 );
+                //TODO: Do something about the year above, maybe from form, idfk
+
                 int index = 6; // change to 7 if empty column maybe, or remove empty column in csv processing
                 //7:1, 8:2, 9:3
                 for (Question question : questions) {
@@ -100,7 +110,7 @@ public class AnswerController {
         } catch (IOException io) {
             return ResponseEntity.status(500).build();
         }
-        return ResponseEntity.ok().body("");
+        return ResponseEntity.ok().build();
 //        Object obj = selectedFile;
 //        System.out.println(selectedFile.getOriginalFilename());
 //        return ResponseEntity.ok(selectedFile.getName());
@@ -120,23 +130,29 @@ public class AnswerController {
         questionRepository.saveAll(questions);
         return questions;
     }
-//	@GetMapping
-//	public List<Answers> getAllAnswers(@RequestParam(required = false) String userId) {
-//		try {
-//			List<Answers> answers = new ArrayList<>();
-//			if (userId == null)
-//				answersDao.findAll().forEach(answers::add);
-//			else
-//				answersDao.findByUserIdContaining(userId).forEach(answers::add);
-//			if (answers.isEmpty()) {
-//				return null;
-//			}
-//			return answers;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+
+    @GetMapping
+    public Map<String, Float> getAnswerBreakdown(
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) String region,
+            @RequestParam(required = false) String regionType,
+            @RequestParam(required = false) String nationality,
+            @RequestParam(required = false) String gender,
+            @RequestParam(required = false) String age,
+            @RequestParam String country,
+            @RequestParam String language,
+            @RequestParam Long questionId
+    ) {
+        try {
+            Map<String, Float> answers = new HashMap<>();
+            RespondentCriteria criteria = new RespondentCriteria(year, region, regionType, nationality, gender, age, country, language, questionId);
+            answers = respondentCriteriaRepository.getBreakdown(criteria);
+            return answers;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 //
 //	@GetMapping("/completed")
 //	public Long getNumberOfCompletions(

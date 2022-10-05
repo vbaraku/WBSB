@@ -1,10 +1,10 @@
-package com.example.demo.DRUser;
+package com.example.demo.Respondent;
 
 //import com.example.demo.Answers.Answers;
 
+import com.example.demo.Answers.Answer;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -21,12 +21,18 @@ public class Respondent {
     private String gender;
     private Integer age;
     private String nationality;
+    private Integer year;
+
+
+    @OneToMany(mappedBy = "respondent", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Answer> answers;
 
     public Respondent(){
         super();
     }
 
-    public Respondent(String region, String regionType, String municipality, String gender, String age, String nationality) {
+    public Respondent(String region, String regionType, String municipality, String gender, String age, String nationality, Integer year) {
         this.region = region.trim();
         this.regionType = regionType.trim();
         this.municipality = municipality.trim();
@@ -36,6 +42,7 @@ public class Respondent {
         }catch(NumberFormatException e){
             this.age = 0;
         }
+        this.year = year;
         this.nationality = nationality.trim();
     }
 
@@ -93,6 +100,14 @@ public class Respondent {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }
 

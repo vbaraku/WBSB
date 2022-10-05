@@ -6,15 +6,14 @@ import { CssBaseline, StyledEngineProvider } from "@mui/material";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import UploadForm from "./components/UploadForm";
+import QuestionNav from "./components/QuestionNav";
 // routing
 // import Routes from './routes';
-
-
 
 // ==============================|| APP ||============================== //
 
 const App = () => {
-//   const customization = useSelector((state) => state.customization);
+  //   const customization = useSelector((state) => state.customization);
   // const cookies = new Cookies();
   // axios.interceptors.request.use(
   //     (config) => {
@@ -30,7 +29,10 @@ const App = () => {
   //     }
   // );
   return (
-		<UploadForm></UploadForm>
+    <>
+      <UploadForm></UploadForm>
+      <QuestionNav></QuestionNav>
+    </>
   );
 };
 

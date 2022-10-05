@@ -1,8 +1,7 @@
 package com.example.demo.Answers;
 
-import com.example.demo.DRUser.Respondent;
+import com.example.demo.Respondent.Respondent;
 import com.example.demo.Question.Question;
-import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 

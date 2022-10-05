@@ -2,6 +2,8 @@ package com.example.demo.Question;
 
 //import com.example.demo.Answers.Answers;
 
+import com.example.demo.Answers.Answer;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +30,10 @@ public class Question {
 	@Column (length = 32)
 	private String language;
 
+
+	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL)
+	private Set<Answer> answers;
 //	@OneToMany
 	@ElementCollection
 
@@ -52,61 +58,51 @@ public class Question {
 	//to filter only questions of a specific year, rather than just answers
 
 
+	public Integer getId() {
+		return id;
+	}
 
-//
-//	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY,
-//			cascade = CascadeType.ALL)
-//	private Set<Answers> answers;
-//	public Questions(){}
-//
-//	public Questions(Integer id, String thematicElement, String subElement, String statement, String explanation) {
-//		super();
-//		this.id = id;
-//		this.thematicElement = thematicElement;
-//		this.subElement = subElement;
-//		this.statement = statement;
-//		this.explanation = explanation;
-//	}
-//
-//	public Integer getId() {
-//		return id;
-//	}
-//
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
-//
-//	public String getThematicElement() {
-//		return thematicElement;
-//	}
-//
-//	public void setThematicElement(String thematicElement) {
-//		this.thematicElement = thematicElement;
-//	}
-//
-//	public String getSubElement() {
-//		return subElement;
-//	}
-//
-//	public void setSubElement(String subElement) {
-//		this.subElement = subElement;
-//	}
-//
-//	public String getStatement() {
-//		return statement;
-//	}
-//
-//	public void setStatement(String statement) {
-//		this.statement = statement;
-//	}
-//
-//	public String getExplanation() {
-//		return explanation;
-//	}
-//
-//	public void setExplanation(String explanation) {
-//		this.explanation = explanation;
-//	}
-//
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
+	public Integer getQuestionCount() {
+		return questionCount;
+	}
+
+	public void setQuestionCount(Integer questionCount) {
+		this.questionCount = questionCount;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public Set<String> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(Set<String> countries) {
+		this.countries = countries;
+	}
 }
