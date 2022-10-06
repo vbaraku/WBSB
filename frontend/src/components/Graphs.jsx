@@ -1,9 +1,12 @@
 import React from "react";
 import Highcharts from "highcharts";
-import "highcharts/more";
 import HighchartsReact from "highcharts-react-official";
 import {useEffect, useState} from 'react'
 import axios from "axios";
+require("highcharts/highcharts-more")(Highcharts);
+require("highcharts/modules/exporting")(Highcharts);
+
+
 export default function Graphs() {
     const [answers, setAnswers] = useState({});
     useEffect(() => {
@@ -49,11 +52,6 @@ export default function Graphs() {
     ],
     xAxis: [
         {
-        //   labels: {
-        //     formatter: function () {
-        //       return JSON.stringify(Object.keys(answers)[0]) || "dss"; // no to be customize
-        //     }
-        //   }
             categories: Object.keys(answers)
         },
         {
@@ -65,7 +63,33 @@ export default function Graphs() {
             }
           }
         }
-      ]
+      ],
+    plotOptions: {
+        packedbubble: {
+          minSize: "30%",
+          maxSize: "80%",
+          //zMin: 0,
+          //zMax: 1000,
+          layoutAlgorithm: {
+            splitSeries: false,
+            gravitationalConstant: 0.02
+          },
+          dataLabels: {
+            enabled: true,
+            format: "{series.name}",
+            filter: {
+              property: "y",
+              operator: ">",
+              value: 250
+            },
+            style: {
+              color: "black",
+              textOutline: "none",
+              fontWeight: "normal"
+            }
+          }
+        }
+    }
   };
   return (
     <div>

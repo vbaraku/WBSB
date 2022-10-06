@@ -1,4 +1,4 @@
-package com.example.demo.Answers;
+package com.example.wbsb.Answers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,12 +7,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import com.example.demo.Respondent.Respondent;
-import com.example.demo.Respondent.RespondentCriteria;
-import com.example.demo.Respondent.RespondentCriteriaRepository;
-import com.example.demo.Respondent.RespondentRepository;
-import com.example.demo.Question.Question;
-import com.example.demo.Question.QuestionRepository;
+import com.example.wbsb.Respondent.Respondent;
+import com.example.wbsb.Respondent.RespondentCriteria;
+import com.example.wbsb.Respondent.RespondentCriteriaRepository;
+import com.example.wbsb.Respondent.RespondentRepository;
+import com.example.wbsb.Question.Question;
+import com.example.wbsb.Question.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

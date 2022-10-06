@@ -1,4 +1,4 @@
-package com.example.demo.Security.JWT;
+package com.example.wbsb.Security.JWT;
 
 public class UsernameAndPasswordAuthenticationRequest {
     private String email;

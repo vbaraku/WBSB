@@ -1,4 +1,4 @@
-    package com.example.demo;
+    package com.example.wbsb;
 
     import org.springframework.context.annotation.Configuration;
     import org.springframework.core.io.ClassPathResource;

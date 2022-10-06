@@ -1,4 +1,4 @@
-package com.example.demo.Respondent;
+package com.example.wbsb.Respondent;
 
 public class BreakdownQuery {
     private Long count;

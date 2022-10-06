@@ -1,8 +1,8 @@
-package com.example.demo.Question;
+package com.example.wbsb.Question;
 
 //import com.example.demo.Answers.Answers;
 
-import com.example.demo.Answers.Answer;
+import com.example.wbsb.Answers.Answer;
 
 import javax.persistence.*;
 import java.util.HashSet;

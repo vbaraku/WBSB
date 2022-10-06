@@ -1,9 +1,6 @@
-package com.example.demo.Respondent;
+package com.example.wbsb.Respondent;
 
-import com.example.demo.Answers.Answer;
-import com.example.demo.Question.Question;
-import com.example.demo.Respondent.Respondent;
-import com.example.demo.Respondent.RespondentCriteria;
+import com.example.wbsb.Answers.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Repository
 public class RespondentCriteriaRepository {

@@ -1,8 +1,8 @@
-package com.example.demo.Respondent;
+package com.example.wbsb.Respondent;
 
 //import com.example.demo.Answers.Answers;
 
-import com.example.demo.Answers.Answer;
+import com.example.wbsb.Answers.Answer;
 
 import javax.persistence.*;
 import java.util.Set;

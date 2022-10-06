@@ -1,4 +1,4 @@
-package com.example.demo.Respondent;
+package com.example.wbsb.Respondent;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

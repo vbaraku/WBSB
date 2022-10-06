@@ -1,7 +1,7 @@
-package com.example.demo.Answers;
+package com.example.wbsb.Answers;
 
-import com.example.demo.Respondent.Respondent;
-import com.example.demo.Question.Question;
+import com.example.wbsb.Respondent.Respondent;
+import com.example.wbsb.Question.Question;
 
 import javax.persistence.*;
 
