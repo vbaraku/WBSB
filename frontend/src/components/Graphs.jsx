@@ -1,5 +1,6 @@
 import React from "react";
 import Highcharts from "highcharts";
+import "highcharts/more";
 import HighchartsReact from "highcharts-react-official";
 import {useEffect, useState} from 'react'
 import axios from "axios";
@@ -13,6 +14,27 @@ export default function Graphs() {
             });
     }, []);
 
+    const [graphTypes, setGraphTypes] = useState([
+        {
+            type:"pie",
+            label:"Pie"
+        },
+        {
+            type:"bar",
+            label:"Bar"
+        },
+        {
+            type:"packedbubble",
+            label:"Bubble"
+        },
+    
+        {
+            type:"line",
+            label:"line"
+        }
+    ]);
+    const [selectedGraphType, setSelectedGraphType] = useState("bar");
+
         
   const options = {
     title: {
@@ -20,9 +42,9 @@ export default function Graphs() {
     },
     series: [
       {
-        type:'pie',
+        type:selectedGraphType,
         data: Object.values(answers),
-        innerSize:"50%"
+        // innerSize:"50%"
       },
     ],
     xAxis: [
@@ -47,6 +69,14 @@ export default function Graphs() {
   };
   return (
     <div>
+        
+        {
+            graphTypes.map((graphType, index) => {
+                return (
+                    <button key={index} onClick={()=>setSelectedGraphType(graphType.type)}>{graphType.label}</button>
+                )
+            })
+        }
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
