@@ -1,6 +1,6 @@
 import UploadForm from "./components/UploadForm";
 import QuestionNav from "./components/QuestionNav";
-import Graphs from "./components/Graphs";
+import Dashboard from "./components/Dashboard";
 // routing
 // import Routes from './routes';
 
@@ -25,8 +25,7 @@ const App = () => {
   return (
     <>
       <UploadForm></UploadForm>
-      {/* <QuestionNav></QuestionNav> */}
-      <Graphs></Graphs>
+      <Dashboard></Dashboard>
     </>
   );
 };
