@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.security.KeyStore;
 import java.util.*;
 
 @Repository
@@ -50,7 +51,7 @@ public class RespondentCriteriaRepository {
 //    }
 
 
-    public Map<String, Float> getBreakdown(RespondentCriteria respondentCriteria) {
+    public List<BreakdownQueryDTO> getBreakdown(RespondentCriteria respondentCriteria) {
         CriteriaQuery<BreakdownQuery> criteriaQuery = cb.createQuery(BreakdownQuery.class);
         Root<Respondent> respondentRoot = criteriaQuery.from(Respondent.class);
 
@@ -59,9 +60,6 @@ public class RespondentCriteriaRepository {
 //        Join<Questions, Answers> questions = answers.join("question", JoinType.INNER);
         Predicate predicate = getPredicate(respondentCriteria, respondentRoot, answers);
 
-        HashMap<String, Float> resMap = new HashMap<>();
-
-
         criteriaQuery.multiselect(cb.count(answers.get("id")), answers.get("text"))
                 .where(predicate)
                 .groupBy(answers.get("text"));
@@ -69,9 +67,10 @@ public class RespondentCriteriaRepository {
         TypedQuery<BreakdownQuery> typedQuery = em.createQuery(criteriaQuery);
         List<BreakdownQuery> res = typedQuery.getResultList();
         Long sum = res.stream().mapToLong(el->el.getCount()).sum();
-        res.forEach(el->resMap.put(el.getAnswer(), ((float)el.getCount()/sum*100f)));
+        List<BreakdownQueryDTO> resList = new ArrayList<BreakdownQueryDTO>();
+        res.forEach(el->resList.add(new BreakdownQueryDTO(((float)el.getCount()/sum*100f), el.getAnswer())));
 
-        return resMap;
+        return resList;
     }
 
     private HashMap<String, Double> getEmptyCategories() {

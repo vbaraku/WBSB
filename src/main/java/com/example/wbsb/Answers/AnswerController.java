@@ -7,10 +7,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import com.example.wbsb.Respondent.Respondent;
-import com.example.wbsb.Respondent.RespondentCriteria;
-import com.example.wbsb.Respondent.RespondentCriteriaRepository;
-import com.example.wbsb.Respondent.RespondentRepository;
+import com.example.wbsb.Respondent.*;
 import com.example.wbsb.Question.Question;
 import com.example.wbsb.Question.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,7 +129,7 @@ public class AnswerController {
     }
 
     @GetMapping
-    public Map<String, Float> getAnswerBreakdown(
+    public List<BreakdownQueryDTO> getAnswerBreakdown(
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String regionType,
@@ -144,10 +141,8 @@ public class AnswerController {
             @RequestParam Long questionId
     ) {
         try {
-            Map<String, Float> answers = new HashMap<>();
             RespondentCriteria criteria = new RespondentCriteria(year, region, regionType, nationality, gender, age, country, language, questionId);
-            answers = respondentCriteriaRepository.getBreakdown(criteria);
-            return answers;
+            return respondentCriteriaRepository.getBreakdown(criteria);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
