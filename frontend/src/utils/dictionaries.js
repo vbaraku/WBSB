@@ -29,9 +29,17 @@ const albanian_dict = {
     "Vlorë",
   ],
 
+  SERBIA_REGIONS: [
+    "Të gjitha",
+    "Beograd",
+    "Vojvodina",
+    "Serbi juglindore",
+    "Serbia Qendrore dhe Perendimore",
+  ],
+
   REGION_TYPES: ["Të gjitha", "Rural", "Urban"],
 
-  NATIONALITIES: [
+  KOSOVO_NATIONALITIES: [
     "Të gjitha",
     "Serb",
     "Shqiptare",
@@ -41,6 +49,27 @@ const albanian_dict = {
     "Turk",
     "Boshnjak",
     "Rom",
+    "Tjetër",
+  ],
+
+  ALBANIA_NATIONALITIES: [
+    "Të gjitha",
+    "Shqiptare",
+    "Grek",
+    "Maqedonas",
+    "Arumun",
+    "Tjetër",
+  ],
+
+  SERBIA_NATIONALITIES: [
+    "Të gjitha",
+    "Serb",
+    "Slovak",
+    "Kroat",
+    "Hungarez",
+    "Boshnjak",
+    "Rom",
+    "Refuzoj te përgjigjem",
     "Tjetër",
   ],
 
@@ -68,33 +97,41 @@ const english_dict = {
     "All",
     "Gjilan",
     "Pristina",
-    "Pejë",
+    "Peja",
     "Prizren",
     "Ferizaj",
-    "Mitrovicë",
-    "Gjakovë",
+    "Mitrovica",
+    "Gjakova",
     "Northern Mitrovica",
   ],
 
   ALBANIA_REGIONS: [
-    "Të gjitha",
+    "All",
     "Berat",
-    "Durrës",
+    "Durres",
     "Elbasan",
     "Fier",
-    "Gjirokastër",
-    "Korçë",
-    "Kukës",
-    "Lezhë",
-    "Dibër",
-    "Shkodër",
-    "Tiranë",
-    "Vlorë",
+    "Gjirokaster",
+    "Korca",
+    "Kukes",
+    "Lezha",
+    "Diber",
+    "Shkoder",
+    "Tirana",
+    "Vlora",
+  ],
+
+  SERBIA_REGIONS: [
+    "All",
+    "Beograd",
+    "Vojvodina",
+    "Southeast Serbia",
+    "Central and Western Serbia",
   ],
 
   REGION_TYPES: ["All", "Rural", "Urban"],
 
-  NATIONALITIES: [
+  KOSOVO_NATIONALITIES: [
     "All",
     "Serb",
     "Albanian",
@@ -104,6 +141,27 @@ const english_dict = {
     "Turkish",
     "Bosniak",
     "Roma",
+    "Other",
+  ],
+
+  ALBANIA_NATIONALITIES: [
+    "All",
+    "Albanian",
+    "Greek",
+    "Macedonian",
+    "Arumun",
+    "Other",
+  ],
+
+  SERBIA_NATIONALITIES: [
+    "All",
+    "Serb",
+    "Slovak",
+    "Croatian",
+    "Hungarian",
+    "Bosniaks",
+    "Roma",
+    "I refuse to answer",
     "Other",
   ],
 
