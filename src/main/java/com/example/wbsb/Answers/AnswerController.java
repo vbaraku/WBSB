@@ -72,7 +72,6 @@ public class AnswerController {
             List<String> row;
             List<Respondent> respondents = new ArrayList<>();
             List<Answer> answers = new ArrayList<>();
-            int count = 0;
             while ((line = reader.readLine()) != null) {
                 row = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
                 Respondent respondent = new Respondent(
@@ -89,10 +88,12 @@ public class AnswerController {
                 int index = 6; // change to 7 if empty column maybe, or remove empty column in csv processing
                 //7:1, 8:2, 9:3
                 for (Question question : questions) {
+                    while(row.get(index).equals("")){
+                        index++;
+                    }
                     Answer answer = new Answer(respondent, question, row.get(index++));
                     answers.add(answer);
                 }
-                count++;
                 respondents.add(respondent);
             }
 
@@ -119,10 +120,24 @@ public class AnswerController {
         //TODO: Inform client to add column between user/answer with category name
         headers = headers.subList(6, headers.size());
 
+        String currentCategory = "";
+        List<Question> questions = new ArrayList<>();
         AtomicInteger questionCount = new AtomicInteger();
-        List<Question> questions = headers.stream().map((question) -> {
-            return new Question(questionCount.getAndIncrement(), "Sample Category", question, "Albanian", "Kosova");
-        }).collect(Collectors.toList());
+        for (String element : headers) {
+            if (element.split(" ")[0].equals("Category:")) {
+                currentCategory = element.replace("Category: ", "");
+            } else {
+                questions.add(
+                        new Question(
+                                questionCount.getAndIncrement(),
+                                currentCategory,
+                                element,
+                                "Albanian",
+                                "Kosova"));
+            }
+        }
+
+//
 
         questionRepository.saveAll(questions);
         return questions;

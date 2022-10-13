@@ -25,7 +25,7 @@ const albanianDict = {
 
     KOSOVO_NATIONALITIES: ['Të gjitha', 'Serb', 'Shqiptare', 'Malazez', 'Egjiptian', 'Ashkali', 'Turk', 'Boshnjak', 'Rom', 'Tjetër'],
 
-    ALBANIA_NATIONALITIES: ['Të gjitha', 'Shqiptare', 'Grek', 'Maqedonas', 'Arumun', 'Tjetër'],
+    ALBANIA_NATIONALITIES: ['Të gjitha', 'Shqiptare', 'Greke', 'Maqedonase', 'Arumune', 'Tjetër'],
 
     SERBIA_NATIONALITIES: ['Të gjitha', 'Serb', 'Slovak', 'Kroat', 'Hungarez', 'Boshnjak', 'Rom', 'Refuzoj te përgjigjem', 'Tjetër'],
 
