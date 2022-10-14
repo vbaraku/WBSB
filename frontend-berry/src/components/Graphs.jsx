@@ -11,17 +11,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
+import Button from '@mui/material/Button';
 
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
-export default function Graphs({ answers }) {
+export default function Graphs({ question, answers }) {
     const [selectedGraphType, setSelectedGraphType] = useState('column');
 
     const displayChart = () => {
-        if (selectedGraphType === 'packedbubble') return <PieOrBarChart answers={answers} selectedGraphType={selectedGraphType} />;
-        if (selectedGraphType === 'stackedbar') return <StackedBarChart answers={answers} />;
-        return <PieOrBarChart answers={answers} selectedGraphType={selectedGraphType} />;
+        if (selectedGraphType === 'packedbubble')
+            return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
+        if (selectedGraphType === 'stackedbar') return <StackedBarChart question={question} answers={answers} />;
+        return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
     };
     const graphTypes = [
         {
@@ -32,10 +34,10 @@ export default function Graphs({ answers }) {
             type: 'column',
             label: 'Bar'
         },
-        {
-            type: 'packedbubble',
-            label: 'Bubble'
-        },
+        // {
+        //     type: 'packedbubble',
+        //     label: 'Bubble'
+        // },
 
         {
             type: 'stackedbar',
@@ -44,15 +46,31 @@ export default function Graphs({ answers }) {
     ];
 
     return (
-        <div>
-            <div>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                alignItems: 'center',
+                alignSelf: 'stretch',
+                marginTop: '50px'
+            }}
+        >
+            <div style={{ display: 'flex' }}>
                 {graphTypes.map((graphType, index) => (
-                    <button type="button" key={index} onClick={() => setSelectedGraphType(graphType.type)}>
+                    <Button
+                        sx={{ marginLeft: 1, width: '150px' }}
+                        variant="outlined"
+                        type="submit"
+                        backgroundColor="#ADD8E6"
+                        key={index}
+                        onClick={() => setSelectedGraphType(graphType.type)}
+                    >
                         {graphType.label}
-                    </button>
+                    </Button>
                 ))}
-                {displayChart()}
             </div>
+            <div style={{ width: '90%' }}>{displayChart()}</div>
         </div>
     );
 }

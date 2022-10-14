@@ -23,6 +23,7 @@ import HelpCenterRoundedIcon from '@mui/icons-material/HelpCenterRounded';
 import { ListSubheader } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Collapse from '@mui/material/Collapse';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 // import SendIcon from '@mui/icons-material/Send';
 // import {
@@ -54,7 +55,7 @@ export default function ResponsiveDrawer({ window, categories, setSelectedQuesti
                 subheader={
                     <ListSubheader component="div" id="nested-list-subheader">
                         {/* Nested List Items */}
-                        Questions
+                        WBSB
                     </ListSubheader>
                 }
             >
@@ -91,6 +92,14 @@ export default function ResponsiveDrawer({ window, categories, setSelectedQuesti
                     >
                         <MenuIcon />
                     </IconButton>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button variant="text" key={page} sx={{ color: 'white' }}>
+                                {page}
+                            </Button>
+                        ))}
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0, md: 0 } }} aria-label="mailbox folders">
@@ -134,9 +143,9 @@ const Category = ({ category, setSelectedQuestion }) => {
                     setOpen((curr) => !curr);
                 }}
             >
-                {/* <ListItemIcon> */}
-                {/* <InboxIcon /> */}
-                {/* </ListItemIcon> */}
+                {/* <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon> */}
                 <ListItemText primary={category.category} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
@@ -146,10 +155,13 @@ const Category = ({ category, setSelectedQuestion }) => {
                         <ListItemButton
                             sx={{ pl: 4 }}
                             onClick={() => {
-                                setSelectedQuestion(q.questionId);
+                                setSelectedQuestion(q);
                             }}
                         >
-                            <ListItemText primary={q.questionText} />
+                            {/* <ListItemIcon>
+                                <ArrowForwardIosIcon />
+                            </ListItemIcon> */}
+                            <ListItemText primary={` - ${q.questionText}`} />
                         </ListItemButton>
                     </List>
                 ))}

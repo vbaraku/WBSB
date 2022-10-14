@@ -17,7 +17,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
         setFilters({ ...filters, [filter]: value });
     };
     return (
-        <>
+        <div>
             <SelectForm
                 value={filters.year}
                 values={years}
@@ -66,7 +66,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
                     handleChange('age', e.target.value);
                 }}
             />
-        </>
+        </div>
     );
 }
 

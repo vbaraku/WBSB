@@ -8,7 +8,7 @@ import FilterBar from './FilterBar';
 export default function Dashboard() {
     const [answers, setAnswers] = useState([]);
     const [questions, setQuestions] = useState([]);
-    const [selectedQuestion, setSelectedQuestion] = useState(1);
+    const [selectedQuestion, setSelectedQuestion] = useState({ questionText: '', questionId: null });
     // TODO: add a context for the language || in other words, make the bottom thing dynamic (not always albanian)
     const dict = albanianDict;
 
@@ -27,7 +27,7 @@ export default function Dashboard() {
             }
             return acc;
         }, {});
-        params.questionId = selectedQuestion;
+        params.questionId = selectedQuestion.questionId || 1;
         params.country = 'Kosova';
         params.language = 'Albanian';
 
@@ -39,6 +39,8 @@ export default function Dashboard() {
     useEffect(() => {
         axios.get('/api/questions', { params: { country: 'Kosova', language: 'Albanian' } }).then((response) => {
             setQuestions(response.data);
+            console.log(response.data[0].questions[0]);
+            setSelectedQuestion(response.data[0].questions[0]);
         });
     }, []);
 
@@ -49,10 +51,10 @@ export default function Dashboard() {
             <div style={{ width: '15%' }}>
                 <MiniDrawer categories={questions} setSelectedQuestion={setSelectedQuestion} />
             </div>
-            <div style={{ width: '85%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '85%' }}>
                 <FilterBar dict={dict} filters={filters} setFilters={setFilters} />
 
-                <Graphs answers={answers} />
+                <Graphs question={selectedQuestion} answers={answers} />
             </div>
         </div>
     );

@@ -5,10 +5,10 @@ import HighchartsReact from 'highcharts-react-official';
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
-export default function StackedBarChart({ answers }) {
+export default function StackedBarChart({ question, answers }) {
     const options = {
         title: {
-            text: 'My chart'
+            text: question
         },
         chart: {
             type: 'bar'

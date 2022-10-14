@@ -5,10 +5,13 @@ import HighchartsReact from 'highcharts-react-official';
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
-export default function PieChart({ answers, selectedGraphType }) {
+export default function PieChart({ question, answers, selectedGraphType }) {
     const options = {
         title: {
-            text: 'My chart'
+            text: question.questionText
+        },
+        subtitle: {
+            text: 'Burimi: securitybarometer.qkss.org'
         },
         chart: {
             type: selectedGraphType
