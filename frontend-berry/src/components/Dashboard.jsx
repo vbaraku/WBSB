@@ -7,7 +7,7 @@ import FilterBar from './FilterBar';
 
 export default function Dashboard() {
     const [answers, setAnswers] = useState([]);
-
+    const [questions, setQuestions] = useState([]);
     // TODO: add a context for the language || in other words, make the bottom thing dynamic (not always albanian)
     const dict = albanianDict;
 
@@ -35,12 +35,18 @@ export default function Dashboard() {
         });
     }, [filters, dict.ALL]);
 
+    useEffect(() => {
+        axios.get('/api/questions', { params: { country: 'Kosova', language: 'Albanian' } }).then((response) => {
+            setQuestions(response.data);
+        });
+    }, []);
+
     return (
         <div style={{ display: 'flex', marginTop: '100px' }}>
             {/* <QuestionNav></QuestionNav> */}
 
             <div style={{ width: '15%' }}>
-                <MiniDrawer />
+                <MiniDrawer categories={questions} />
             </div>
             <div style={{ width: '85%' }}>
                 <FilterBar dict={dict} filters={filters} setFilters={setFilters} />
