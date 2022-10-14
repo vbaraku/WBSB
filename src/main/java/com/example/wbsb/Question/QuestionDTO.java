@@ -1,33 +1,27 @@
 package com.example.wbsb.Question;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class QuestionDTO {
-    String category;
-    List<String> questions;
+    private String questionText;
+    private Integer questionId;
 
-    public QuestionDTO() {
+    public QuestionDTO(String questionText, Integer questionId) {
+        this.questionText = questionText;
+        this.questionId = questionId;
     }
 
-    public QuestionDTO(String category, List<Question> questions) {
-        this.category = category;
-        this.questions = questions.stream().map(question -> question.getText()).collect(Collectors.toList());
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public String getCategory() {
-        return category;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public List<String> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<String> questions) {
-        this.questions = questions;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 }

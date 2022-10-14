@@ -19,16 +19,16 @@ public class QuestionController {
 		this.questionRepository = questionRepository;
 	}
 	@GetMapping
-	public List<QuestionDTO> getAllQuestions(@RequestParam String country, @RequestParam String language) {
+	public List<CategoryDTO> getAllQuestions(@RequestParam String country, @RequestParam String language) {
 		try {
 			List<Question> questions = new ArrayList<>();
 			questionRepository.findAllByCountriesAndAndLanguage(country, language).forEach(questions::add);
 			Map<String, List<Question>> questionsByCategory = questions.stream().collect(Collectors.groupingBy(Question::getCategory));
-			List<QuestionDTO> questionDTOs = new ArrayList<>();
+			List<CategoryDTO> questionDTOs = new ArrayList<>();
 			for (Map.Entry<String, List<Question>> entry : questionsByCategory.entrySet()) {
-				QuestionDTO questionDTO = new QuestionDTO();
+				CategoryDTO questionDTO = new CategoryDTO();
 				questionDTO.setCategory(entry.getKey());
-				questionDTO.setQuestions(entry.getValue().stream().map(el->el.getText()).collect(Collectors.toList()));
+				questionDTO.setQuestions(entry.getValue());
 				questionDTOs.add(questionDTO);
 			}
 			return questionDTOs;

@@ -35,9 +35,8 @@ const drawerWidth = 240;
 
 const pages = ['Kosova', 'Shqipëria', 'Serbia'];
 
-export default function ResponsiveDrawer(props) {
+export default function ResponsiveDrawer({ window, categories, setSelectedQuestion }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { window, categories } = props;
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -60,7 +59,7 @@ export default function ResponsiveDrawer(props) {
                 }
             >
                 {categories.map((category, index) => (
-                    <Category key={index} category={category} />
+                    <Category key={index} category={category} setSelectedQuestion={setSelectedQuestion} />
                 ))}
             </List>
         </div>
@@ -126,7 +125,7 @@ export default function ResponsiveDrawer(props) {
     );
 }
 
-const Category = ({ category }) => {
+const Category = ({ category, setSelectedQuestion }) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -142,10 +141,15 @@ const Category = ({ category }) => {
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                {category.questions.map((q) => (
+                {category.questions.map((q, index) => (
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
-                            <ListItemText primary={q} />
+                        <ListItemButton
+                            sx={{ pl: 4 }}
+                            onClick={() => {
+                                setSelectedQuestion(q.questionId);
+                            }}
+                        >
+                            <ListItemText primary={q.questionText} />
                         </ListItemButton>
                     </List>
                 ))}
