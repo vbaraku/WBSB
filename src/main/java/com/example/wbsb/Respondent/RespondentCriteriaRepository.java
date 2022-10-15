@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.security.KeyStore;
 import java.util.*;
 
 @Repository
@@ -21,34 +20,6 @@ public class RespondentCriteriaRepository {
         this.cb = em.getCriteriaBuilder();
     }
 
-
-//    public HashMap<String, Float> findAllWithFilters(RespondentCriteria respondentCriteria) {
-//        CriteriaQuery<Respondent> criteriaQuery = cb.createQuery(Respondent.class);
-//        Root<Respondent> drUserRoot = criteriaQuery.from(Respondent.class);
-//        Predicate predicate = getPredicate(respondentCriteria, drUserRoot);
-//        criteriaQuery.where(predicate);
-//
-//        TypedQuery<Respondent> typedQuery = em.createQuery(criteriaQuery);
-//        return typedQuery.getResultList();
-//    }
-
-//    public Long countAllCompleted(RespondentSearchCriteria userSearchCriteria) {
-//        CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class);
-//
-//        Root<Respondent> drUserRoot = criteriaQuery.from(Respondent.class);
-//
-//        Predicate predicate = getPredicate(userSearchCriteria, drUserRoot);
-//
-////        Metamodel m = em.getMetamodel();
-////        EntityType<Answers> Answers_ = m.entity(Answers.class);
-//
-//        Join<Respondent, Answers> answers = drUserRoot.join("answers", JoinType.INNER);
-//        criteriaQuery.select(cb.countDistinct(answers.get("user"))).where(predicate);
-//
-//        TypedQuery<Long> typedQuery = em.createQuery(criteriaQuery);
-//        return typedQuery.getSingleResult();
-//
-//    }
 
 
     public List<BreakdownQueryDTO> getBreakdown(RespondentCriteria respondentCriteria) {
@@ -66,26 +37,11 @@ public class RespondentCriteriaRepository {
 
         TypedQuery<BreakdownQuery> typedQuery = em.createQuery(criteriaQuery);
         List<BreakdownQuery> res = typedQuery.getResultList();
-        Long sum = res.stream().mapToLong(el->el.getCount()).sum();
+        Long sum = res.stream().mapToLong(el -> el.getCount()).sum();
         List<BreakdownQueryDTO> resList = new ArrayList<BreakdownQueryDTO>();
-        res.forEach(el->resList.add(new BreakdownQueryDTO(((float)el.getCount()/sum*100f), el.getAnswer())));
+        res.forEach(el -> resList.add(new BreakdownQueryDTO(((float) el.getCount() / sum * 100f), el.getAnswer())));
 
         return resList;
-    }
-
-    private HashMap<String, Double> getEmptyCategories() {
-        HashMap<String, Double> averageQueries = new HashMap<>();
-        String[] questions = {"Content and Curricula",
-                "Collaboration and Networking",
-                "Assessment practices",
-                "Professional Development",
-                "Infrastructure",
-                "Leadership & Governance Practices",
-                "Teaching and Learning Practices"};
-       Arrays.asList(questions).stream().forEach(el->{
-           averageQueries.put(el, 0d);
-       });
-       return averageQueries;
     }
 
 
@@ -93,7 +49,6 @@ public class RespondentCriteriaRepository {
                                    Root<Respondent> userRoot,
                                    Join<Respondent, Answer> answerRoot) {
         List<Predicate> predicateList = new ArrayList<>();
-
 
 
         if (userSearchCriteria.getGender() != null) {
@@ -120,33 +75,56 @@ public class RespondentCriteriaRepository {
             );
         }
 
-        predicateList.add(
-                cb.equal(answerRoot.get("question"), userSearchCriteria.getQuestionId())
-        );
-
-        if (userSearchCriteria.getYear() != null){
+        if (userSearchCriteria.getYear() != null) {
             predicateList.add(
                     cb.equal(userRoot.get("year"), userSearchCriteria.getYear())
             );
         }
 
+        predicateList.add(
+                cb.equal(answerRoot.get("question"), userSearchCriteria.getQuestionId())
+        );
+
+        predicateList.add(
+                cb.equal(userRoot.get("country"), userSearchCriteria.getCountry())
+        );
+        predicateList.add(
+                cb.equal(userRoot.get("language"), userSearchCriteria.getLanguage())
+        );
+
         String age = userSearchCriteria.getAge();
-        if(age != null){
+        if (age != null) {
             Predicate predicate;
 
-            if(age.equals("65+")) {
-                predicate = cb.greaterThanOrEqualTo(userRoot.get("age"),65);
-            }else{
+            if (age.equals("65+")) {
+                predicate = cb.greaterThanOrEqualTo(userRoot.get("age"), 65);
+            } else {
                 String[] ages = age.split("-");
                 int startAge = Integer.parseInt(ages[0]);
                 int endAge = Integer.parseInt(ages[1]);
-                predicate = cb.between(userRoot.get("age"),startAge, endAge);
+                predicate = cb.between(userRoot.get("age"), startAge, endAge);
             }
             predicateList.add(
-predicate
+                    predicate
             );
+
         }
         return cb.and(predicateList.toArray(new Predicate[0]));
 
+    }
+
+    public List<Object> getFilters(RespondentCriteria criteria, String filter) {
+        CriteriaQuery<Object> criteriaQuery = cb.createQuery(Object.class);
+        Root<Respondent> respondentRoot = criteriaQuery.from(Respondent.class);
+        Join<Respondent, Answer> answers = respondentRoot.join("answers", JoinType.INNER);
+        Predicate predicate = getPredicate(criteria, respondentRoot, answers);
+
+        criteriaQuery.select(respondentRoot.get(filter)).distinct(true)
+                .where(predicate);
+
+
+        TypedQuery<Object> typedQuery = em.createQuery(criteriaQuery);
+        List<Object> res = typedQuery.getResultList();
+        return res;
     }
 }

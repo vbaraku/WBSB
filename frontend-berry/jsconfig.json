@@ -4,6 +4,6 @@
         "module": "commonjs",
         "baseUrl": "src"
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "src/components/DashboardGraph/.jsx", "src/components/DashboardGraph/.jsx"],
     "exclude": ["node_modules"]
 }

@@ -24,6 +24,12 @@ public class Respondent {
     private Integer year;
 
 
+    //Language and country of an answer/respondent
+    private String language;
+    private String country;
+
+
+
     @OneToMany(mappedBy = "respondent", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<Answer> answers;
@@ -32,7 +38,7 @@ public class Respondent {
         super();
     }
 
-    public Respondent(String region, String regionType, String municipality, String gender, String age, String nationality, Integer year) {
+    public Respondent(String region, String regionType, String municipality, String gender, String age, String nationality, Integer year, String country, String language) {
         this.region = region.trim();
         this.regionType = regionType.trim();
         this.municipality = municipality.trim();
@@ -44,6 +50,25 @@ public class Respondent {
         }
         this.year = year;
         this.nationality = nationality.trim();
+        this.country = country;
+        this.language = language;
+    }
+
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public long getId() {

@@ -1,40 +1,13 @@
+import { Button } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import Graphs from './Graphs';
+import DashboardGraph from './DashboardGraph';
 import MiniDrawer from './MiniDrawer';
-import { albanianDict, englishtDict, serbianDict } from '../utils/dictionaries';
 import axios from 'axios';
-import FilterBar from './FilterBar';
 
 export default function Dashboard() {
-    const [answers, setAnswers] = useState([]);
+    const [displaySecond, setDisplaySecond] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [selectedQuestion, setSelectedQuestion] = useState({ questionText: '', questionId: null });
-    // TODO: add a context for the language || in other words, make the bottom thing dynamic (not always albanian)
-    const dict = albanianDict;
-
-    const [filters, setFilters] = useState({
-        year: 2021,
-        region: dict.ALL,
-        regionType: dict.ALL,
-        nationality: dict.ALL,
-        gender: dict.ALL,
-        age: dict.ALL
-    });
-    useEffect(() => {
-        const params = Object.entries(filters).reduce((acc, [key, value]) => {
-            if (value !== dict.ALL) {
-                acc[key] = value;
-            }
-            return acc;
-        }, {});
-        params.questionId = selectedQuestion.questionId || 1;
-        params.country = 'Kosova';
-        params.language = 'Albanian';
-
-        axios.get('/api/answer', { params }).then((response) => {
-            setAnswers(response.data);
-        });
-    }, [filters, dict.ALL, selectedQuestion]);
 
     useEffect(() => {
         axios.get('/api/questions', { params: { country: 'Kosova', language: 'Albanian' } }).then((response) => {
@@ -45,17 +18,31 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <div style={{ display: 'flex', marginTop: '100px' }}>
-            {/* <QuestionNav></QuestionNav> */}
-
+        <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ width: '15%' }}>
                 <MiniDrawer categories={questions} setSelectedQuestion={setSelectedQuestion} />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '85%' }}>
-                <FilterBar dict={dict} filters={filters} setFilters={setFilters} />
-
-                <Graphs question={selectedQuestion} answers={answers} />
+            <div>
+                <DashboardGraph selectedQuestion={selectedQuestion} />
             </div>
+
+            {displaySecond ? (
+                <div>
+                    <DashboardGraph selectedQuestion={selectedQuestion} />
+                </div>
+            ) : (
+                <div>
+                    <Button
+                        variant="contained"
+                        type="button"
+                        onClick={() => {
+                            setDisplaySecond(true);
+                        }}
+                    >
+                        +
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }

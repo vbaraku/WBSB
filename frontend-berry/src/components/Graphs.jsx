@@ -19,7 +19,20 @@ require('highcharts/modules/exporting')(Highcharts);
 export default function Graphs({ question, answers }) {
     const [selectedGraphType, setSelectedGraphType] = useState('column');
 
+    // const [graph, setGraph] = useState(null);
+
+    // useEffect(() => {
+    //     if (selectedGraphType === 'packedbubble') {
+    //         setGraph(<PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />);
+    //     } else if (selectedGraphType === 'stackedbar') {
+    //         setGraph(<StackedBarChart question={question} answers={answers} />);
+    //     } else {
+    //         setGraph(<PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />);
+    //     }
+    // }, [selectedGraphType]);
+
     const displayChart = () => {
+        console.log(selectedGraphType);
         if (selectedGraphType === 'packedbubble')
             return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
         if (selectedGraphType === 'stackedbar') return <StackedBarChart question={question} answers={answers} />;

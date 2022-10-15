@@ -36,7 +36,6 @@ public class Question {
 	private Set<Answer> answers;
 //	@OneToMany
 	@ElementCollection
-
 	//TODO: When a csv is processed and we have the same question twice, we just edit countries
 	//field instead of adding multiple questions of the same text
 	private Set<String> countries;

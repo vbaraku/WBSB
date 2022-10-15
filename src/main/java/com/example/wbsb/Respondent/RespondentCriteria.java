@@ -1,5 +1,7 @@
 package com.example.wbsb.Respondent;
 
+import lombok.NoArgsConstructor;
+
 public class RespondentCriteria {
     Integer year;
     String region;
@@ -18,6 +20,12 @@ public class RespondentCriteria {
         this.nationality = nationality;
         this.gender = gender;
         this.age = age;
+        this.country = country;
+        this.language = language;
+        this.questionId = questionId;
+    }
+
+    public RespondentCriteria(String country, String language, Long questionId) {
         this.country = country;
         this.language = language;
         this.questionId = questionId;

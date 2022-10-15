@@ -4,8 +4,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
 import UploadForm from './components/UploadForm';
-import QuestionNav from './components/QuestionNav';
-import Dashboard from './components/Dashboard';
+// import QuestionNav from './components/QuestionNav';
+// import DashboardGraph from './components/DashboardGraph';
+import Dashboard from 'components/Dashboard';
 // routing
 import Routes from 'routes';
 
@@ -45,7 +46,7 @@ const App = () => {
                     </NavigationScroll>
                 </Locales> */}
                 <>
-                    {/* <UploadForm /> */}
+                    {/* <UploadForm /   > */}
                     <Dashboard />
                 </>
                 {/* </RTLLayout> */}

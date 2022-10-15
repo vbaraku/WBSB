@@ -50,16 +50,6 @@ public class AnswerController {
 
     }
 
-//
-//	@Autowired
-////	AnswersService answersService;
-//
-//	@Autowired
-////	DRUserDao userDao;
-
-//	@Autowired
-//	DRUserCriteriaRepository userCriteriaRepository;
-
     @PostMapping(consumes = "multipart/form-data")
     @Transactional
     public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file) {
@@ -81,14 +71,16 @@ public class AnswerController {
                         row.get(3),
                         row.get(4),
                         row.get(5),
-                        2021
+                        2021,
+                        "Kosova",
+                        "Albanian"
                 );
                 //TODO: Do something about the year above, maybe from form, idfk
 
                 int index = 6; // change to 7 if empty column maybe, or remove empty column in csv processing
                 //7:1, 8:2, 9:3
                 for (Question question : questions) {
-                    while(row.get(index).equals("")){
+                    while (row.get(index).equals("")) {
                         index++;
                     }
                     Answer answer = new Answer(respondent, question, row.get(index++));
@@ -99,11 +91,6 @@ public class AnswerController {
 
             respondentRepository.saveAll(respondents);
             answerRepository.saveAll(answers);
-            /*
-                Question q = text.get();
-
-             */
-
 
         } catch (IOException io) {
             return ResponseEntity.status(500).build();
@@ -112,6 +99,24 @@ public class AnswerController {
 //        Object obj = selectedFile;
 //        System.out.println(selectedFile.getOriginalFilename());
 //        return ResponseEntity.ok(selectedFile.getName());
+    }
+
+    @GetMapping("/filters")
+    public Filter getFilters(
+            @RequestParam String country,
+            @RequestParam String language,
+            @RequestParam Long questionId
+    ) {
+        RespondentCriteria criteria = new RespondentCriteria(country, language, questionId);
+        List<String> regions = respondentCriteriaRepository.getFilters(criteria, "region").stream().map(el -> (String) el).collect(Collectors.toList());
+        List<String> nationalities = respondentCriteriaRepository.getFilters(criteria, "nationality").stream().map(el -> (String) el).collect(Collectors.toList());
+        List<String> regionTypes = respondentCriteriaRepository.getFilters(criteria, "regionType").stream().map(el -> (String) el).collect(Collectors.toList());
+        List<String> genders = respondentCriteriaRepository.getFilters(criteria, "gender").stream().map(el -> (String) el).collect(Collectors.toList());
+        List<Integer> years = respondentCriteriaRepository.getFilters(criteria, "year").stream().map(el -> (Integer) (el)).collect(Collectors.toList());
+
+        Filter filters = new Filter(years, regions, regionTypes, nationalities, genders);
+
+        return filters;
     }
 
     private List<Question> insertQuestions(String line) throws IOException {
