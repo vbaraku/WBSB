@@ -109,10 +109,12 @@ export default function ResponsiveDrawer({
                         {countries.map((page, index) => (
                             <Button
                                 variant="contained"
+                                size="Large"
                                 key={page}
                                 sx={{
+                                    marginLeft: 1.5,
                                     color: 'white',
-                                    backgroundColor: selectedCountry === countryValues[index] ? 'purple' : '',
+                                    backgroundColor: selectedCountry === countryValues[index] ? '#2E7193' : '',
                                     '&.MuiButtonBase-root:hover': {
                                         bgcolor: 'transparent'
                                     }

@@ -17,6 +17,9 @@ export default function StackedBarChart({ question, answers }) {
             name: el.category,
             data: [el.percentage]
         })),
+        credits: {
+            enabled: false
+        },
         yAxis: {
             min: 0,
             max: 100

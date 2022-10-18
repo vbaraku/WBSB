@@ -16,6 +16,9 @@ export default function PieChart({ question, answers, selectedGraphType }) {
         chart: {
             type: selectedGraphType
         },
+        credits: {
+            enabled: false
+        },
         series: {
             name: 'Answers',
             data: answers.map((el) => ({
