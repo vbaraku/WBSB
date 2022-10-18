@@ -11,7 +11,7 @@ public class Answer {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="answer_sequence")
-	@SequenceGenerator(name="answer_sequence", sequenceName = "answer_id_seq", allocationSize = 10000)
+	@SequenceGenerator(name="answer_sequence", sequenceName = "answer_id_seq", allocationSize = 100000)
 	private Integer id;
 
 

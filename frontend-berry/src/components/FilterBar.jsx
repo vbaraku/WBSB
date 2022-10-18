@@ -6,13 +6,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 
-export default function FilterBar({ dict, filters, setFilters }) {
-    const years = [dict.ALL, 2021] || [];
-    const regions = dict.ALBANIA_REGIONS || [];
-    const regionTypes = dict.REGION_TYPES || [];
-    const nationalities = dict.ALBANIA_NATIONALITIES || [];
-    const genders = dict.GENDERS || [];
-    const ages = [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+'] || [];
+export default function FilterBar({ dict, filters, setFilters, filterOptions }) {
+    // const years = [dict.ALL, 2021] || [];
+    // const regions = dict.ALBANIA_REGIONS || [];
+    // const regionTypes = dict.REGION_TYPES || [];
+    // const nationalities = dict.ALBANIA_NATIONALITIES || [];
+    // const genders = dict.GENDERS || [];
+
+    // const [filterOptions, setFilterOptions] = React.useState({
+    //     year: years[0],
+    //     region: regions[0],
+    //     regionType: regionTypes[0]
+    // });
+
     const handleChange = (filter, value) => {
         setFilters({ ...filters, [filter]: value });
     };
@@ -20,7 +26,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
         <div>
             <SelectForm
                 value={filters.year}
-                values={years}
+                values={filterOptions.years}
                 label={dict.YEAR_LABEL}
                 handleChange={(e) => {
                     handleChange('year', e.target.value);
@@ -28,7 +34,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
             />
             <SelectForm
                 value={filters.region}
-                values={regions}
+                values={filterOptions.regions}
                 label={dict.REGION_LABEL}
                 handleChange={(e) => {
                     handleChange('region', e.target.value);
@@ -36,7 +42,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
             />
             <SelectForm
                 value={filters.regionType}
-                values={regionTypes}
+                values={filterOptions.regionTypes}
                 label={dict.REGION_TYPE_LABEL}
                 handleChange={(e) => {
                     handleChange('regionType', e.target.value);
@@ -44,7 +50,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
             />
             <SelectForm
                 value={filters.nationality}
-                values={nationalities}
+                values={filterOptions.nationalities}
                 label={dict.NATIONALITY_LABEL}
                 handleChange={(e) => {
                     handleChange('nationality', e.target.value);
@@ -52,7 +58,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
             />
             <SelectForm
                 value={filters.gender}
-                values={genders}
+                values={filterOptions.genders}
                 label={dict.GENDER_LABEL}
                 handleChange={(e) => {
                     handleChange('gender', e.target.value);
@@ -60,7 +66,7 @@ export default function FilterBar({ dict, filters, setFilters }) {
             />
             <SelectForm
                 value={filters.age}
-                values={ages}
+                values={filterOptions.ages}
                 label={dict.AGE_LABEL}
                 handleChange={(e) => {
                     handleChange('age', e.target.value);

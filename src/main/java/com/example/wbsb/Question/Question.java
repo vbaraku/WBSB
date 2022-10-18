@@ -14,7 +14,8 @@ public class Question {
 
 	//TODO: Sequence generation strategy
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="question_sequence")
+	@SequenceGenerator(name="question_sequence", sequenceName = "question_id_seq", allocationSize = 500)
 //	@Column()
 
 	private Integer id; //CRUD

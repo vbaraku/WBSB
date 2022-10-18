@@ -41,7 +41,9 @@ const albanianDict = {
 
     GENDER_LABEL: 'Gjinia',
 
-    AGE_LABEL: 'Mosha'
+    AGE_LABEL: 'Mosha',
+
+    COUNTRIES: ['Kosova', 'Shqipëria', 'Serbia']
 };
 
 const serbianDict = {};
@@ -89,7 +91,9 @@ const englishtDict = {
 
     GENDER_LABEL: 'Gender',
 
-    AGE_LABEL: 'Age'
+    AGE_LABEL: 'Age',
+
+    COUNTRIES: ['Kosovo', 'Albania', 'Serbia']
 };
 
 export { albanianDict, serbianDict, englishtDict };

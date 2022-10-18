@@ -3,27 +3,35 @@ import React, { useState, useEffect } from 'react';
 import DashboardGraph from './DashboardGraph';
 import MiniDrawer from './MiniDrawer';
 import axios from 'axios';
+import Loader from 'ui-component/Loader';
 
 export default function Dashboard() {
     const [displaySecond, setDisplaySecond] = useState(false);
     const [questions, setQuestions] = useState([]);
-    const [selectedQuestion, setSelectedQuestion] = useState({ questionText: '', questionId: null });
+    const [selectedQuestion, setSelectedQuestion] = useState({});
+    const [selectedCountry, setSelectedCountry] = useState('Kosovo');
 
     useEffect(() => {
-        axios.get('/api/questions', { params: { country: 'Kosova', language: 'Albanian' } }).then((response) => {
+        axios.get('/api/questions', { params: { country: selectedCountry, language: 'Albanian' } }).then((response) => {
             setQuestions(response.data);
-            console.log(response.data[0].questions[0]);
-            setSelectedQuestion(response.data[0].questions[0]);
+            if (selectedQuestion.questionId === undefined) setSelectedQuestion(response.data[0]?.questions[0]);
         });
-    }, []);
+    }, [selectedCountry]);
 
+    if (!selectedQuestion) return <Loader />;
     return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ width: '15%' }}>
-                <MiniDrawer categories={questions} setSelectedQuestion={setSelectedQuestion} />
+                <MiniDrawer
+                    categories={questions}
+                    selectedQuestion={selectedQuestion}
+                    setSelectedQuestion={setSelectedQuestion}
+                    selectedCountry={selectedCountry}
+                    setSelectedCountry={setSelectedCountry}
+                />
             </div>
             <div>
-                <DashboardGraph selectedQuestion={selectedQuestion} />
+                <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} />
             </div>
 
             {displaySecond ? (

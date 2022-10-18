@@ -52,8 +52,9 @@ public class AnswerController {
 
     @PostMapping(consumes = "multipart/form-data")
     @Transactional
-    public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file) {
+    public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file, @RequestPart String country) {
 
+        System.out.println(country);
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "ISO-8859-1"));
             String line = reader.readLine();
@@ -72,7 +73,7 @@ public class AnswerController {
                         row.get(4),
                         row.get(5),
                         2021,
-                        "Kosova",
+                        country,
                         "Albanian"
                 );
                 //TODO: Do something about the year above, maybe from form, idfk
@@ -129,16 +130,24 @@ public class AnswerController {
         List<Question> questions = new ArrayList<>();
         AtomicInteger questionCount = new AtomicInteger();
         for (String element : headers) {
+            element = element.replaceAll("^\"|\"$", "");
             if (element.split(" ")[0].equals("Category:")) {
                 currentCategory = element.replace("Category: ", "");
             } else {
-                questions.add(
-                        new Question(
-                                questionCount.getAndIncrement(),
-                                currentCategory,
-                                element,
-                                "Albanian",
-                                "Kosova"));
+                Optional<Question> question = questionRepository.findByText(element);
+                if(!question.isPresent()) {
+                    questions.add(
+                            new Question(
+                                    questionCount.getAndIncrement(),
+                                    currentCategory,
+                                    element,
+                                    "Albanian",
+                                    "Kosovo"));
+                }else{
+                    Question q1 = question.get();
+                    q1.getCountries().add("Albania");
+                    questions.add(q1);
+                }
             }
         }
 

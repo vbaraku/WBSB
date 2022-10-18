@@ -25,25 +25,32 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Collapse from '@mui/material/Collapse';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-// import SendIcon from '@mui/icons-material/Send';
-// import {
-//   albanian_dict,
-//   english_dict,
-//   kosovar_dict,
-// } from ".../utils/dictionaries";
+import SendIcon from '@mui/icons-material/Send';
+import { albanianDict, englishtDict, serbianDict } from '../utils/dictionaries';
 
 const drawerWidth = 240;
 
-const pages = ['Kosova', 'Shqipëria', 'Serbia'];
+const countries = albanianDict.COUNTRIES;
+const countryValues = englishtDict.COUNTRIES;
 
-export default function ResponsiveDrawer({ window, categories, setSelectedQuestion }) {
+export default function ResponsiveDrawer({
+    window,
+    categories,
+    selectedQuestion,
+    setSelectedQuestion,
+    selectedCountry,
+    setSelectedCountry
+}) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const [open, setOpen] = React.useState(false);
+    // const [open, setOpen] = React.useState(false);
 
+    const handleCountryChange = (index) => {
+        setSelectedCountry(countryValues[index]);
+    };
     const drawer = (
         <div>
             <Toolbar />
@@ -60,7 +67,12 @@ export default function ResponsiveDrawer({ window, categories, setSelectedQuesti
                 }
             >
                 {categories.map((category, index) => (
-                    <Category key={index} category={category} setSelectedQuestion={setSelectedQuestion} />
+                    <Category
+                        key={index}
+                        category={category}
+                        setSelectedQuestion={setSelectedQuestion}
+                        selectedQuestion={selectedQuestion}
+                    />
                 ))}
             </List>
         </div>
@@ -94,8 +106,21 @@ export default function ResponsiveDrawer({ window, categories, setSelectedQuesti
                     </IconButton>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button variant="text" key={page} sx={{ color: 'white' }}>
+                        {countries.map((page, index) => (
+                            <Button
+                                variant="contained"
+                                key={page}
+                                sx={{
+                                    color: 'white',
+                                    backgroundColor: selectedCountry === countryValues[index] ? 'purple' : '',
+                                    '&.MuiButtonBase-root:hover': {
+                                        bgcolor: 'transparent'
+                                    }
+                                }}
+                                onClick={() => {
+                                    handleCountryChange(index);
+                                }}
+                            >
                                 {page}
                             </Button>
                         ))}
@@ -134,7 +159,7 @@ export default function ResponsiveDrawer({ window, categories, setSelectedQuesti
     );
 }
 
-const Category = ({ category, setSelectedQuestion }) => {
+const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -151,7 +176,11 @@ const Category = ({ category, setSelectedQuestion }) => {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 {category.questions.map((q, index) => (
-                    <List component="div" disablePadding>
+                    <List
+                        component="div"
+                        disablePadding
+                        style={{ backgroundColor: q.questionId === selectedQuestion.questionId ? '#ADD8E6' : '' }}
+                    >
                         <ListItemButton
                             sx={{ pl: 4 }}
                             onClick={() => {

@@ -12,7 +12,7 @@ import java.util.Set;
 public class Respondent {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="emp_sequence")
-    @SequenceGenerator(name="emp_sequence", sequenceName = "emp_id_seq", allocationSize = 1000)
+    @SequenceGenerator(name="emp_sequence", sequenceName = "emp_id_seq", allocationSize = 10000)
     private long id;
 
     private String region;
