@@ -12,15 +12,60 @@ export default function Dashboard() {
     const [questions, setQuestions] = useState([]);
     const [selectedQuestion, setSelectedQuestion] = useState({});
     const [selectedCountry, setSelectedCountry] = useState('Kosovo');
+    const [selectedLanguage, setSelectedLanguage] = useState('ALB');
+
+    const [prevLang, setPrevLang] = useState('ALB');
+
+    function findQuestionByCount(categoryArray, count) {
+        let questionCounter = 0;
+        console.log(count);
+        for (let i = 0; i < categoryArray.length; i += 1) {
+            const questionLen = categoryArray[i].questions.length;
+            if (questionCounter + questionLen >= count) {
+                setSelectedQuestion(categoryArray[i].questions.find((q) => q.count === count));
+                break;
+            }
+            questionCounter += questionLen;
+        }
+    }
+
+    function findQuestionByText(categoryArray, text) {
+        let questionText = '';
+        if (!text) {
+            console.log('hello');
+            setSelectedQuestion(categoryArray[0]?.questions[0]);
+        }
+        for (let i = 0; i < categoryArray.length; i += 1) {
+            for (let j = 0; j < categoryArray[i].questions.length; j += 1) {
+                questionText = categoryArray[i].questions[j].text;
+                if (questionText === text) {
+                    setSelectedQuestion(categoryArray[i].questions[j]);
+                    return;
+                }
+            }
+        }
+    }
 
     useEffect(() => {
-        axios.get('/api/questions', { params: { country: selectedCountry, language: 'Albanian' } }).then((response) => {
+        console.log('useEffect');
+        axios.get('/api/questions', { params: { country: selectedCountry, language: selectedLanguage } }).then((response) => {
+            const questionCount = selectedQuestion.count;
             setQuestions(response.data);
-            if (selectedQuestion.questionId === undefined) setSelectedQuestion(response.data[0]?.questions[0]);
+            if (prevLang !== selectedLanguage) {
+                // lang triggered useEffect
+                console.log(prevLang, selectedLanguage);
+                if (questionCount) {
+                    findQuestionByCount(response.data, questionCount);
+                }
+            } else {
+                // country triggered useEffect
+                findQuestionByText(response.data, selectedQuestion.text);
+            }
+            setPrevLang(selectedLanguage);
         });
-    }, [selectedCountry]);
+    }, [selectedLanguage, selectedCountry]);
 
-    if (!selectedQuestion) return <Loader />;
+    // if (!selectedQuestion) return <Loader />;
     return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ width: '15%' }}>
@@ -30,15 +75,21 @@ export default function Dashboard() {
                     setSelectedQuestion={setSelectedQuestion}
                     selectedCountry={selectedCountry}
                     setSelectedCountry={setSelectedCountry}
+                    selectedLanguage={selectedLanguage}
+                    setSelectedLanguage={setSelectedLanguage}
                 />
                 {/* <MenuList /> */}
             </div>
-            <MainCard style={{ width: '100%', display: 'flex' }}>
-                <Box>
-                    <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} />
+            <MainCard>
+                <Box style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+                    <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={selectedLanguage} />
                     {displaySecond ? (
                         <div>
-                            <DashboardGraph selectedQuestion={selectedQuestion} />
+                            <DashboardGraph
+                                country={selectedCountry}
+                                selectedQuestion={selectedQuestion}
+                                selectedLanguage={selectedLanguage}
+                            />
                         </div>
                     ) : (
                         <div>

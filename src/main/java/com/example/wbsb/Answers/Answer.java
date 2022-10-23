@@ -9,27 +9,31 @@ import javax.persistence.*;
 @Table
 public class Answer {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="answer_sequence")
-	@SequenceGenerator(name="answer_sequence", sequenceName = "answer_id_seq", allocationSize = 100000)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "answer_sequence")
+    @SequenceGenerator(name = "answer_sequence", sequenceName = "answer_id_seq", allocationSize = 100000)
+    private Integer id;
 
 
 //	@Column(name = "rating")
 //	private Integer rating;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "question_id", nullable = false)
-	Question question;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumns(value = {
+			@JoinColumn(name = "question_id", nullable = false, referencedColumnName = "id"),
+			@JoinColumn(name = "question_lang", nullable = false, referencedColumnName = "language")
+	})
+    Question question;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "respondent_id", nullable = false)
-	Respondent respondent;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "respondent_id", nullable = false)
+    Respondent respondent;
 
 
-	String text;
+    String text;
 
-	public Answer(){}
+    public Answer() {
+    }
 
 //	public Answer(Integer id, Long userId, Long questionId, String text) {
 //		super();
@@ -37,27 +41,28 @@ public class Answer {
 //		this.text = text;
 //	}
 
-	public Answer(Respondent respondent, Question question, String text) {
-		this.question = question;
-		this.respondent = respondent;
-		this.text = text.replaceAll("^\"|\"$", "").trim();
-	}
-	public Integer getId() {
-		return id;
-	}
+    public Answer(Respondent respondent, Question question, String text) {
+        this.question = question;
+        this.respondent = respondent;
+        this.text = text.replaceAll("^\"|\"$", "").trim();
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setRating(String text) {
-		this.text = text;
-	}
+    public void setRating(String text) {
+        this.text = text;
+    }
 
 
 }

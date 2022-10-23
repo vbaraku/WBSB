@@ -30,26 +30,35 @@ import { albanianDict, englishtDict, serbianDict } from '../utils/dictionaries';
 
 const drawerWidth = 240;
 
-const countries = albanianDict.COUNTRIES;
-const countryValues = englishtDict.COUNTRIES;
-
 export default function ResponsiveDrawer({
     window,
     categories,
     selectedQuestion,
     setSelectedQuestion,
     selectedCountry,
-    setSelectedCountry
+    setSelectedCountry,
+    selectedLanguage,
+    setSelectedLanguage
 }) {
+    const [countryValues] = useState(englishtDict.COUNTRIES);
+
+    const languages = ['ALB', 'ENG', 'SRB'];
+    const countries = albanianDict.COUNTRIES;
+
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    console.log(selectedLanguage);
 
     // const [open, setOpen] = React.useState(false);
 
     const handleCountryChange = (index) => {
         setSelectedCountry(countryValues[index]);
+    };
+
+    const handleLanguageChange = (value) => {
+        setSelectedLanguage(value);
     };
     const drawer = (
         <div>
@@ -128,6 +137,40 @@ export default function ResponsiveDrawer({
                         ))}
                     </Box>
                 </Toolbar>
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {languages.map((language) => (
+                            <Button
+                                variant="contained"
+                                size="Large"
+                                key={language}
+                                sx={{
+                                    marginLeft: 1.5,
+                                    color: 'white',
+                                    backgroundColor: selectedLanguage === language,
+                                    '&.MuiButtonBase-root:hover': {
+                                        bgcolor: 'transparent'
+                                    }
+                                }}
+                                onClick={(e) => {
+                                    handleLanguageChange(language);
+                                }}
+                            >
+                                {language}
+                            </Button>
+                        ))}
+                    </Box>
+                </Toolbar>
             </AppBar>
             <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0, md: 0 } }} aria-label="mailbox folders">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -179,9 +222,10 @@ const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 {category.questions.map((q, index) => (
                     <List
+                        key={index}
                         component="div"
                         disablePadding
-                        style={{ backgroundColor: q.questionId === selectedQuestion.questionId ? '#ADD8E6' : '' }}
+                        style={{ backgroundColor: q.id === selectedQuestion.id ? '#ADD8E6' : '' }}
                     >
                         <ListItemButton
                             sx={{ pl: 4 }}
@@ -192,7 +236,7 @@ const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
                             {/* <ListItemIcon>
                                 <ArrowForwardIosIcon />
                             </ListItemIcon> */}
-                            <ListItemText primary={` - ${q.questionText}`} />
+                            <ListItemText primary={` - ${q.text}`} />
                         </ListItemButton>
                     </List>
                 ))}

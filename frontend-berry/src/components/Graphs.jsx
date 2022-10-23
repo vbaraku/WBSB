@@ -32,7 +32,6 @@ export default function Graphs({ question, answers }) {
     // }, [selectedGraphType]);
 
     const displayChart = () => {
-        console.log(selectedGraphType);
         if (selectedGraphType === 'packedbubble')
             return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
         if (selectedGraphType === 'stackedbar') return <StackedBarChart question={question} answers={answers} />;

@@ -8,7 +8,7 @@ require('highcharts/modules/exporting')(Highcharts);
 export default function StackedBarChart({ question, answers }) {
     const options = {
         title: {
-            text: question.questionText
+            text: question?.text
         },
         chart: {
             type: 'bar'

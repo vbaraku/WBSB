@@ -6,10 +6,20 @@ import axios from 'axios';
 import FilterBar from './FilterBar';
 import { Button } from '@mui/material';
 
-export default function DashboardGraph({ selectedQuestion, country }) {
+export default function DashboardGraph({ selectedQuestion, country, selectedLanguage }) {
     const [answers, setAnswers] = useState([]);
     // TODO: add a context for the language || in other words, make the bottom thing dynamic (not always albanian)
-    const dict = albanianDict;
+    const [dict, setDictionary] = useState(albanianDict);
+
+    function updateLanguage() {
+        if (selectedLanguage === 'ALB') {
+            setDictionary(albanianDict);
+        } else if (selectedLanguage === 'ENG') {
+            setDictionary(englishtDict);
+        } else if (selectedLanguage === 'SRB') {
+            setDictionary(serbianDict);
+        }
+    }
 
     const [filters, setFilters] = useState({
         year: 2021,
@@ -30,16 +40,17 @@ export default function DashboardGraph({ selectedQuestion, country }) {
     });
 
     useEffect(() => {
-        if (!selectedQuestion.questionId) return;
+        if (!selectedQuestion?.id) return;
         axios
             .get('/api/answer/filters', {
                 params: {
                     country,
-                    language: 'Albanian',
-                    questionId: selectedQuestion.questionId
+                    language: selectedLanguage,
+                    questionId: selectedQuestion.id
                 }
             })
             .then((response) => {
+                updateLanguage();
                 setFilterOptions({
                     ...filterOptions,
                     years: response.data.years.concat(dict.ALL),
@@ -50,10 +61,10 @@ export default function DashboardGraph({ selectedQuestion, country }) {
                 });
                 // setAnswers(response.data);
             });
-    }, [selectedQuestion]);
+    }, [selectedQuestion, country, selectedLanguage]);
 
     useEffect(() => {
-        if (!selectedQuestion.questionId) return;
+        if (!selectedQuestion?.id) return;
 
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
             if (value !== dict.ALL) {
@@ -61,9 +72,9 @@ export default function DashboardGraph({ selectedQuestion, country }) {
             }
             return acc;
         }, {});
-        params.questionId = selectedQuestion.questionId || 1;
+        params.questionId = selectedQuestion.id || 1;
         params.country = country;
-        params.language = 'Albanian';
+        params.language = selectedLanguage;
 
         axios.get('/api/answer', { params }).then((response) => {
             setAnswers(response.data);

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class CategoryDTO {
     String category;
-    List<QuestionDTO> questions;
+    List<Question> questions;
 
     public CategoryDTO() {
     }
@@ -19,14 +19,12 @@ public class CategoryDTO {
         this.category = category;
     }
 
-    public List<QuestionDTO> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
     public void setQuestions(List<Question> questions) {
-        List<QuestionDTO> questionDTOS = questions.stream().map(el->{
-            return new QuestionDTO(el.getText(),el.getId());
-        }).collect(Collectors.toList());
+        List<Question> questionDTOS = questions;
         this.questions = questionDTOS;
     }
 }

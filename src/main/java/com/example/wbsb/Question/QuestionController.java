@@ -1,8 +1,6 @@
 package com.example.wbsb.Question;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,21 @@ public class QuestionController {
 	public List<CategoryDTO> getAllQuestions(@RequestParam String country, @RequestParam String language) {
 		try {
 			List<Question> questions = new ArrayList<>();
-			questionRepository.findAllByCountriesAndAndLanguage(country, language).forEach(questions::add);
-			Map<String, List<Question>> questionsByCategory = questions.stream().collect(Collectors.groupingBy(Question::getCategory));
+			questionRepository.findAllByCountryAndLanguage(country, language).forEach(questions::add);
+//			SortedMap<String, List<Question>> questionsByCategory = questions.stream().collect(Collectors.toMap(Question::getCategory,Question::getText, (v1->v2)));
+			LinkedHashMap<String, List<Question>> questionsByCategory = new LinkedHashMap<>();
+			questions.stream().forEach(question ->
+			{
+				String category = question.getCategory();
+				if (questionsByCategory.containsKey(category)){
+					questionsByCategory.get(category).add(question);
+				}else{
+					ArrayList list = new ArrayList();
+					list.add(question);
+					questionsByCategory.put(category,list);
+
+				}
+			});
 			List<CategoryDTO> questionDTOs = new ArrayList<>();
 			for (Map.Entry<String, List<Question>> entry : questionsByCategory.entrySet()) {
 				CategoryDTO questionDTO = new CategoryDTO();
