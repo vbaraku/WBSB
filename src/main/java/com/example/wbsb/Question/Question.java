@@ -4,26 +4,24 @@ package com.example.wbsb.Question;
 
 import com.example.wbsb.Answers.Answer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import javax.persistence.JoinColumn;
+import java.util.UUID;
 
 
 @Entity
 @Table(name = "question")
 @IdClass(QuestionId.class)
-public class Question{
+public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "question_sequence")
-    @SequenceGenerator(name = "question_sequence", sequenceName = "question_id_seq", allocationSize = 500)
-    Integer id;
+//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "question_sequence")
+//    @SequenceGenerator(name = "question_sequence", sequenceName = "question_id_seq", allocationSize = 500)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    String id;
 
     @Id
     String language;
@@ -35,12 +33,11 @@ public class Question{
             cascade = CascadeType.ALL)
     private Set<Answer> answers;
 
-    @Transient
-    private String country;
 
     @Column(length = 5500, unique = true)
     private String text;
 
+    private int count;
 
     @Column(length = 1000)
     private String category;
@@ -52,33 +49,61 @@ public class Question{
      * matched with Q1 of Lang2. QuestionOrder stores the position in which a question
      * was placed in when inserted
      */
-    @Column(name = "question_meta", nullable=false)
+    @Column(name = "question_meta")
     @ElementCollection
     private Set<QuestionMeta> metaData;
-
 
 
     public Question() {
     }
 
-    public Question(Integer id, String q, String q1, QuestionMeta questionMeta){
-
+    public Question(String id, String text, String category, String language) {
+        this.id = id;
+        setText(text);
+        this.category = category;
+        this.language = language;
     }
 
-    public Question( String text, String category, String language, String country) {
-        this.text = text;
+    public Question(String text, String category, String language, String country, int count) {
+        this.setText(text);
         this.category = category;
-        this.country = country;
+        this.metaData = new HashSet<QuestionMeta>();
+        this.metaData.add(new QuestionMeta(country));
+        this.count = count;
+        this.id = UUID.randomUUID().toString();
+//        this.country = country;
 //        this.id.language = language;
         this.language = language;
     }
 
-    public Integer getId() {
+    private void setText(String text) {
+        this.text = text.trim();
+    }
+
+    public Question(String id, String language) {
+        this.id = id;
+        this.language = language;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getLanguage() {
@@ -115,10 +140,6 @@ public class Question{
         this.metaData = metaData;
     }
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getCountry() {
-        return country;
-    }
 
     public String getCategory() {
         return category;
@@ -136,11 +157,10 @@ public class Question{
 }
 
 @Embeddable
-class QuestionId implements Serializable{
+class QuestionId implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "question_sequence")
-    @SequenceGenerator(name = "question_sequence", sequenceName = "question_id_seq", allocationSize = 500)
-    Integer id;
+            @Column(length = 1000)
+    String id;
 
     @Id
     String language;

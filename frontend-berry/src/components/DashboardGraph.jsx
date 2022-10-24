@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Graphs from './Graphs';
 import MiniDrawer from './MiniDrawer';
-import { albanianDict, englishtDict, serbianDict } from '../utils/dictionaries';
+import { albanianDict, englishDict, serbianDict } from '../utils/dictionaries';
 import axios from 'axios';
 import FilterBar from './FilterBar';
 import { Button } from '@mui/material';
@@ -12,13 +12,17 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
     const [dict, setDictionary] = useState(albanianDict);
 
     function updateLanguage() {
-        if (selectedLanguage === 'ALB') {
-            setDictionary(albanianDict);
-        } else if (selectedLanguage === 'ENG') {
-            setDictionary(englishtDict);
-        } else if (selectedLanguage === 'SRB') {
+        if (selectedLanguage === 'SRB') {
             setDictionary(serbianDict);
+            return serbianDict;
         }
+
+        if (selectedLanguage === 'ENG') {
+            setDictionary(englishDict);
+            return englishDict;
+        }
+        setDictionary(albanianDict);
+        return albanianDict;
     }
 
     const [filters, setFilters] = useState({
@@ -36,7 +40,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         regionTypes: [],
         nationalities: [],
         genders: [],
-        ages: [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+'] || []
+        ages: ['18-25', '26-35', '36-45', '46-55', '56-65', '65+', dict.ALL] || []
     });
 
     useEffect(() => {
@@ -50,14 +54,26 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
                 }
             })
             .then((response) => {
-                updateLanguage();
+                const dict = updateLanguage();
+                const ages = filterOptions.ages;
+                ages.pop();
+                ages.push(dict.ALL);
                 setFilterOptions({
                     ...filterOptions,
                     years: response.data.years.concat(dict.ALL),
                     regions: response.data.regions.concat(dict.ALL),
                     regionTypes: response.data.regionTypes.concat(dict.ALL),
                     nationalities: response.data.nationalities.concat(dict.ALL),
-                    genders: response.data.genders.concat(dict.ALL)
+                    genders: response.data.genders.concat(dict.ALL),
+                    ages
+                });
+                setFilters({
+                    year: 2021,
+                    region: dict.ALL,
+                    regionType: dict.ALL,
+                    nationality: dict.ALL,
+                    gender: dict.ALL,
+                    age: dict.ALL
                 });
                 // setAnswers(response.data);
             });
@@ -67,7 +83,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         if (!selectedQuestion?.id) return;
 
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
-            if (value !== dict.ALL) {
+            if (value !== albanianDict.ALL && value !== englishDict.ALL && value !== serbianDict.ALL) {
                 acc[key] = value;
             }
             return acc;

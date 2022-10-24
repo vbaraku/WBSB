@@ -55,15 +55,13 @@ public class AnswerController {
     @Transactional
     public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file, @RequestPart String country, @RequestPart String language) {
 
-        System.out.println(country);
-        System.out.println(language);
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "ISO-8859-1"));
             String line = reader.readLine();
             List<String> headers = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
 
             String duplicateQuestion = getDuplicate(headers);
-            if(duplicateQuestion != null){
+            if (duplicateQuestion != null) {
                 return ResponseEntity.status(400).body("One of the questions is duplicated: \n" + duplicateQuestion);
             }
 
@@ -89,16 +87,17 @@ public class AnswerController {
                 //TODO: Do something about the year above, maybe from form, idfk
 
                 int index = 6; // change to 7 if empty column maybe, or remove empty column in csv processing
-                //7:1, 8:2, 9:3
                 for (Question question : questions) {
-                    while (headers.get(index).contains("Category:")) {
+                    if(headers.get(index).contains("Category:")){
                         index++;
                     }
-                    if(row.get(index).equals("")){
+
+                    if (row.get(index).trim().equals("")) {
                         index++;
                         continue;
                     }
-                    Answer answer = new Answer(respondent, question, row.get(index++));
+                    Answer answer = new Answer(respondent, question, row.get(index));
+                    index++;
                     answers.add(answer);
                 }
                 respondents.add(respondent);
@@ -111,16 +110,15 @@ public class AnswerController {
         } catch (IOException io) {
             return ResponseEntity.status(500).build();
         }
-        System.out.println("ok :)");
         return ResponseEntity.ok().build();
 //        Object obj = selectedFile;
 //        System.out.println(selectedFile.getOriginalFilename());
 //        return ResponseEntity.ok(selectedFile.getName());
     }
 
-    private String getDuplicate(List<String> list){
+    private String getDuplicate(List<String> list) {
         Map<String, Integer> stringCount = new HashMap<>();
-        for(String element : list) {
+        for (String element : list) {
             if (stringCount.containsKey(element)) {
                 return element;
             }
@@ -134,7 +132,7 @@ public class AnswerController {
     public Filter getFilters(
             @RequestParam String country,
             @RequestParam String language,
-            @RequestParam Long questionId
+            @RequestParam String questionId
     ) {
         RespondentCriteria criteria = new RespondentCriteria(country, language, questionId);
         List<String> regions = respondentCriteriaRepository.getFilters(criteria, "region").stream().map(el -> (String) el).collect(Collectors.toList());
@@ -155,40 +153,64 @@ public class AnswerController {
 
         String currentCategory = "";
         List<Question> questions = new ArrayList<>();
-        AtomicInteger questionCount = new AtomicInteger();
-        AtomicInteger categoryIndex = new AtomicInteger();
 
-        for (String element : headers) {
-            element = element.replaceAll("^\"|\"$", "");
-            if (element.contains("Category:")) {
-                currentCategory = element.replace("Category: ", "");
-                categoryIndex.incrementAndGet();
-            } else {
+        List<Question> storedQuestions = questionRepository.findAllByLanguage(language);
 
-                Optional<Question> question = null;
+        if (storedQuestions.size() == 0) { // No questions with the same text exist
+            storedQuestions = questionRepository.findAllByCountry(country);
+            AtomicInteger count = new AtomicInteger(0);
+            for (String element : headers) {
+                element = element.replaceAll("^\"|\"$", "");
+                if (element.contains("Category:")) {
+                    currentCategory = element.replace("Category: ", "");
+                    continue;
+                }
+                Question newQ = new Question(
+                        element,
+                        currentCategory,
+                        language,
+                        country,
+                        count.getAndIncrement());
+//                    newQ.setText(element, language);
+//                    newQ.setCategory(currentCategory, language);
+                questions.add(newQ);
+            }
 
+            for (int i = 0; i < storedQuestions.size(); i++) {
+                questions.get(i).setId(storedQuestions.get(i).getId());
+            }
+        } else { // questions with same text exist
+            //Perform a merge, by using a hashmap
+            HashMap<String, Question> storedQuestionsMap = new HashMap<>();
 
-
-                if( !question.isPresent()) {
-                    Question newQ = new Question(
+            for (Question q : storedQuestions) {
+                storedQuestionsMap.put(q.getText(), q);
+            }
+            for (int i = 0; i<headers.size(); i++){
+                String element = headers.get(i);
+                element = element.replaceAll("^\"|\"$", "");
+                element = element.trim();
+                if (element.contains("Category:")) {
+                    currentCategory = element.replace("Category: ", "");
+                    continue;
+                }
+                if(storedQuestionsMap.get(element) == null){
+                    questions.add(new Question(
                             element,
                             currentCategory,
                             language,
-                            country);
-//                    newQ.setText(element, language);
-//                    newQ.setCategory(currentCategory, language);
-                    questions.add(newQ);
-
+                            country,
+                            i));
                 }else{
-                    Question q1 = question.get();
+                    Question q1 = storedQuestionsMap.get(element);
                     q1.getMeta().add(new QuestionMeta(country));
                     questions.add(q1);
                 }
+
             }
-
         }
-
         questionRepository.saveAll(questions);
+        questionRepository.flush();
         return questions;
     }
 
@@ -202,7 +224,7 @@ public class AnswerController {
             @RequestParam(required = false) String age,
             @RequestParam String country,
             @RequestParam String language,
-            @RequestParam Long questionId
+            @RequestParam String questionId
     ) {
         try {
             RespondentCriteria criteria = new RespondentCriteria(year, region, regionType, nationality, gender, age, country, language, questionId);

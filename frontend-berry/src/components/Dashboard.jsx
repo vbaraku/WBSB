@@ -14,36 +14,20 @@ export default function Dashboard() {
     const [selectedCountry, setSelectedCountry] = useState('Kosovo');
     const [selectedLanguage, setSelectedLanguage] = useState('ALB');
 
-    const [prevLang, setPrevLang] = useState('ALB');
-
-    function findQuestionByCount(categoryArray, count) {
-        let questionCounter = 0;
-        console.log(count);
-        for (let i = 0; i < categoryArray.length; i += 1) {
-            const questionLen = categoryArray[i].questions.length;
-            if (questionCounter + questionLen >= count) {
-                setSelectedQuestion(categoryArray[i].questions.find((q) => q.count === count));
-                break;
-            }
-            questionCounter += questionLen;
-        }
-    }
-
-    function findQuestionByText(categoryArray, text) {
-        let questionText = '';
-        if (!text) {
-            console.log('hello');
+    function findQuestionById(categoryArray, id) {
+        if (!id) {
             setSelectedQuestion(categoryArray[0]?.questions[0]);
+            return;
         }
         for (let i = 0; i < categoryArray.length; i += 1) {
             for (let j = 0; j < categoryArray[i].questions.length; j += 1) {
-                questionText = categoryArray[i].questions[j].text;
-                if (questionText === text) {
+                if (categoryArray[i].questions[j].id === id) {
                     setSelectedQuestion(categoryArray[i].questions[j]);
                     return;
                 }
             }
         }
+        setSelectedQuestion(categoryArray[0]?.questions[0]);
     }
 
     useEffect(() => {
@@ -51,17 +35,7 @@ export default function Dashboard() {
         axios.get('/api/questions', { params: { country: selectedCountry, language: selectedLanguage } }).then((response) => {
             const questionCount = selectedQuestion.count;
             setQuestions(response.data);
-            if (prevLang !== selectedLanguage) {
-                // lang triggered useEffect
-                console.log(prevLang, selectedLanguage);
-                if (questionCount) {
-                    findQuestionByCount(response.data, questionCount);
-                }
-            } else {
-                // country triggered useEffect
-                findQuestionByText(response.data, selectedQuestion.text);
-            }
-            setPrevLang(selectedLanguage);
+            findQuestionById(response.data, selectedQuestion.id);
         });
     }, [selectedLanguage, selectedCountry]);
 

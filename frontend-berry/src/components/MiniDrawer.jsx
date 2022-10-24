@@ -26,7 +26,7 @@ import Collapse from '@mui/material/Collapse';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import SendIcon from '@mui/icons-material/Send';
-import { albanianDict, englishtDict, serbianDict } from '../utils/dictionaries';
+import { albanianDict, englishDict, serbianDict } from '../utils/dictionaries';
 
 const drawerWidth = 240;
 
@@ -40,7 +40,7 @@ export default function ResponsiveDrawer({
     selectedLanguage,
     setSelectedLanguage
 }) {
-    const [countryValues] = useState(englishtDict.COUNTRIES);
+    const [countryValues] = useState(englishDict.COUNTRIES);
 
     const languages = ['ALB', 'ENG', 'SRB'];
     const countries = albanianDict.COUNTRIES;
@@ -136,18 +136,6 @@ export default function ResponsiveDrawer({
                             </Button>
                         ))}
                     </Box>
-                </Toolbar>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {languages.map((language) => (
                             <Button

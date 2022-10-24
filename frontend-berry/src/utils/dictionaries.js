@@ -48,7 +48,7 @@ const albanianDict = {
 
 const serbianDict = {};
 
-const englishtDict = {
+const englishDict = {
     ALL: 'All',
 
     KOSOVO_REGIONS: ['All', 'Gjilan', 'Pristina', 'Peja', 'Prizren', 'Ferizaj', 'Mitrovica', 'Gjakova', 'Northern Mitrovica'],
@@ -96,4 +96,4 @@ const englishtDict = {
     COUNTRIES: ['Kosovo', 'Albania', 'Serbia']
 };
 
-export { albanianDict, serbianDict, englishtDict };
+export { albanianDict, serbianDict, englishDict };

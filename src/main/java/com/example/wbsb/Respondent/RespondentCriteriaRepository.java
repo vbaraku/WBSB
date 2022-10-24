@@ -1,6 +1,7 @@
 package com.example.wbsb.Respondent;
 
 import com.example.wbsb.Answers.Answer;
+import com.example.wbsb.Question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -82,7 +83,7 @@ public class RespondentCriteriaRepository {
         }
 
         predicateList.add(
-                cb.equal(answerRoot.get("question"), userSearchCriteria.getQuestionId())
+                cb.equal(answerRoot.get("question").get("id"), userSearchCriteria.getQuestionId())
         );
 
         predicateList.add(

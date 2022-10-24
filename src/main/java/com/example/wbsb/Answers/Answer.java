@@ -18,15 +18,15 @@ public class Answer {
 //	@Column(name = "rating")
 //	private Integer rating;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns(value = {
-			@JoinColumn(name = "question_id", nullable = false, referencedColumnName = "id"),
-			@JoinColumn(name = "question_lang", nullable = false, referencedColumnName = "language")
+			@JoinColumn(name = "question_id",  referencedColumnName = "id"),
+			@JoinColumn(name = "question_lang",  referencedColumnName = "language")
 	})
     Question question;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "respondent_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "respondent_id"  )
     Respondent respondent;
 
 

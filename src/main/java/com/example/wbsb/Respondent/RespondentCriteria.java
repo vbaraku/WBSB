@@ -1,7 +1,5 @@
 package com.example.wbsb.Respondent;
 
-import lombok.NoArgsConstructor;
-
 public class RespondentCriteria {
     Integer year;
     String region;
@@ -11,9 +9,9 @@ public class RespondentCriteria {
     String age;
     String country;
     String language;
-    Long questionId;
+    String questionId;
 
-    public RespondentCriteria(Integer year, String region, String regionType, String nationality, String gender, String age, String country, String language, Long questionId) {
+    public RespondentCriteria(Integer year, String region, String regionType, String nationality, String gender, String age, String country, String language, String questionId) {
         this.year = year;
         this.region = region;
         this.regionType = regionType;
@@ -25,7 +23,7 @@ public class RespondentCriteria {
         this.questionId = questionId;
     }
 
-    public RespondentCriteria(String country, String language, Long questionId) {
+    public RespondentCriteria(String country, String language, String questionId) {
         this.country = country;
         this.language = language;
         this.questionId = questionId;
@@ -95,11 +93,11 @@ public class RespondentCriteria {
         this.language = language;
     }
 
-    public Long getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(Long questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
