@@ -60,6 +60,7 @@ public class Question {
     public Question(String id, String text, String category, String language) {
         this.id = id;
         setText(text);
+        this.text = text;
         this.category = category;
         this.language = language;
     }

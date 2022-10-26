@@ -171,8 +171,6 @@ public class AnswerController {
                         language,
                         country,
                         count.getAndIncrement());
-//                    newQ.setText(element, language);
-//                    newQ.setCategory(currentCategory, language);
                 questions.add(newQ);
             }
 

@@ -18,7 +18,7 @@ public class Answer {
 //	@Column(name = "rating")
 //	private Integer rating;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY   )
     @JoinColumns(value = {
 			@JoinColumn(name = "question_id",  referencedColumnName = "id"),
 			@JoinColumn(name = "question_lang",  referencedColumnName = "language")

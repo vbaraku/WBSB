@@ -5,6 +5,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { Box } from '@mui/material';
 
 export default function FilterBar({ dict, filters, setFilters, filterOptions }) {
     // const years = [dict.ALL, 2021] || [];
@@ -23,7 +24,7 @@ export default function FilterBar({ dict, filters, setFilters, filterOptions }) 
         setFilters({ ...filters, [filter]: value });
     };
     return (
-        <div>
+        <Box>
             <SelectForm
                 value={filters.year}
                 values={filterOptions.years}
@@ -72,12 +73,12 @@ export default function FilterBar({ dict, filters, setFilters, filterOptions }) 
                     handleChange('age', e.target.value);
                 }}
             />
-        </div>
+        </Box>
     );
 }
 
 const SelectForm = ({ value, values, label, handleChange }) => (
-    <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <FormControl sx={{ m: 1 }}>
         <InputLabel id={`demo-simple-select-helper-label-${label}`}>{label}</InputLabel>
         <Select
             labelId={`demo-simple-select-helper-label-${label}`}
@@ -85,6 +86,7 @@ const SelectForm = ({ value, values, label, handleChange }) => (
             value={value}
             label={label}
             onChange={handleChange}
+            style={{ borderRadius: '9px' }}
         >
             {values.map((el) => (
                 <MenuItem value={el} key={el}>

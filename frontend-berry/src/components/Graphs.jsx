@@ -32,9 +32,12 @@ export default function Graphs({ question, answers }) {
     // }, [selectedGraphType]);
 
     const displayChart = () => {
-        if (selectedGraphType === 'packedbubble')
+        if (selectedGraphType === 'packedbubble') {
             return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
-        if (selectedGraphType === 'stackedbar') return <StackedBarChart question={question} answers={answers} />;
+        }
+        if (selectedGraphType === 'stackedbar') {
+            return <StackedBarChart question={question} answers={answers} />;
+        }
         return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
     };
     const graphTypes = [
@@ -68,10 +71,10 @@ export default function Graphs({ question, answers }) {
                 marginTop: '50px'
             }}
         >
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {graphTypes.map((graphType, index) => (
                     <Button
-                        sx={{ marginLeft: 1, width: '150px' }}
+                        sx={{ marginLeft: 1, width: '150px', margi: '5px' }}
                         variant="outlined"
                         type="submit"
                         backgroundColor="#ADD8E6"

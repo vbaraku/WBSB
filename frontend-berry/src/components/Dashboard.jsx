@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 import DashboardGraph from './DashboardGraph';
 import MiniDrawer from './MiniDrawer';
 import axios from 'axios';
-import Loader from 'ui-component/Loader';
-import MenuList from '../layout/MainLayout/Sidebar/MenuList/index';
-import MainCard from 'ui-component/cards/MainCard';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Dashboard() {
     const [displaySecond, setDisplaySecond] = useState(false);
@@ -13,7 +12,7 @@ export default function Dashboard() {
     const [selectedQuestion, setSelectedQuestion] = useState({});
     const [selectedCountry, setSelectedCountry] = useState('Kosovo');
     const [selectedLanguage, setSelectedLanguage] = useState('ALB');
-
+    const drawerWidth = 240;
     function findQuestionById(categoryArray, id) {
         if (!id) {
             setSelectedQuestion(categoryArray[0]?.questions[0]);
@@ -41,30 +40,55 @@ export default function Dashboard() {
 
     // if (!selectedQuestion) return <Loader />;
     return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ width: '15%' }}>
-                <MiniDrawer
-                    categories={questions}
-                    selectedQuestion={selectedQuestion}
-                    setSelectedQuestion={setSelectedQuestion}
-                    selectedCountry={selectedCountry}
-                    setSelectedCountry={setSelectedCountry}
-                    selectedLanguage={selectedLanguage}
-                    setSelectedLanguage={setSelectedLanguage}
-                />
-                {/* <MenuList /> */}
-            </div>
-            <MainCard>
-                <Box style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex' }}>
+            <MiniDrawer
+                categories={questions}
+                selectedQuestion={selectedQuestion}
+                setSelectedQuestion={setSelectedQuestion}
+                selectedCountry={selectedCountry}
+                setSelectedCountry={setSelectedCountry}
+                selectedLanguage={selectedLanguage}
+                setSelectedLanguage={setSelectedLanguage}
+            />
+            <Box
+                component="main"
+                sx={{
+                    borderRadius: '10px 10px 10px 10px',
+                    backgroundColor: '#f5f5f5',
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` }
+                }}
+            >
+                <Box
+                    sx={{
+                        p: 3
+                    }}
+                >
                     <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={selectedLanguage} />
                     {displaySecond ? (
-                        <div>
-                            <DashboardGraph
-                                country={selectedCountry}
-                                selectedQuestion={selectedQuestion}
-                                selectedLanguage={selectedLanguage}
-                            />
-                        </div>
+                        <>
+                            <div style={{ marginTop: '20px' }}>
+                                <DashboardGraph
+                                    country={selectedCountry}
+                                    selectedQuestion={selectedQuestion}
+                                    selectedLanguage={selectedLanguage}
+                                />
+                            </div>
+                            <div>
+                                <Button
+                                    variant="contained"
+                                    type="button"
+                                    onClick={() => {
+                                        setDisplaySecond(false);
+                                    }}
+                                    style={{ borderRadius: '0px 0px 12px 12px', backgroundColor: '#ed5e68' }}
+                                    endIcon={<DeleteIcon />}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
+                        </>
                     ) : (
                         <div>
                             <Button
@@ -73,13 +97,15 @@ export default function Dashboard() {
                                 onClick={() => {
                                     setDisplaySecond(true);
                                 }}
+                                style={{ borderRadius: '0px 0px 12px 12px' }}
+                                endIcon={<AddIcon />}
                             >
-                                Krahaso +
+                                Krahaso
                             </Button>
                         </div>
                     )}
                 </Box>
-            </MainCard>
-        </div>
+            </Box>
+        </Box>
     );
 }

@@ -22,7 +22,7 @@ export default function Header() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <LinkWrapper to="/te-dhenat">Të dhënat</LinkWrapper>
-                        <LinkWrapper to="/ballina">Ballina</LinkWrapper>
+                        <LinkWrapper to="/">Ballina</LinkWrapper>
                         {/* <LinkWrapper to="/">Publikime</LinkWrapper> */}
                         {/* <LinkWrapper to="/about">Rreth WBSB</LinkWrapper> */}
 
@@ -52,10 +52,9 @@ export default function Header() {
                 <TranslateIcon />
             </IconButton> */}
             {/* bootstrap select form  */}
-            <Box>
+            <Box sx={{ marginRight: 3 }}>
                 <FormControl variant="standard">
                     {/* <InputLabel id="language-select-label">Language</InputLabel> */}
-
                     <Select
                         labelId="language-select-label"
                         id="language-select"
@@ -63,7 +62,13 @@ export default function Header() {
                         className="form-select"
                         aria-label="Default select example"
                     >
-                        <MenuItem value="Albanian"> Albanian </MenuItem>
+                        <MenuItem value="Albanian">
+                            <TranslateIcon /> Albanian
+                        </MenuItem>
+
+                        <MenuItem value="Albanian">English</MenuItem>
+
+                        <MenuItem value="Albanian">Serbian</MenuItem>
                         {/* <option value="1">English</option>
                 <option value="2">Albanian</option>
                 <option value="3">Serbian</option> */}
@@ -77,7 +82,7 @@ export default function Header() {
 const LinkWrapper = ({ to, children }) => {
     const path = useLocation().pathname;
     return (
-        <Nav.Link as={Link} to={to} style={{ color: path.includes(to) ? '#108EDD' : '', fontWeight: 600, fontSize: '20px' }}>
+        <Nav.Link as={Link} to={to} style={{ color: path === to ? '#108EDD' : '', fontWeight: 600, fontSize: '20px' }}>
             {children}
         </Nav.Link>
     );
@@ -88,7 +93,7 @@ const DropdownWrapper = ({ title, to, children }) => {
     const [show, setShow] = useState(false);
     console.log(path, to, path.includes(to));
     const showDropdown = (e) => {
-        setShow(!show);
+        setShow(true);
     };
     const hideDropdown = (e) => {
         setShow(false);
@@ -100,6 +105,7 @@ const DropdownWrapper = ({ title, to, children }) => {
             show={show}
             onMouseEnter={showDropdown}
             onMouseLeave={hideDropdown}
+            onClick={showDropdown}
             color={path.includes(to) ? '#108EDD' : ''}
         >
             {children}

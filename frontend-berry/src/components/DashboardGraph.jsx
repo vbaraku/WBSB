@@ -4,7 +4,7 @@ import MiniDrawer from './MiniDrawer';
 import { albanianDict, englishDict, serbianDict } from '../utils/dictionaries';
 import axios from 'axios';
 import FilterBar from './FilterBar';
-import { Button } from '@mui/material';
+import { Button, Box, Divider } from '@mui/material';
 
 export default function DashboardGraph({ selectedQuestion, country, selectedLanguage }) {
     const [answers, setAnswers] = useState([]);
@@ -98,14 +98,22 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
     }, [filters, selectedQuestion, country]);
 
     return (
-        <div style={{ display: 'flex', marginTop: '100px' }}>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '85%' }}>
-                <div>
-                    <FilterBar dict={dict} filters={filters} setFilters={setFilters} filterOptions={filterOptions} />
-
-                    <Graphs question={selectedQuestion} answers={answers} />
-                </div>
-            </div>
-        </div>
+        <Box
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: '#fff',
+                borderRadius: '4px',
+                boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+                flexGrow: 1
+            }}
+        >
+            <Box sx={{ backgroundColor: '#fff', marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 1 }}>
+                <FilterBar dict={dict} filters={filters} setFilters={setFilters} filterOptions={filterOptions} />
+            </Box>
+            <Divider style={{ width: '95%' }} />
+            <Graphs question={selectedQuestion} answers={answers} />
+        </Box>
     );
 }

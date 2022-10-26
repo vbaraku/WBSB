@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-
-// load mock apis
-import '_mockApis';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 // project imports
 import * as serviceWorker from 'serviceWorker';
