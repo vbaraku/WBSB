@@ -1,12 +1,12 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="group" viewBox="0 0 500 500"
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="group"
 >
     <defs>
         <clippath id="id-32"></clippath>
         <clippath id="id-59">
-            <rect width="100%" height="100%"></rect>
+            <!-- <rect width="50%" height="50%"></rect> -->
         </clippath>
-        <clippath id="id-84"></clippath>
-        <clippath id="id-100"></clippath>
+        <!-- <clippath id="id-84"></clippath>
+        <clippath id="id-100"></clippath> -->
         <!-- <filter id="filter-id-64" filterUnits="objectBoundingBox" width="200%" height="200%" x="-50%" y="-50%">
             <fegaussianblur result="blurOut" in="SourceGraphic" stdDeviation="1.5"></fegaussianblur>
             <feoffset result="offsetBlur" dx="1" dy="1"></feoffset>
@@ -41,17 +41,17 @@
     </defs>
     <g class="imapsSprite-group imapsContainer-group">
         <g class="imapsSprite-group imapsRectangle-group" fill="#ffffff" fill-opacity="0">
-            <rect class="imapsRectangle" width="100%" height="100%"></rect>
+            <rect class="imapsRectangle" width="50%" height="50%"></rect>
         </g>
         <g class="imapsContainer">
-            <g class="imapsSprite-group imapsContainer-group imapsComponent-group imapsChart-group imapsSerialChart-group imapsMapChart-group" role="region" clip-path="url(&quot;#id-59&quot;)" aria-label="Interactive Map" font-family="inherit" opacity="1">
+            <g class="imapsSprite-group imapsContainer-group imapsComponent-group imapsChart-group imapsSerialChart-group imapsMapChart-group" role="region" aria-label="Interactive Map" font-family="inherit" opacity="1">
                 <g class="imapsSprite-group imapsRectangle-group" fill="rgba(255,0,0,0)" aria-label="Use plus and minus keys on your keyboard to zoom in and out">
-                    <rect class="imapsRectangle" width="100%" height="100%"></rect>
+                    <rect class="imapsRectangle" width="50%" height="50%"></rect>
                 </g>
                 <g class="imapsContainer imapsComponent imapsChart imapsSerialChart imapsMapChart">
                     <g class="imapsSprite-group imapsContainer-group">
                         <g class="imapsSprite-group imapsRectangle-group" fill="#ffffff" fill-opacity="0" focusable="true" tabindex="0" style="outline: none;">
-                            <rect class="imapsRectangle" width="100%" height="100%"></rect>
+                            <rect class="imapsRectangle" width="50%" height="50%"></rect>
                         </g>
                         <g class="imapsContainer">
                             <g class="imapsSprite-group imapsContainer-group" style="touch-action: none; user-select: none; -webkit-user-drag: none;" transform="translate(1.2107,1.7592)">
@@ -199,7 +199,7 @@
                     </g>
                     <g class="imapsSprite-group imapsContainer-group" visibility="hidden" style="pointer-events: none;" display="none">
                         <g class="imapsSprite-group imapsRectangle-group" fill="#ffffff" opacity="1">
-                            <rect class="imapsRectangle" width="100%" height="100%"></rect>
+                            <rect class="imapsRectangle" width="50%" height="50%"></rect>
                         </g>
                         <g class="imapsContainer">
                             <g class="imapsSprite-group imapsContainer-group" transform="translate(500,355)">
@@ -236,7 +236,7 @@
                         <g class="imapsContainer imapsTooltip">
                             <g class="imapsSprite-group imapsContainer-group imapsLabel-group" fill="#000000" style="pointer-events: none;" transform="translate(0,6)">
                                 <g class="imapsContainer imapsLabel" transform="translate(-24,7)" style="user-select: none;">
-                                    <foreignobject width="100%" height="24">
+                                    <foreignobject width="50%" height="24">
                                         <div style="white-space: nowrap; color: rgb(0, 0, 0); display: block;">Serbia</div>
                                     </foreignobject>
                                 </g>

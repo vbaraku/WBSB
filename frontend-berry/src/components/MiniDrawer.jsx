@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { Button } from 'react-bootstrap';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -20,7 +21,8 @@ export default function ResponsiveDrawer({
     selectedCountry,
     setSelectedCountry,
     selectedLanguage,
-    setSelectedLanguage
+    setSelectedLanguage,
+    drawerOpen
 }) {
     const { height, width } = useWindowDimensions();
 
@@ -120,10 +122,10 @@ export default function ResponsiveDrawer({
 
             <Box
                 component="nav"
-                sx={{ position: 'relative', width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{ position: '', width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 aria-label="mailbox folders"
-                className="questio-drawer"
-                display={width > 650 ? 'block' : 'none'}
+                className="question-drawer"
+                display={width > 768 || drawerOpen ? 'block' : 'none'}
             >
                 <List
                     sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
@@ -155,9 +157,11 @@ const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
     return (
         <>
             <ListItemButton
-                onClick={() => {
+                onClick={(e) => {
                     setOpen((curr) => !curr);
+                    e.stopPropagation();
                 }}
+                className="category"
             >
                 {/* <ListItemIcon>
                     <InboxIcon />
@@ -171,7 +175,7 @@ const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
                         key={index}
                         component="div"
                         disablePadding
-                        style={{ backgroundColor: q.id === selectedQuestion.id ? '#ADD8E6' : '' }}
+                        style={{ backgroundColor: q?.id === selectedQuestion?.id ? '#e3f2fd' : '' }}
                     >
                         <ListItemButton
                             sx={{ pl: 4 }}

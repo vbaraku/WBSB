@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Box } from '@mui/material';
+import { Row, Col } from 'react-bootstrap';
 
 export default function FilterBar({ dict, filters, setFilters, filterOptions }) {
     // const years = [dict.ALL, 2021] || [];
@@ -24,61 +25,77 @@ export default function FilterBar({ dict, filters, setFilters, filterOptions }) 
         setFilters({ ...filters, [filter]: value });
     };
     return (
-        <Box>
-            <SelectForm
-                value={filters.year}
-                values={filterOptions.years}
-                label={dict.YEAR_LABEL}
-                handleChange={(e) => {
-                    handleChange('year', e.target.value);
-                }}
-            />
-            <SelectForm
-                value={filters.region}
-                values={filterOptions.regions}
-                label={dict.REGION_LABEL}
-                handleChange={(e) => {
-                    handleChange('region', e.target.value);
-                }}
-            />
-            <SelectForm
-                value={filters.regionType}
-                values={filterOptions.regionTypes}
-                label={dict.REGION_TYPE_LABEL}
-                handleChange={(e) => {
-                    handleChange('regionType', e.target.value);
-                }}
-            />
-            <SelectForm
-                value={filters.nationality}
-                values={filterOptions.nationalities}
-                label={dict.NATIONALITY_LABEL}
-                handleChange={(e) => {
-                    handleChange('nationality', e.target.value);
-                }}
-            />
-            <SelectForm
-                value={filters.gender}
-                values={filterOptions.genders}
-                label={dict.GENDER_LABEL}
-                handleChange={(e) => {
-                    handleChange('gender', e.target.value);
-                }}
-            />
-            <SelectForm
-                value={filters.age}
-                values={filterOptions.ages}
-                label={dict.AGE_LABEL}
-                handleChange={(e) => {
-                    handleChange('age', e.target.value);
-                }}
-            />
-        </Box>
+        <Row>
+            <Col lg={4} md={4} xs={6}>
+                <SelectForm
+                    value={filters.year}
+                    values={filterOptions.years}
+                    label={dict.YEAR_LABEL}
+                    handleChange={(e) => {
+                        handleChange('year', e.target.value);
+                    }}
+                />
+            </Col>
+            <Col lg={4} md={4} xs={6}>
+                <SelectForm
+                    value={filters.region}
+                    values={filterOptions.regions}
+                    label={dict.REGION_LABEL}
+                    handleChange={(e) => {
+                        handleChange('region', e.target.value);
+                    }}
+                />
+            </Col>
+
+            <Col lg={4} md={4} xs={6}>
+                <SelectForm
+                    value={filters.regionType}
+                    values={filterOptions.regionTypes}
+                    label={dict.REGION_TYPE_LABEL}
+                    handleChange={(e) => {
+                        handleChange('regionType', e.target.value);
+                    }}
+                />
+            </Col>
+
+            <Col lg={4} md={4} xs={6}>
+                <SelectForm
+                    value={filters.nationality}
+                    values={filterOptions.nationalities}
+                    label={dict.NATIONALITY_LABEL}
+                    handleChange={(e) => {
+                        handleChange('nationality', e.target.value);
+                    }}
+                />
+            </Col>
+
+            <Col lg={4} md={4} xs={6}>
+                <SelectForm
+                    value={filters.gender}
+                    values={filterOptions.genders}
+                    label={dict.GENDER_LABEL}
+                    handleChange={(e) => {
+                        handleChange('gender', e.target.value);
+                    }}
+                />
+            </Col>
+
+            <Col lg={4} md={4} xs={6}>
+                <SelectForm
+                    value={filters.age}
+                    values={filterOptions.ages}
+                    label={dict.AGE_LABEL}
+                    handleChange={(e) => {
+                        handleChange('age', e.target.value);
+                    }}
+                />
+            </Col>
+        </Row>
     );
 }
 
 const SelectForm = ({ value, values, label, handleChange }) => (
-    <FormControl sx={{ m: 1 }}>
+    <FormControl sx={{ m: 1, width: '100%' }}>
         <InputLabel id={`demo-simple-select-helper-label-${label}`}>{label}</InputLabel>
         <Select
             labelId={`demo-simple-select-helper-label-${label}`}
@@ -86,7 +103,7 @@ const SelectForm = ({ value, values, label, handleChange }) => (
             value={value}
             label={label}
             onChange={handleChange}
-            style={{ borderRadius: '9px' }}
+            style={{ borderRadius: '9px', width: '100%' }}
         >
             {values.map((el) => (
                 <MenuItem value={el} key={el}>

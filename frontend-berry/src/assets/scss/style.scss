@@ -1,6 +1,78 @@
 .map_box {
-    padding-top: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     height: 100%;
-    background-color: blue;
+    background: linear-gradient(90deg, #108edd 11%, #19191e 87%);
     display: flex;
+}
+
+.wbsb-map {
+    max-height: 90%;
+    max-width: 50%;
+}
+.container-fluid {
+    padding: 0;
+}
+
+.graph-wrapper {
+    padding: 15px;
+
+    @media screen and (min-width: 768px) {
+        padding: 25px;
+    }
+}
+
+.data-section {
+    @media screen and (max-width: 768px) {
+        margin-top: 50px;
+    }
+}
+.country-select {
+    // background-color: darkblue;
+    color: white;
+    margin: 0px 0px;
+}
+
+.country-option {
+    color: white;
+    background-color: #1976d2;
+
+    border-radius: 10px 10px 0px 0px !important;
+    box-shadow: none !important;
+    padding: 10px 15px;
+    margin-right: 5px !important;
+}
+
+.selected-country {
+    color: black !important;
+    background-color: white !important;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px 15px;
+    z-index: 0 !important;
+    margin-right: 5px;
+    //box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 0%) !important;
+}
+
+.question-drawer {
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        z-index: 100;
+        opacity: 1;
+        width: 70%;
+        max-height: 126vh;
+    }
+    height: 100%;
+    overflow: scroll;
+    // max-height: 100vh;
+    // overflow-y: hidden;
+}
+
+.question-drawer::-webkit-scrollbar {
+    display: none;
+}
+
+.body {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
 }

@@ -14,7 +14,7 @@ export default function Header() {
     return (
         <Navbar collapseOnSelect expand="lg">
             <Navbar.Brand as={Link} to="/">
-                <Image src={logo} alt="logo" style={{ width: 'auto', minHeight: '100px' }} />
+                <Image src={logo} alt="logo" style={{ width: 'auto', height: 'auto', maxWidth: '190px' }} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 

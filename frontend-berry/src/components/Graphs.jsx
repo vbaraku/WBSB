@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import axios from 'axios';
-import PieOrBarChart from './graphs/PieOrBarChart';
+import Charts from './graphs/Charts';
 import StackedBarChart from './graphs/StackedBarChart';
 import QuestionNav from './QuestionNav';
 import Select from '@mui/material/Select';
@@ -33,12 +33,9 @@ export default function Graphs({ question, answers }) {
 
     const displayChart = () => {
         if (selectedGraphType === 'packedbubble') {
-            return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
+            return <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />;
         }
-        if (selectedGraphType === 'stackedbar') {
-            return <StackedBarChart question={question} answers={answers} />;
-        }
-        return <PieOrBarChart question={question} answers={answers} selectedGraphType={selectedGraphType} />;
+        return <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />;
     };
     const graphTypes = [
         {
@@ -74,7 +71,7 @@ export default function Graphs({ question, answers }) {
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {graphTypes.map((graphType, index) => (
                     <Button
-                        sx={{ marginLeft: 1, width: '150px', margi: '5px' }}
+                        sx={{ marginLeft: 1, padding: '5px', paddingLeft: '12px', paddingRight: '12px', margin: '5px' }}
                         variant="outlined"
                         type="submit"
                         backgroundColor="#ADD8E6"
