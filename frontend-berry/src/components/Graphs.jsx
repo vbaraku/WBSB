@@ -12,13 +12,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Button from '@mui/material/Button';
+import { InfinitySpin } from 'react-loader-spinner';
 
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
 export default function Graphs({ question, answers }) {
     const [selectedGraphType, setSelectedGraphType] = useState('column');
-
     // const [graph, setGraph] = useState(null);
 
     // useEffect(() => {
@@ -56,6 +56,10 @@ export default function Graphs({ question, answers }) {
             label: 'stacked bar'
         }
     ];
+
+    if (answers.length < 1) {
+        return <InfinitySpin color="blue" />;
+    }
 
     return (
         <div

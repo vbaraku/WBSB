@@ -9,6 +9,9 @@ import { Row, Col } from 'react-bootstrap';
 import useWindowDimensions from 'utils/useWindowDimensions';
 import MenuIcon from '@mui/icons-material/Menu';
 import { borderRadius, maxWidth } from '@mui/system';
+import { useLanguage } from '../LanguageContext';
+
+import { Audio } from 'react-loader-spinner';
 
 export default function Dashboard() {
     const { height, width } = useWindowDimensions();
@@ -17,7 +20,10 @@ export default function Dashboard() {
     const [questions, setQuestions] = useState([]);
     const [selectedQuestion, setSelectedQuestion] = useState({});
     const [selectedCountry, setSelectedCountry] = useState('Kosovo');
-    const [selectedLanguage, setSelectedLanguage] = useState('ALB');
+
+    const { language, dictionary } = useLanguage();
+
+    // const [selectedLanguage, setSelectedLanguage] = useState('ALB');
 
     const ref = useRef(null);
 
@@ -41,11 +47,11 @@ export default function Dashboard() {
 
     useEffect(() => {
         console.log('useEffect');
-        axios.get('/api/questions', { params: { country: selectedCountry, language: selectedLanguage } }).then((response) => {
+        axios.get('/api/questions', { params: { country: selectedCountry, language } }).then((response) => {
             setQuestions(response.data);
             findQuestionById(response.data, selectedQuestion?.id);
         });
-    }, [selectedLanguage, selectedCountry]);
+    }, [language, selectedCountry]);
 
     useEffect(() => {
         document.addEventListener('click', (e) => {
@@ -60,7 +66,6 @@ export default function Dashboard() {
         };
     }, []);
 
-    // if (!selectedQuestion) return <Loader />;
     return (
         <Box sx={{ display: 'flex' }}>
             <MiniDrawer
@@ -69,8 +74,8 @@ export default function Dashboard() {
                 setSelectedQuestion={setSelectedQuestion}
                 selectedCountry={selectedCountry}
                 setSelectedCountry={setSelectedCountry}
-                selectedLanguage={selectedLanguage}
-                setSelectedLanguage={setSelectedLanguage}
+                selectedLanguage={language}
+                // setSelectedLanguage={setSelectedLanguage}
                 drawerOpen={drawerOpen}
             />
             <Box
@@ -117,15 +122,11 @@ export default function Dashboard() {
                             </Button>
                         ))}
                     </Row>
-                    <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={selectedLanguage} />
+                    <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={language} />
                     {displaySecond ? (
                         <>
-                            <div style={{ marginTop: '20px' }}>
-                                <DashboardGraph
-                                    country={selectedCountry}
-                                    selectedQuestion={selectedQuestion}
-                                    selectedLanguage={selectedLanguage}
-                                />
+                            <div className="dashboard" style={{ marginTop: '20px' }}>
+                                <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={language} />
                             </div>
                             <div>
                                 <Button
@@ -137,7 +138,7 @@ export default function Dashboard() {
                                     style={{ borderRadius: '0px 0px 12px 12px', backgroundColor: '#ed5e68' }}
                                     endIcon={<DeleteIcon />}
                                 >
-                                    Delete
+                                    {dictionary.DELETE}
                                 </Button>
                             </div>
                         </>
@@ -152,7 +153,7 @@ export default function Dashboard() {
                                 style={{ borderRadius: '0px 0px 12px 12px' }}
                                 endIcon={<AddIcon />}
                             >
-                                Krahaso
+                                {dictionary.COMPARE}
                             </Button>
                         </div>
                     )}

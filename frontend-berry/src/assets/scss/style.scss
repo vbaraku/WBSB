@@ -6,6 +6,17 @@
     display: flex;
 }
 
+@font-face {
+    font-family: 'Publica Sans';
+    src: local('Publica Sans'), url(../fonts/PublicaSans-Medium.otf) format('opentype');
+}
+
+.body {
+    font-family: 'Publica Sans';
+    // font-size: 16px;
+    // color: #fff;
+    // background-color: #19191e;
+}
 .wbsb-map {
     max-height: 90%;
     max-width: 50%;
@@ -16,16 +27,23 @@
 
 .graph-wrapper {
     padding: 15px;
-
     @media screen and (min-width: 768px) {
         padding: 25px;
     }
 }
 
 .data-section {
+    // max-height: 50px;
+    // max-width: 90%;
+    padding: 0 5%;
     @media screen and (max-width: 768px) {
         margin-top: 50px;
+        padding: 0 0%;
     }
+    // .dashbard {
+    //     max-height: 600px;
+    //     width: auto;
+    // }
 }
 .country-select {
     // background-color: darkblue;
@@ -62,6 +80,7 @@
         max-height: 126vh;
     }
     height: 100%;
+    max-height: 1200px;
     overflow: scroll;
     // max-height: 100vh;
     // overflow-y: hidden;
@@ -75,4 +94,216 @@
     background-color: black;
     height: 100vh;
     width: 100vw;
+}
+
+.footer-link {
+    color: black;
+    text-decoration: none;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.footer-link:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.homepage-banner {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    min-height: 450px;
+    background: rgb(24, 95, 175);
+    background: linear-gradient(86deg, rgba(24, 95, 175, 1) 0%, rgba(4, 102, 200, 1) 100%);
+    margin: 0 !important;
+    span {
+        color: white;
+        font-size: 48px;
+        // font-weight: 600;
+        font-family: 'Publica Sans', 'Courier New', Courier, monospace;
+    }
+
+    @media screen and (max-width: 992px) {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .banner-text {
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+        margin-bottom: 100px;
+        padding-left: 25px;
+        z-index: 10;
+        .redirect-link {
+            display: block;
+            text-decoration: none;
+            background-color: #185faf;
+            border: 2px solid #185faf;
+            transition: 0.4s;
+
+            color: white !important;
+            padding: 0.4em 1em;
+            width: max-content;
+        }
+        .redirect-link:hover {
+            text-decoration: none;
+            background-color: white;
+            color: #185faf !important;
+            border: 2px solid #185faf;
+        }
+
+        @media screen and (max-width: 992px) {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0px;
+            padding-left: 0px;
+            .redirect-link {
+                margin-top: 0.5em;
+            }
+        }
+    }
+
+    .img-wrapper {
+        max-width: 690px;
+        display: flex;
+        align-items: center;
+        .banner-image {
+            width: 100%;
+            height: 100%;
+            max-height: 300px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: auto;
+        }
+    }
+}
+
+.publication-card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 0%);
+    margin-bottom: 1em;
+    .publication-title {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+    }
+
+    .publication-description {
+        font-size: 1em;
+        margin-bottom: 0.5em;
+    }
+    .publication-link {
+        display: block;
+        text-decoration: none;
+        background-color: #185faf;
+        border: 1px solid #185faf;
+        color: white !important;
+        padding: 0.5em 1em;
+        width: max-content;
+    }
+    .publication-link:hover {
+        text-decoration: none;
+        background-color: white;
+        color: #185faf !important;
+    }
+}
+
+.hidden {
+    opacity: 0;
+    transition: all 1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.show {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    color: #185faf;
+    text-decoration: underline;
+}
+
+.homepage-header {
+    background: linear-gradient(45deg, #108edd, #08476f);
+}
+.partner-section {
+    margin: auto;
+    margin-top: 90px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    //a nice light blue color
+    background-color: #e3f2fd;
+    //light yellow background
+    padding-top: 15px;
+    padding-bottom: 30px;
+    .partner-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 380px;
+        // border: 1px solid #185faf;
+        margin: 0 15px;
+        padding: 20px;
+        box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 0%);
+        border-radius: 20px;
+        background-color: white;
+        .img-wrapper {
+            // min-height: 120px;
+            max-height: 140px;
+            max-width: 85%;
+            height: 180px;
+            margin-bottom: 20px;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+                border-radius: 10px;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            border-radius: 0px 0px 10px 10px;
+            height: 100%;
+
+            h3 {
+                min-height: 90px;
+                line-height: 30px;
+            }
+            p {
+                text-align: justify;
+            }
+            .partner-link {
+                border-radius: 7px;
+                text-decoration: none;
+                background-color: white;
+                border: 2px solid #185faf;
+                color: #185faf !important;
+                padding: 0.5em 1em;
+                transition: 0.4s;
+                margin-top: auto;
+                // align-self: flex-end;
+            }
+            .partner-link:hover {
+                text-decoration: none;
+                background-color: #185faf;
+                color: white !important;
+            }
+        }
+    }
 }

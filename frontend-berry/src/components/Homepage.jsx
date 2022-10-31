@@ -1,93 +1,173 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, CardActionArea, CardMedia, CardContent, Typography, CardActions, Divider } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';
-import { Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 // import image from '../assets/images/test.svg';
 import { ReactComponent as Logo } from '../assets/images/test.svg';
 import { CloudOff } from '@mui/icons-material';
 import Slider from 'react-slick';
+import logo from '../assets/images/logo.png';
+import csdgLogo from '../assets/images/logo-csdg.jpg';
+import bcspLogo from '../assets/images/logo-bcsp-orange.jpg';
+import { useLanguage, useLanguageUpdate } from '../LanguageContext';
+import reportImage from '../assets/images/report1.png';
+import axios from 'axios';
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import fileDownload from 'js-file-download';
+import qkssLogo from '../assets/images/qkss-logo.png';
+import PublicationList from 'PublicationList';
 
 export default function Homepage() {
-    const navigate = useNavigate();
+    const { language, dictionary } = useLanguage();
+
+    const [partners, setPartners] = useState([
+        {
+            name: dictionary.PARTNER0,
+            logo: qkssLogo,
+            link: 'https://www.qkss.org/',
+            description: dictionary.PARTNER0_DESC
+        },
+        {
+            name: dictionary.PARTNER1,
+            logo: bcspLogo,
+            link: 'https://www.bcsp.org/',
+            description: dictionary.PARTNER1_DESC
+        },
+        {
+            name: dictionary.PARTNER2,
+            logo: csdgLogo,
+            link: 'https://www.csdg.org/',
+            description: dictionary.PARTNER2_DESC
+        }
+    ]);
 
     useEffect(() => {
-        const countries = Array.from(document.querySelectorAll('.clickable-map'));
-        const kosovo = document.querySelector('.kosovo-map');
-        const colour = '';
-        countries.forEach((country) => {
-            country.onclick = () => {
-                const countryName = country.classList[0];
-                navigate(`/te-dhenat?shteti=${countryName}`);
-            };
-
-            country.onmouseover = () => {
-                country.style.cursor = 'pointer';
-                // colour = country.style.fill;
-                country.style.opacity = 0.85;
-                // country.style = '#e9e9e9';
-            };
-
-            country.onmouseout = () => {
-                country.style.fill = colour;
-                country.style.opacity = 1;
-                // country.style.fill = '#f5f5f5';
-            };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
         });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
     }, []);
+
     return (
-        <div className="map_box">
-            <Row style={{ width: '100%', maxHeight: '400px' }}>
-                <Col
-                    md={4}
-                    lg={4}
-                    sm={12}
+        <>
+            <Container fluid className="homepage-header">
+                <Row className="homepage-banner">
+                    <Col lg={6} md={12} sm={12} className="banner-text">
+                        <span className="title">Barometri 2022 is now here</span>
+                        <Link className="redirect-link" to="te-dhenat">
+                            Explore our data ➜
+                        </Link>
+                    </Col>
+                    <Col className="img-wrapper" lg={6} md={12} sm={12}>
+                        <img className="banner-image" src={logo} alt="logo" />
+                    </Col>
+                </Row>
+                <div
                     style={{
-                        justifyContent: 'flex-end',
-                        alignContent: 'left',
                         display: 'flex',
-                        flexDirection: 'column',
-                        maxHeight: '100%'
+                        width: '100%',
+                        justifyContent: 'center',
+                        color: 'white',
+                        fontSize: '26px',
+                        fontWeight: '600'
                     }}
                 >
-                    <ControlledCarousel />
-                </Col>
-                <Col
-                    md={8}
-                    lg={8}
-                    sm={12}
-                    style={{ justifyContent: 'center', alignContent: 'left', display: 'flex', flexDirection: 'column', maxHeight: '100%' }}
-                >
-                    <Logo className="wbsb-map" style={{ width: 'auto', height: '100%' }} viewBox="100 0 380 420" />
+                    <span
+                        onClick={() => {
+                            document.querySelector('.partner-section').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        style={{ margin: '20px', cursor: 'pointer' }}
+                    >
+                        {dictionary.PARTNERS}
+                    </span>
+
+                    <span
+                        onClick={() => {
+                            document.querySelector('#publications').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        style={{ margin: '20px', cursor: 'pointer' }}
+                    >
+                        Publications
+                    </span>
+                    <span style={{ margin: '20px' }}>test</span>
+                </div>
+            </Container>
+            <Row style={{ margin: 'auto', maxWidth: 1240, marginTop: '90px' }}>
+                <Col>
+                    <p>{dictionary.METHODOLOGY_DESC1}</p>
+                    <p>{dictionary.METHODOLOGY_DESC2}</p>
+                    <p>{dictionary.METHODOLOGY_DESC3}</p>
+                    <p>{dictionary.METHODOLOGY_DESC4}</p>
                 </Col>
             </Row>
-        </div>
-    );
-}
+            <Row style={{ margin: 'auto', maxWidth: 1240, marginTop: '90px' }}>
+                <Col className="hidden">
+                    {/* <AnimationOnScroll animateIn="animate__fadeIn" animateOut="animate__fadeIn"> */}
+                    <p>{dictionary.ABOUT_WBSB_DESC1}</p>
+                    <p>{dictionary.ABOUT_WBSB_DESC2}</p>
+                    <p>{dictionary.ABOUT_WBSB_DESC3}</p>
+                    <p>{dictionary.ABOUT_WBSB_DESC4}</p>
+                    {/* </AnimationOnScroll> */}
+                </Col>
+            </Row>
 
-function ControlledCarousel() {
-    const settings = {
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
-    };
-    const text = `BSBP shërben si një instrument për të matur perceptimet e qytetarëve të Shqipërisë, Kosovës dhe Serbisë për çështje të ndryshme të lidhura me sigurinë, sundimin e ligjit, drejtësinë, bashkëpunimin rajonal dhe ndërtimin e paqes. Për më tepër, BSBP identifikon kërcënimet dhe sfidat e ndryshme ekzistuese dhe ato me potencial rritjeje siç perceptohen nga qytetarët e të tre vendeve.
+            <Container fluid className="partner-section">
+                <div style={{ maxWidth: '1240px', textAlign: '' }}>
+                    <h1 style={{ marginBottom: 10, fontSize: '40px' }} className="">
+                        Partners
+                    </h1>
+                    <hr />
 
-`;
+                    <Row
+                        // className="row-fluid"
+                        style={{ margin: 'auto', justifyContent: 'space-around', marginTop: '40px' }}
+                    >
+                        {partners.map((partner, index) => (
+                            <Col
+                                className="hidden partner-card"
+                                lg={4}
+                                md={6}
+                                sm={12}
+                                // style={{ maxWidth: '35%', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+                            >
+                                <div className="img-wrapper">
+                                    <img src={partner.logo} alt="logo" />
+                                </div>
+                                <div className="content">
+                                    <h3>{partner.name}</h3>
+                                    <Divider />
+                                    <p>{partner.description}</p>
+                                    <Link className="partner-link" to="te-dhenat">
+                                        {dictionary.READ_MORE} ➜
+                                    </Link>
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
+                </div>
+            </Container>
 
-    // Split text into array with members of size 100 but not splitting words
-    const splitText = text.match(/.{1,200}(\s|$)/g);
-    return (
-        <div style={{ background: 'lightblue', textAlign: 'center', margin: '0 5%' }}>
-            <Slider {...settings}>
-                {splitText.map((item, index) => (
-                    <div key={index}>
-                        <p>{item}</p>
-                    </div>
-                ))}
-            </Slider>
-        </div>
+            <Container id="publications" fluid style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}>
+                <h1 style={{ marginBottom: 30 }} className="">
+                    {dictionary.PUBLICATION}
+                </h1>
+                <hr />
+
+                <Row style={{ maxWidth: 1000, margin: 'auto' }}>
+                    <PublicationList listSize={3} />
+                </Row>
+            </Container>
+        </>
     );
 }

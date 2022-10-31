@@ -1,11 +1,14 @@
 import React from 'react';
 import Highcharts, { chart } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
 
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
 export default function Charts({ question, answers, selectedGraphType }) {
+    const { language, dictionary } = useLanguage();
+
     let options = {};
     if (selectedGraphType === 'stackedbar') {
         options = {
@@ -49,7 +52,7 @@ export default function Charts({ question, answers, selectedGraphType }) {
                 text: question?.text
             },
             subtitle: {
-                text: 'Burimi: securitybarometer.qkss.org'
+                text: dictionary.SOURCE
             },
             chart: {
                 type: selectedGraphType

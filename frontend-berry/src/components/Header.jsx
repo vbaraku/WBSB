@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import TranslateIcon from '@mui/icons-material/Translate';
 import Select from '@mui/material/Select';
@@ -9,8 +9,12 @@ import IconButton from '@mui/material/IconButton';
 import { Container, Nav, Navbar, NavDropdown, Image, Button, Form } from 'react-bootstrap';
 import logo from '../assets/images/logo.png';
 import { FormControl } from '@mui/material';
+import { useLanguage, useLanguageUpdate } from '../LanguageContext';
 
 export default function Header() {
+    const { language, dictionary } = useLanguage();
+    const setLanguage = useLanguageUpdate();
+
     return (
         <Navbar collapseOnSelect expand="lg">
             <Navbar.Brand as={Link} to="/">
@@ -21,12 +25,12 @@ export default function Header() {
             <Container>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <LinkWrapper to="/te-dhenat">Të dhënat</LinkWrapper>
-                        <LinkWrapper to="/">Ballina</LinkWrapper>
-                        {/* <LinkWrapper to="/">Publikime</LinkWrapper> */}
+                        <LinkWrapper to="/">{dictionary.HOME}</LinkWrapper>
+                        <LinkWrapper to="/te-dhenat">{dictionary.DATA}</LinkWrapper>
+                        <LinkWrapper to="/publikime">Publikime</LinkWrapper>
                         {/* <LinkWrapper to="/about">Rreth WBSB</LinkWrapper> */}
 
-                        <DropdownWrapper title="Publikime" to="/publikime">
+                        {/* <DropdownWrapper title={dictionary.PUBLICATION} to="/publikime">
                             <NavDropdown.Item as={Link} to="/publikime/raporte">
                                 Raporte
                             </NavDropdown.Item>
@@ -35,7 +39,7 @@ export default function Header() {
                             </NavDropdown.Item>
                         </DropdownWrapper>
 
-                        <DropdownWrapper title="Rreth WBSB" to="/about">
+                        <DropdownWrapper title={dictionary.ABOUT_WBSB} to="/about">
                             <NavDropdown.Item as={Link} to="/about/proj">
                                 About proj
                             </NavDropdown.Item>
@@ -44,7 +48,7 @@ export default function Header() {
                             </NavDropdown.Item>
                         </DropdownWrapper>
 
-                        <LinkWrapper to="/contact">Kontakti</LinkWrapper>
+                        <LinkWrapper to="/contact">{dictionary.CONTACT}</LinkWrapper> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -58,17 +62,18 @@ export default function Header() {
                     <Select
                         labelId="language-select-label"
                         id="language-select"
-                        value="Albanian"
+                        value={language}
+                        onChange={(e) => {
+                            setLanguage(e.target.value);
+                        }}
                         className="form-select"
                         aria-label="Default select example"
                     >
-                        <MenuItem value="Albanian">
-                            <TranslateIcon /> Albanian
-                        </MenuItem>
+                        <MenuItem value="ALB">Albanian</MenuItem>
 
-                        <MenuItem value="Albanian">English</MenuItem>
+                        <MenuItem value="ENG">English</MenuItem>
 
-                        <MenuItem value="Albanian">Serbian</MenuItem>
+                        <MenuItem value="SRB">Serbian</MenuItem>
                         {/* <option value="1">English</option>
                 <option value="2">Albanian</option>
                 <option value="3">Serbian</option> */}
