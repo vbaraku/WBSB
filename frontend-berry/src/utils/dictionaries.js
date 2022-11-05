@@ -95,6 +95,8 @@ const albanianDict = {
 
     SOURCE: 'Burimi: securitybarometer.qkss.org',
 
+    METHODOLOGY: 'Metodologjia',
+
     METHODOLOGY_DESC1:
         'Të dhënat e Barometrit të Sigurisë të Ballkanit Perëndimor janë marrur përmes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën. Hulumtimi në terren u krye në periudhën 17-25 shtator 2021. ',
 
@@ -105,6 +107,8 @@ const albanianDict = {
         'Faza e parë e tërheqjes së mostrës u bazua në njësitë administrative të drejtorive rajonale të Policisë së Kosovës, duke përfshirë tetë rajonet: Ferizaj, Gjakovë, Gjilan, Mitrovicë të Jugut, Mitrovicë të Veriut, Pejë, Prishtinë dhe Prizren.',
 
     METHODOLOGY_DESC4: '',
+
+    DONOR: 'Donatori',
 
     DONATOR:
         'National Endowment for Democracy (NED) është një fondacion i pavarur, jofitimprurës i përkushtuar ndaj rritjes dhe forcimit të institucioneve demokratike në mbarë botën. Çdo vit, NED jep më shumë se 2000 grante për të mbështetur projektet e organizatave joqeveritare jashtë vendit, të cilët punojnë për qëllime demokratike në më shumë se 100 vende.'
@@ -133,7 +137,7 @@ const serbianDict = {
 
     HOME: 'Podaci',
 
-    PUBLICATION: 'Publikacija',
+    PUBLICATION: 'Publikacije',
 
     ABOUT_WBSB: 'O BBZB',
 
@@ -167,13 +171,15 @@ const serbianDict = {
 
     REPORT: 'Izveštaj',
 
-    READ_MORE: 'Опширније',
+    READ_MORE: 'Opširnije',
 
     COMPARE: 'Uporediti',
 
     DELETE: 'Izbrisati',
 
     SOURCE: 'Izvor: securitybarometer.qkss.org',
+
+    METHODOLOGY: 'Metodologija',
 
     METHODOLOGY_DESC1:
         'Istraživanje Barometra bezbednosti na Zapadnom Balkanu (BBZB) sprovedeno je kroz razgovor licem u lice sa nasumično izabranim ispitanicima širom Kosova, Albanije i Srbije. Terensko istraživanje je sprovedeno u drugoj polovini septembra 2021. godine.',
@@ -186,6 +192,8 @@ const serbianDict = {
 
     METHODOLOGY_DESC4:
         'Unutar opština, uzorak je stratifikovan na urban/ruralan uzorak na osnovu broja domaćinstava u svakoj sredini. Za izabir domaćinstava unutar uzorkovanih lokacija korišćeni su slučajni obrasci, dok je randomizacija unutar domaćinstava zasnovana na metodi sledećeg rođendana odrasle osobe. Podaci su verifikovani u realnom vremenu preko terenskih koordinatora koji su obišli unapred definisani uzorak domaćinstava nakon završetka ankete u odgovarajućim domaćinstvima, putem telefonskog kontakta sa svim ispitanicima radi potvrde pridržavanja metodologije i nekih od ključnih odgovora i analizom logičke doslednost odgovora pri obradi i analizi podataka. Margina greške iznosi 3 procenta sa intervalom poverenja od 95 procenata.',
+
+    DONOR: 'Donator',
 
     DONATOR:
         'National Endowment for Democracy (NED) je nezavisna, neprofitna fondacija posvećena rastu i jačanju demokratskih institucija širom sveta. Svake godine NED daje više od 2.000 grantova za podršku projektima nevladinih grupa u inostranstvu koje rade za demokratske ciljeve u više od 100 zemalja.'
@@ -244,7 +252,7 @@ const englishDict = {
 
     HOME: 'Home',
 
-    PUBLICATION: 'Publication',
+    PUBLICATION: 'Publications',
 
     ABOUT_WBSB: 'About WBSB',
 
@@ -288,6 +296,8 @@ const englishDict = {
 
     SOURCE: 'Source: securitybarometer.qkss.org',
 
+    METHODOLOGY: 'Methodology',
+
     METHODOLOGY_DESC1:
         'The Western Balkans Security Barometer (WBSB) survey was conducted through face-to-face interviews with randomly selected respondents throughout Kosovo, Albania and Serbia. The field research was conducted in the second part of September 2021.',
 
@@ -299,6 +309,8 @@ const englishDict = {
 
     METHODOLOGY_DESC4:
         'Within the municipalities, the sample was stratified into urban/rural sample based on the number of households in each area. Random patterns were used to select the households within the sampled locations, while the randomization within the households was based on the next adult birthday method. The data were verified in real time through field coordinators that visited a predefined sample of households after the completion of the survey in the respective households, through telephone contact with all respondents to confirm the adherence to the methodology and some of the key answers and by analyzing the logical consistency of the answers when processing and analyzing the data. The margin of error is 3 percent with a confidence interval of 95 percent.',
+
+    DONOR: 'Donor',
 
     DONATOR:
         'National Endowment for Democracy (NED) is an independent, nonprofit foundation dedicated to the growth and strengthening of democratic institutions around the world. Each year, NED makes more than 2,000 grants to support the projects of non-governmental groups abroad who are working for democratic goals in more than 100 countries.'

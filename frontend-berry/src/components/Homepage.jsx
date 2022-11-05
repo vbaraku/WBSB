@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Box, CardActionArea, CardMedia, CardContent, Typography, CardActions, Divider } from '@mui/material';
+import { Box, CardActionArea, CardMedia, CardContent, Chip, Typography, CardActions, Divider } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 // import image from '../assets/images/test.svg';
@@ -19,6 +19,7 @@ import { AnimationOnScroll } from 'react-animation-on-scroll';
 import fileDownload from 'js-file-download';
 import qkssLogo from '../assets/images/qkss-logo.png';
 import PublicationList from 'PublicationList';
+import donor from '../assets/images/donor.png';
 
 export default function Homepage() {
     const { language, dictionary } = useLanguage();
@@ -60,7 +61,7 @@ export default function Homepage() {
     }, []);
 
     return (
-        <>
+        <div className="homepage">
             <Container fluid className="homepage-header">
                 <Row className="homepage-banner">
                     <Col lg={6} md={12} sm={12} className="banner-text">
@@ -85,7 +86,25 @@ export default function Homepage() {
                 >
                     <span
                         onClick={() => {
-                            document.querySelector('.partner-section').scrollIntoView({ behavior: 'smooth' });
+                            document.querySelector('#methodology-section').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        style={{ margin: '20px', cursor: 'pointer' }}
+                    >
+                        {dictionary.METHODOLOGY}
+                    </span>
+
+                    <span
+                        onClick={() => {
+                            document.querySelector('#about-section').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        style={{ margin: '20px', cursor: 'pointer' }}
+                    >
+                        {dictionary.ABOUT_WBSB}
+                    </span>
+
+                    <span
+                        onClick={() => {
+                            document.querySelector('#partner-section').scrollIntoView({ behavior: 'smooth' });
                         }}
                         style={{ margin: '20px', cursor: 'pointer' }}
                     >
@@ -94,38 +113,137 @@ export default function Homepage() {
 
                     <span
                         onClick={() => {
-                            document.querySelector('#publications').scrollIntoView({ behavior: 'smooth' });
+                            document.querySelector('#donor-section').scrollIntoView({ behavior: 'smooth' });
                         }}
                         style={{ margin: '20px', cursor: 'pointer' }}
                     >
-                        Publications
+                        {dictionary.DONOR}
                     </span>
-                    <span style={{ margin: '20px' }}>test</span>
+                    <span
+                        onClick={() => {
+                            document.querySelector('#publication-section').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        style={{ margin: '20px', cursor: 'pointer' }}
+                    >
+                        {dictionary.PUBLICATION}
+                    </span>
                 </div>
             </Container>
-            <Row style={{ margin: 'auto', maxWidth: 1240, marginTop: '90px' }}>
-                <Col>
-                    <p>{dictionary.METHODOLOGY_DESC1}</p>
-                    <p>{dictionary.METHODOLOGY_DESC2}</p>
-                    <p>{dictionary.METHODOLOGY_DESC3}</p>
-                    <p>{dictionary.METHODOLOGY_DESC4}</p>
-                </Col>
-            </Row>
-            <Row style={{ margin: 'auto', maxWidth: 1240, marginTop: '90px' }}>
-                <Col className="hidden">
-                    {/* <AnimationOnScroll animateIn="animate__fadeIn" animateOut="animate__fadeIn"> */}
-                    <p>{dictionary.ABOUT_WBSB_DESC1}</p>
-                    <p>{dictionary.ABOUT_WBSB_DESC2}</p>
-                    <p>{dictionary.ABOUT_WBSB_DESC3}</p>
-                    <p>{dictionary.ABOUT_WBSB_DESC4}</p>
-                    {/* </AnimationOnScroll> */}
-                </Col>
-            </Row>
-
-            <Container fluid className="partner-section">
+            <Container id="methodology-section" fluid className="section" style={{ marginTop: '0px' }}>
+                <div style={{ maxWidth: '1240px' }}>
+                    <h1 style={{ marginBottom: 10, marginTop: 20, fontSize: '40px' }} className="">
+                        {dictionary.METHODOLOGY}
+                    </h1>
+                    <hr />
+                    <Row style={{ margin: 'auto', maxWidth: 1240, marginTop: '35px' }}>
+                        <Col
+                            lg={{ span: 5, offset: 0 }}
+                            md={12}
+                            sm={12}
+                            className="banner-text"
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                        >
+                            <div className="hidden">
+                                <Typography variant="body2" align="right" style={{ marginRight: '-50px', fontSize: '18px' }}>
+                                    {' '}
+                                    {dictionary.METHODOLOGY_DESC1}
+                                </Typography>
+                            </div>
+                        </Col>
+                        <Col lg={2}>
+                            <Divider orientation="vertical">
+                                {' '}
+                                <Chip label="1" />{' '}
+                            </Divider>
+                        </Col>
+                    </Row>
+                    <Row style={{ margin: 'auto', maxWidth: 1240 }}>
+                        <Col lg={{ span: 2, offset: 5 }}>
+                            <Divider orientation="vertical">
+                                {' '}
+                                <Chip label="2" />{' '}
+                            </Divider>
+                        </Col>
+                        <Col
+                            lg={{ span: 5 }}
+                            md={12}
+                            sm={12}
+                            className="banner-text"
+                            style={{ marginLeft: '-50px', display: 'flex', flexDirection: 'row' }}
+                        >
+                            <div className="hidden">
+                                <Typography variant="body2" style={{ fontSize: '18px' }}>
+                                    {dictionary.METHODOLOGY_DESC2}
+                                </Typography>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row style={{ margin: 'auto', maxWidth: 1240 }}>
+                        <Col
+                            lg={{ span: 5, offset: 0 }}
+                            md={12}
+                            sm={12}
+                            className="banner-text"
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                        >
+                            <div className="hidden">
+                                <Typography variant="body2" align="right" style={{ marginRight: '-50px', fontSize: '18px' }}>
+                                    {dictionary.METHODOLOGY_DESC3}
+                                </Typography>
+                            </div>
+                        </Col>
+                        <Col lg={2}>
+                            <Divider orientation="vertical">
+                                <Chip label="3" />{' '}
+                            </Divider>
+                        </Col>
+                    </Row>
+                    <Row style={{ margin: 'auto', maxWidth: 1240 }}>
+                        <Col lg={{ span: 2, offset: 5 }}>
+                            <Divider orientation="vertical">
+                                <Chip label="4" />{' '}
+                            </Divider>
+                        </Col>
+                        <Col lg={{ span: 5 }} md={12} sm={12} className="banner-text" style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div className="hidden">
+                                <Typography variant="body2" style={{ marginLeft: '-50px', fontSize: '18px' }}>
+                                    {' '}
+                                    {dictionary.METHODOLOGY_DESC4}
+                                </Typography>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+            </Container>
+            <Container id="about-section" fluid className="section" style={{ marginTop: '0px' }}>
+                <div style={{ maxWidth: '1240px', textAlign: '' }}>
+                    <h1 style={{ marginBottom: 10, marginTop: 10, fontSize: '40px', textAlign: 'left' }} className="">
+                        {dictionary.ABOUT_WBSB}
+                    </h1>
+                    <hr />
+                    <Row style={{ margin: 'auto', maxWidth: 1240, marginTop: '40px' }}>
+                        <Col
+                            className="hidden"
+                            lg={5}
+                            md={12}
+                            sm={12}
+                            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+                        >
+                            <img style={{ width: '100%' }} className="banner-image" src={logo} alt="logo" />
+                        </Col>
+                        <Col className="hidden" lg={7} md={12} sm={12}>
+                            <Typography align="justify">{dictionary.ABOUT_WBSB_DESC1}</Typography>
+                            <Typography align="justify">{dictionary.ABOUT_WBSB_DESC2}</Typography>
+                            <Typography align="justify">{dictionary.ABOUT_WBSB_DESC3}</Typography>
+                            <Typography align="justify">{dictionary.ABOUT_WBSB_DESC4}</Typography>
+                        </Col>
+                    </Row>
+                </div>
+            </Container>
+            <Container id="partner-section" fluid className="partner-section" style={{ marginTop: '0px' }}>
                 <div style={{ maxWidth: '1240px', textAlign: '' }}>
                     <h1 style={{ marginBottom: 10, fontSize: '40px' }} className="">
-                        Partners
+                        {dictionary.PARTNERS}
                     </h1>
                     <hr />
 
@@ -158,7 +276,32 @@ export default function Homepage() {
                 </div>
             </Container>
 
-            <Container id="publications" fluid style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}>
+            <Container id="donor-section" fluid style={{ maxWidth: 1240, margin: 'auto', justifyContent: 'center' }}>
+                <h1 style={{ marginBottom: 30 }} className="">
+                    {dictionary.DONOR}
+                </h1>
+                <hr />
+
+                <Row style={{ maxWidth: 1240, margin: 'auto' }}>
+                    <Col lg={6} md={12} sm={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <img style={{ width: '100%' }} className="banner-image" src={donor} alt="donor" />
+                    </Col>
+                    <Col
+                        lg={6}
+                        md={12}
+                        sm={12}
+                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '18px' }}
+                    >
+                        <Typography variant="inherit">{dictionary.DONATOR}</Typography>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container
+                id="publication-section"
+                fluid
+                style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}
+            >
                 <h1 style={{ marginBottom: 30 }} className="">
                     {dictionary.PUBLICATION}
                 </h1>
@@ -167,7 +310,13 @@ export default function Homepage() {
                 <Row style={{ maxWidth: 1000, margin: 'auto' }}>
                     <PublicationList listSize={3} />
                 </Row>
+                <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center', width: '100%' }}>
+                    <Link className="partner-link" to="publikime" style={{ textAlign: 'center' }}>
+                        {dictionary.READ_MORE} ➜
+                    </Link>
+                </div>
             </Container>
-        </>
+            {/*  */}
+        </div>
     );
 }

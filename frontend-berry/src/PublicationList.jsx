@@ -5,7 +5,7 @@ import { Card, CardMedia, CardContent, Typography } from '@mui/material';
 import fileDownload from 'js-file-download';
 import { Link } from 'react-router-dom';
 
-export default function PublicationList({ listSize }) {
+export default function PublicationList({ listSize, year }) {
     const [publications, setPublications] = useState([]);
 
     let baseURL = '';
@@ -30,9 +30,16 @@ export default function PublicationList({ listSize }) {
             fileDownload(response.data, `${name}.pdf`);
         });
     }
+
+    function getPublications() {
+        if (year && year !== 0) {
+            return publications.filter((pub) => pub.date.slice(0, 4) === String(year));
+        }
+        return publications;
+    }
     return (
         <>
-            {publications.map((publication, index) => (
+            {getPublications().map((publication, index) => (
                 <Col lg={4} md={6} sm={12} key={index} style={{ marginBottom: '60px' }}>
                     {/* <Card style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src={reportImage} />
