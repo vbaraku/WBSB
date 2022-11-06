@@ -56,9 +56,9 @@ public class AnswerController {
     @Transactional
     public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file, @RequestPart String country, @RequestPart String language) {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "ISO-8859-1"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "UTF-8"));
             String line = reader.readLine();
-            List<String> headers = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
+            List<String> headers = Arrays.asList(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
 
             String duplicateQuestion = getDuplicate(headers);
             if (duplicateQuestion != null) {

@@ -27,7 +27,7 @@ export default function Header() {
                     <Nav className="me-auto">
                         <LinkWrapper to="/">{dictionary.HOME}</LinkWrapper>
                         <LinkWrapper to="/te-dhenat">{dictionary.DATA}</LinkWrapper>
-                        <LinkWrapper to="/publikime">Publikime</LinkWrapper>
+                        <LinkWrapper to="/publikime">{dictionary.PUBLICATION}</LinkWrapper>
                         {/* <LinkWrapper to="/about">Rreth WBSB</LinkWrapper> */}
 
                         {/* <DropdownWrapper title={dictionary.PUBLICATION} to="/publikime">

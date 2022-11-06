@@ -1,6 +1,10 @@
 const albanianDict = {
     ALL: 'Të gjitha',
 
+    TITLE: 'Barometri i sigurisë 2022 është ketu!',
+
+    EXPLORE: 'Eksploroni të dhënat',
+
     KOSOVO_REGIONS: ['Të gjitha', 'Gjilan', 'Prishtinë', 'Pejë', 'Prizren', 'Ferizaj', 'Mitrovicë', 'Gjakovë', 'Mitrovica e Veriut'],
 
     ALBANIA_REGIONS: [
@@ -98,15 +102,15 @@ const albanianDict = {
     METHODOLOGY: 'Metodologjia',
 
     METHODOLOGY_DESC1:
-        'Të dhënat e Barometrit të Sigurisë të Ballkanit Perëndimor janë marrur përmes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën. Hulumtimi në terren u krye në periudhën 17-25 shtator 2021. ',
+        'Te dhenat e Barometrit te Sigurise te Ballkanit Perendimor jane marrur permes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën. Hulumtimi në terren u krye në periudhën 17-25 shtator 2021.',
 
     METHODOLOGY_DESC2:
-        'Pyetësori i anketës përbëhej kryesisht nga pyetje të mbyllura në formë të shkallës Likert me pesë pikë, të pasuara nga disa pyetje të hapura pa opsione të paracaktuara. Mostra kombëtare për anketën përfshinte 1,197 amvisëri në Kosovë, 1132 në Shqipëri dhe 1000 në Serbi. ',
-
+        'Pyetësori i anketës përbëhej kryesisht nga pyetje të mbyllura në formë të shkallës Likert me pesë pikë, të pasuara nga disa pyetje të hapura pa opsione të paracaktuara. Mostra kombëtare për anketën përfshinte 1,197 amvisëri në Kosovë, 1132 në Shqipëri dhe 1000 në Serbi.',
     METHODOLOGY_DESC3:
         'Faza e parë e tërheqjes së mostrës u bazua në njësitë administrative të drejtorive rajonale të Policisë së Kosovës, duke përfshirë tetë rajonet: Ferizaj, Gjakovë, Gjilan, Mitrovicë të Jugut, Mitrovicë të Veriut, Pejë, Prishtinë dhe Prizren.',
 
-    METHODOLOGY_DESC4: '',
+    METHODOLOGY_DESC4:
+        'Numri i anketimeve të kryera në secilin rajon u përcaktua në përpjesëtim me numrin e popullsisë për secilën komunë brenda rajoneve përkatëse bazuar në regjistrimin e popullsisë në Kosovë të vitit 2011. Brenda komunave, mostra u shtresua në mostër urbane/ rurale bazuar në numrin e amvisërive në secilën zonë. Për përzgjedhjen e amvisërive brenda lokaliteteve të mostruara u përdorën modele të rastësishme, ndërsa rastësia brenda amvisërive u bazua në metodën e ditëlindjes radhës së të rriturve.',
 
     DONOR: 'Donatori',
 
@@ -116,6 +120,10 @@ const albanianDict = {
 
 const serbianDict = {
     ALL: 'Sve',
+
+    TITLE: 'Bezbednosni barometar je ovde!',
+
+    EXPLORE: 'Istražite naše podatke',
 
     YEAR_LABEL: 'Godine',
 
@@ -201,6 +209,10 @@ const serbianDict = {
 
 const englishDict = {
     ALL: 'All',
+
+    TITLE: 'Security Barometer 2022 is now here!',
+
+    EXPLORE: 'Explore our data',
 
     KOSOVO_REGIONS: ['All', 'Gjilan', 'Pristina', 'Peja', 'Prizren', 'Ferizaj', 'Mitrovica', 'Gjakova', 'Northern Mitrovica'],
 

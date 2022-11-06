@@ -18,10 +18,9 @@ export default function Publications() {
         });
     }, []);
 
-    console.log(year);
     return (
-        <Container id="publications" fluid style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}>
-            <FormControl sx={{}}>
+        <Container id="publications" fluid style={{ maxWidth: 1000, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}>
+            <FormControl sx={{ marginLeft: '15px' }}>
                 <InputLabel id="publications-label">{dictionary.YEAR_LABEL}</InputLabel>
                 <Select
                     value={year}

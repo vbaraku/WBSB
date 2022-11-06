@@ -24,27 +24,34 @@ import donor from '../assets/images/donor.png';
 export default function Homepage() {
     const { language, dictionary } = useLanguage();
 
-    const [partners, setPartners] = useState([
-        {
-            name: dictionary.PARTNER0,
-            logo: qkssLogo,
-            link: 'https://www.qkss.org/',
-            description: dictionary.PARTNER0_DESC
-        },
-        {
-            name: dictionary.PARTNER1,
-            logo: bcspLogo,
-            link: 'https://www.bcsp.org/',
-            description: dictionary.PARTNER1_DESC
-        },
-        {
-            name: dictionary.PARTNER2,
-            logo: csdgLogo,
-            link: 'https://www.csdg.org/',
-            description: dictionary.PARTNER2_DESC
-        }
-    ]);
+    function updatePartners() {
+        return [
+            {
+                name: dictionary.PARTNER0,
+                logo: qkssLogo,
+                link: 'https://www.qkss.org/',
+                description: dictionary.PARTNER0_DESC
+            },
+            {
+                name: dictionary.PARTNER1,
+                logo: bcspLogo,
+                link: 'https://www.bcsp.org/',
+                description: dictionary.PARTNER1_DESC
+            },
+            {
+                name: dictionary.PARTNER2,
+                logo: csdgLogo,
+                link: 'https://www.csdg.org/',
+                description: dictionary.PARTNER2_DESC
+            }
+        ];
+    }
 
+    const [partners, setPartners] = useState(updatePartners());
+
+    useEffect(() => {
+        setPartners(updatePartners());
+    }, [language]);
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -65,9 +72,9 @@ export default function Homepage() {
             <Container fluid className="homepage-header">
                 <Row className="homepage-banner">
                     <Col lg={6} md={12} sm={12} className="banner-text">
-                        <span className="title">Barometri 2022 is now here</span>
+                        <span className="title">{dictionary.TITLE}</span>
                         <Link className="redirect-link" to="te-dhenat">
-                            Explore our data ➜
+                            {dictionary.EXPLORE} ➜
                         </Link>
                     </Col>
                     <Col className="img-wrapper" lg={6} md={12} sm={12}>
@@ -284,9 +291,10 @@ export default function Homepage() {
 
                 <Row style={{ maxWidth: 1240, margin: 'auto' }}>
                     <Col lg={6} md={12} sm={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                        <img style={{ width: '100%' }} className="banner-image" src={donor} alt="donor" />
+                        <img style={{ width: '100%' }} className="banner-image hidden" src={donor} alt="donor" />
                     </Col>
                     <Col
+                        className="hidden"
                         lg={6}
                         md={12}
                         sm={12}
@@ -300,14 +308,14 @@ export default function Homepage() {
             <Container
                 id="publication-section"
                 fluid
-                style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}
+                style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center', marginBottom: '90px' }}
             >
                 <h1 style={{ marginBottom: 30 }} className="">
                     {dictionary.PUBLICATION}
                 </h1>
                 <hr />
 
-                <Row style={{ maxWidth: 1000, margin: 'auto' }}>
+                <Row className="hidden" style={{ maxWidth: 1000, margin: 'auto' }}>
                     <PublicationList listSize={3} />
                 </Row>
                 <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center', width: '100%' }}>
