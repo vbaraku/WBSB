@@ -64,8 +64,34 @@ export default function Homepage() {
         ];
     }
 
+    function updatePartners() {
+        return [
+            {
+                name: dictionary.PARTNER0,
+                logo: qkssLogo,
+                link: 'https://www.qkss.org/',
+                description: dictionary.PARTNER0_DESC
+            },
+            {
+                name: dictionary.PARTNER1,
+                logo: bcspLogo,
+                link: 'https://www.bcsp.org/',
+                description: dictionary.PARTNER1_DESC
+            },
+            {
+                name: dictionary.PARTNER2,
+                logo: csdgLogo,
+                link: 'https://www.csdg.org/',
+                description: dictionary.PARTNER2_DESC
+            }
+        ];
+    }
+
     const [partners, setPartners] = useState(updatePartners());
 
+    useEffect(() => {
+        setPartners(updatePartners());
+    }, [language]);
     useEffect(() => {
         setPartners(updatePartners());
     }, [language]);
@@ -88,7 +114,7 @@ export default function Homepage() {
         <div className="homepage">
             <Container fluid className="homepage-header">
                 <Row className="homepage-banner">
-                    <Col lg={7} md={12} sm={12} className="banner-text">
+                    <Col lg={6} md={12} sm={12} className="banner-text">
                         <span className="title">{dictionary.TITLE}</span>
                         <Link className="redirect-link" to="te-dhenat">
                             {dictionary.EXPLORE} ➜
