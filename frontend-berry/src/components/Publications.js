@@ -11,12 +11,6 @@ export default function Publications() {
     const [year, setYear] = useState(0);
     const { dictionary } = useLanguage();
 
-    useEffect(() => {
-        axios.get('/api/publication').then((res) => {
-            setPublications(res.data);
-        });
-    }, []);
-
     return (
         <Container id="publications" fluid style={{ maxWidth: 1000, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}>
             <FormControl sx={{ marginLeft: '15px' }}>

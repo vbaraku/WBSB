@@ -64,29 +64,6 @@ export default function Homepage() {
         ];
     }
 
-    function updatePartners() {
-        return [
-            {
-                name: dictionary.PARTNER0,
-                logo: qkssLogo,
-                link: 'https://www.qkss.org/',
-                description: dictionary.PARTNER0_DESC
-            },
-            {
-                name: dictionary.PARTNER1,
-                logo: bcspLogo,
-                link: 'https://www.bcsp.org/',
-                description: dictionary.PARTNER1_DESC
-            },
-            {
-                name: dictionary.PARTNER2,
-                logo: csdgLogo,
-                link: 'https://www.csdg.org/',
-                description: dictionary.PARTNER2_DESC
-            }
-        ];
-    }
-
     const [partners, setPartners] = useState(updatePartners());
 
     useEffect(() => {
