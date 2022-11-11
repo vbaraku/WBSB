@@ -27,7 +27,7 @@ export default function Header() {
                     <Nav className="me-auto">
                         <LinkWrapper to="/">{dictionary.HOME}</LinkWrapper>
                         <LinkWrapper to="/te-dhenat">{dictionary.DATA}</LinkWrapper>
-                        <LinkWrapper to="/publikime">Publikime</LinkWrapper>
+                        <LinkWrapper to="/publikime">{dictionary.PUBLICATION}</LinkWrapper>
                         {/* <LinkWrapper to="/about">Rreth WBSB</LinkWrapper> */}
 
                         {/* <DropdownWrapper title={dictionary.PUBLICATION} to="/publikime">
@@ -56,6 +56,7 @@ export default function Header() {
                 <TranslateIcon />
             </IconButton> */}
             {/* bootstrap select form  */}
+            <TranslateIcon fontSize="small" style={{ marginRight: 7, color: '#969A97' }} />
             <Box sx={{ marginRight: 3 }}>
                 <FormControl variant="standard">
                     {/* <InputLabel id="language-select-label">Language</InputLabel> */}
@@ -69,11 +70,11 @@ export default function Header() {
                         className="form-select"
                         aria-label="Default select example"
                     >
-                        <MenuItem value="ALB">Albanian</MenuItem>
+                        <MenuItem value="ALB">{dictionary.ALBANIAN}</MenuItem>
 
-                        <MenuItem value="ENG">English</MenuItem>
+                        <MenuItem value="ENG">{dictionary.ENGLISH}</MenuItem>
 
-                        <MenuItem value="SRB">Serbian</MenuItem>
+                        <MenuItem value="SRB">{dictionary.SERBIAN}</MenuItem>
                         {/* <option value="1">English</option>
                 <option value="2">Albanian</option>
                 <option value="3">Serbian</option> */}

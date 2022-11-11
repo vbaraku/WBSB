@@ -33,7 +33,7 @@ public class PublicationController {
         try {
             List<Publication> publications = new ArrayList<>();
 
-            publicationRepository.findAll().forEach(publications::add);
+            publicationRepository.findAllByOrderByDateDesc().forEach(publications::add);
             if (year != null) {
                 publications = publications.stream().filter(p-> p.getDate().getYear() == year).collect(Collectors.toList());
             }

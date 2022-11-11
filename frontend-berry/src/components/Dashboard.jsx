@@ -14,14 +14,15 @@ import { useLanguage } from '../LanguageContext';
 import { Audio } from 'react-loader-spinner';
 
 export default function Dashboard() {
+    const { language, dictionary } = useLanguage();
     const { height, width } = useWindowDimensions();
     const countries = ['Albania', 'Kosovo', 'Serbia'];
+    const countriesLabel = [dictionary.ALBANIA, dictionary.KOSOVO, dictionary.SERBIA];
     const [displaySecond, setDisplaySecond] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [selectedQuestion, setSelectedQuestion] = useState({});
     const [selectedCountry, setSelectedCountry] = useState('Kosovo');
-
-    const { language, dictionary } = useLanguage();
+    const [selectedCountryLabel, setSelectedCountryLabel] = useState(dictionary.KOSOVO);
 
     // const [selectedLanguage, setSelectedLanguage] = useState('ALB');
 
@@ -111,52 +112,62 @@ export default function Dashboard() {
                 </Button>
                 <Box className="data-section" style={{ zIndez: 3 }}>
                     <Row className="country-select">
-                        {countries.map((country) => (
+                        {countries.map((country, index) => (
                             <Button
                                 variant="contained"
                                 type="button"
                                 className={`btn country-option ${selectedCountry === country ? 'selected-country' : ''}`}
                                 onClick={() => setSelectedCountry(country)}
                             >
-                                {country}
+                                {countriesLabel[index]}
                             </Button>
                         ))}
                     </Row>
-                    <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={language} />
-                    {displaySecond ? (
-                        <>
-                            <div className="dashboard" style={{ marginTop: '20px' }}>
-                                <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={language} />
-                            </div>
+                    <Row>
+                        <Col lg={displaySecond ? 6 : 12} md={12} sm={12}>
+                            <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={language} />
+                        </Col>
+                        {displaySecond ? (
+                            <>
+                                <Col lg={6} md={12} sm={12}>
+                                    <div className="dashboard" style={{ marginTop: '20px' }}>
+                                        <DashboardGraph
+                                            country={selectedCountry}
+                                            selectedQuestion={selectedQuestion}
+                                            selectedLanguage={language}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Button
+                                            variant="contained"
+                                            type="button"
+                                            onClick={() => {
+                                                setDisplaySecond(false);
+                                            }}
+                                            style={{ borderRadius: '0px 0px 12px 12px', backgroundColor: '#ed5e68' }}
+                                            endIcon={<DeleteIcon />}
+                                        >
+                                            {dictionary.DELETE}
+                                        </Button>
+                                    </div>
+                                </Col>
+                            </>
+                        ) : (
                             <div>
                                 <Button
                                     variant="contained"
                                     type="button"
                                     onClick={() => {
-                                        setDisplaySecond(false);
+                                        setDisplaySecond(true);
                                     }}
-                                    style={{ borderRadius: '0px 0px 12px 12px', backgroundColor: '#ed5e68' }}
-                                    endIcon={<DeleteIcon />}
+                                    style={{ borderRadius: '0px 0px 12px 12px' }}
+                                    endIcon={<AddIcon />}
                                 >
-                                    {dictionary.DELETE}
+                                    {dictionary.COMPARE}
                                 </Button>
                             </div>
-                        </>
-                    ) : (
-                        <div>
-                            <Button
-                                variant="contained"
-                                type="button"
-                                onClick={() => {
-                                    setDisplaySecond(true);
-                                }}
-                                style={{ borderRadius: '0px 0px 12px 12px' }}
-                                endIcon={<AddIcon />}
-                            >
-                                {dictionary.COMPARE}
-                            </Button>
-                        </div>
-                    )}
+                        )}
+                    </Row>
                 </Box>
             </Box>
         </Box>

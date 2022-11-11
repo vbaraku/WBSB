@@ -72,7 +72,7 @@ export default function Graphs({ question, answers }) {
                 marginTop: '50px'
             }}
         >
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', height: '100%', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {graphTypes.map((graphType, index) => (
                     <Button
                         sx={{ marginLeft: 1, padding: '5px', paddingLeft: '12px', paddingRight: '12px', margin: '5px' }}
@@ -86,7 +86,7 @@ export default function Graphs({ question, answers }) {
                     </Button>
                 ))}
             </div>
-            <div style={{ width: '90%' }}>{displayChart()}</div>
+            {displayChart()}
         </div>
     );
 }

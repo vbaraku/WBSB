@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
@@ -49,6 +51,11 @@ public class QuestionController {
 		}
 	}
 
+	@GetMapping(path = "/{id}")
+	public Question getQuestion(@RequestParam String country, @RequestParam String language, @PathVariable int id) {
+			List<Question> question = questionRepository.findAllByCountryAndLanguage(country,language);
+			return question.get(id);
+	}
 
 
 

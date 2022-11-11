@@ -17,34 +17,57 @@ import Publications from 'components/Publications';
 import style from './assets/scss/style.scss';
 // routing
 
-// defaultTheme
-import themes from 'themes';
-
 // import Box from '@mui/material';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import publicaSans from './assets/fonts/PublicaSans-Light.otf';
+import camptonLight from './assets/fonts/CamptonLight.otf';
+import publicaSansBold from './assets/fonts/PublicaSans-Bold.otf';
+
 // import { JWTProvider } from 'contexts/JWTContext';
 // import { Auth0Provider } from 'contexts/Auth0Context';
 
+import createTheme from '@mui/material/styles/createTheme';
 // ==============================|| APP ||============================== //
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
 
+    const theme = createTheme({
+        typography: {
+            fontFamily: 'Campton'
+        },
+        components: {
+            // MuiCssBaseline: {
+            //     styleOverrides: `
+            //         @font-face {
+            //         font-family: 'Publica Sans Light';
+            //         font-style: normal;
+            //         font-display: swap;
+            //         font-weight: 400;
+            //         src: local('Publica Sans Light'), url(${publicaSans}) format('opentype');
+            //         unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+            //         }
+            //     `
+            // }
+        }
+    });
     return (
         <>
             <LanguageProvider>
-                <Header />
-                <Container fluid style={{ height: '100%' }}>
-                    <Routes>
-                        <Route path="/te-dhenat" element={<Dashboard />} />
+                <ThemeProvider theme={theme}>
+                    <Header />
+                    <Container fluid style={{ height: '100%' }}>
+                        <Routes>
+                            <Route path="/te-dhenat" element={<Dashboard />} />
 
-                        <Route path="/upload" element={<UploadForm />} />
-                        <Route path="/upload-report" element={<UploadReport />} />
-                        <Route path="/publikime" element={<Publications />} />
-                        <Route path="/" element={<Homepage />} />
-                    </Routes>
-                </Container>
+                            <Route path="/upload" element={<UploadForm />} />
+                            <Route path="/upload-report" element={<UploadReport />} />
+                            <Route path="/publikime" element={<Publications />} />
+                            <Route path="/" element={<Homepage />} />
+                        </Routes>
+                    </Container>
+                </ThemeProvider>
                 {/* <Footer /> */}
             </LanguageProvider>
         </>

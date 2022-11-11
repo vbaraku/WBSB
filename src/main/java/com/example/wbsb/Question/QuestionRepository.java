@@ -26,5 +26,9 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             "where md.country = :country and q.language = :language")
     List<Question> findAllByCountryAndLanguage(String country, String language);
 
+    @Query("SELECT new Question(q.id, q.text, q.category, q.language) from Question q " +
+            "join q.metaData md " +
+            "where md.country = :country and q.language = :language and q.id = :id")
+    Question findByCountryAndLanguageAndId(String country, String language, Long id);
 
 }

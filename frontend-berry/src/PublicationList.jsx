@@ -40,7 +40,7 @@ export default function PublicationList({ listSize, year }) {
     return (
         <>
             {getPublications().map((publication, index) => (
-                <Col lg={4} md={6} sm={12} key={index} style={{ marginBottom: '60px' }}>
+                <Col lg={4} md={6} sm={12} key={index} style={{ paddingTop: '15px' }}>
                     {/* <Card style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src={reportImage} />
                                 <Card.Body>

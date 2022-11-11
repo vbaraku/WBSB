@@ -11,8 +11,18 @@
     src: local('Publica Sans'), url(../fonts/PublicaSans-Medium.otf) format('opentype');
 }
 
-.body {
-    font-family: 'Publica Sans';
+@font-face {
+    font-family: 'Publica Sans Light';
+    src: local('Publica Sans'), url(../fonts/PublicaSans-Light.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'Campton';
+    src: local('Campton'), url(../fonts/CamptonLight.otf) format('opentype');
+}
+
+body {
+    font-family: 'Campton' !important;
     // font-size: 16px;
     // color: #fff;
     // background-color: #19191e;
@@ -112,14 +122,14 @@
     justify-content: left;
     width: 100%;
     min-height: 450px;
-    background: rgb(24, 95, 175);
-    background: linear-gradient(86deg, rgba(24, 95, 175, 1) 0%, rgba(4, 102, 200, 1) 100%);
+    // background: rgb(24, 95, 175);
+    background: linear-gradient(90deg, #0078b7, #0965c1);
     margin: 0 !important;
     span {
         color: white;
         font-size: 48px;
         // font-weight: 600;
-        font-family: 'Publica Sans', 'Courier New', Courier, monospace;
+        font-family: 'Publica Sans';
     }
 
     @media screen and (max-width: 992px) {
@@ -138,8 +148,8 @@
         .redirect-link {
             display: block;
             text-decoration: none;
-            background-color: #185faf;
-            border: 2px solid #185faf;
+            background-color: #044389;
+            border: 2px solid #044389;
             transition: 0.4s;
 
             color: white !important;
@@ -149,8 +159,8 @@
         .redirect-link:hover {
             text-decoration: none;
             background-color: white;
-            color: #185faf !important;
-            border: 2px solid #185faf;
+            color: #044389 !important;
+            border: 2px solid #044389;
         }
 
         @media screen and (max-width: 992px) {
@@ -236,7 +246,7 @@
 }
 
 .homepage-header {
-    background: linear-gradient(45deg, #108edd, #08476f);
+    background: #044389;
 }
 
 .section {

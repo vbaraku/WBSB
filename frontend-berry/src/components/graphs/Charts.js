@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Highcharts, { chart } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
@@ -9,63 +9,44 @@ require('highcharts/modules/exporting')(Highcharts);
 export default function Charts({ question, answers, selectedGraphType }) {
     const { language, dictionary } = useLanguage();
 
-    let options = {};
-    if (selectedGraphType === 'stackedbar') {
-        options = {
-            title: {
-                text: question?.text
-            },
-            chart: {
-                type: 'bar'
-            },
-            series: answers.map((el) => ({
-                name: el.category,
-                data: [el.percentage]
-            })),
+    Highcharts.setOptions({
+        colors: [
+            'rgb(28, 91, 171)',
+            'rgb(221, 59, 54)',
+            'rgb(245, 212, 45)',
+            'rgb(112, 135, 127)',
+            'rgb(6, 167, 125)',
+            '#05B2DC',
+            '#CB48B7',
+            '#18f2b2',
+            '#ED7D3A',
+            '#FFA3AF'
+        ]
+    });
+
+    function getChartOptions() {
+        let options = {
             credits: {
                 enabled: false
             },
-            yAxis: {
-                min: 0,
-                max: 100
-            },
-            xAxis: [
-                {
-                    categories: ['Answers']
-                }
-            ],
-            plotOptions: {
-                column: {
-                    // colorByPoint: true,
-                },
-                series: {
-                    stacking: 'normal'
-                },
-                colors: {
-                    fill: ['#000000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF']
-                }
-            }
-        };
-    } else {
-        options = {
             title: {
                 text: question?.text
             },
             subtitle: {
                 text: dictionary.SOURCE
-            },
+            }
+        };
+
+        options = {
+            ...options,
             chart: {
                 type: selectedGraphType
-            },
-            credits: {
-                enabled: false
             },
             series: {
                 name: 'Answers',
                 data: answers.map((el) => ({
                     name: el.category,
                     y: el.percentage
-                    //  color: categoryToColor(el.category),
                 }))
             },
             xAxis: [
@@ -74,15 +55,10 @@ export default function Charts({ question, answers, selectedGraphType }) {
                     animation: false
                 }
             ],
-            yAxis: [
-                {
-                    // categories: answers.map((el) => el.category),
-                    labels: {
-                        enabled: false,
-                        animation: false
-                    }
-                }
-            ],
+            yAxis: {
+                min: null,
+                max: null
+            },
             plotOptions: {
                 packedbubble: {
                     minSize: '30%',
@@ -93,18 +69,7 @@ export default function Charts({ question, answers, selectedGraphType }) {
                     },
                     dataLabels: {
                         animation: false,
-                        enabled: true,
-                        format: '',
-                        filter: {
-                            property: 'y',
-                            operator: '>',
-                            value: 250
-                        },
-                        style: {
-                            color: 'black',
-                            textOutline: 'none',
-                            fontWeight: 'normal'
-                        }
+                        enabled: true
                     }
                 },
                 column: {
@@ -112,36 +77,90 @@ export default function Charts({ question, answers, selectedGraphType }) {
                     // dataLabels: {
                     //     enabled: false
                     // },
-                    showInLegend: true
+                    showInLegend: true,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}%',
+                        style: {
+                            color: 'black',
+                            fontSize: '12px',
+                            fontWeight: 'normal'
+                        },
+                        inside: false
+                    }
                 },
                 pie: {
                     innerSize: '60%',
                     allowPointSelect: true,
                     cursor: 'pointer',
+                    showInLegend: true,
+                    size: '100%',
                     dataLabels: {
-                        enabled: false,
-                        animation: false
-                    },
-                    showInLegend: true
-                },
-
-                plotOptions: {
-                    series: {
-                        stacking: 'normal'
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}%',
+                        style: {
+                            color: 'black',
+                            fontSize: '12px',
+                            fontWeight: 'normal'
+                        }
                     }
-                },
-                colors: {
-                    fill: ['#000000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF']
                 }
             }
         };
-    }
-    options.chart = {
-        ...options.chart,
-        animation: {
-            duration: 200
+        if (selectedGraphType === 'stackedbar') {
+            options = {
+                chart: {
+                    type: 'bar'
+                },
+                series: answers.map((el) => ({
+                    name: el.category,
+                    data: [el.percentage]
+                })),
+                yAxis: {
+                    min: 0,
+                    max: 100
+                },
+                xAxis: [
+                    {
+                        categories: ['Answers']
+                    }
+                ],
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    },
+                    stackedbar: {
+                        dataLabels: {
+                            enabled: false,
+                            format: '{point.y}%',
+                            style: {
+                                color: 'red',
+                                fontSize: '12px',
+                                fontWeight: 'normal'
+                            }
+                        }
+                    }
+                }
+            };
         }
-    };
+        options.chart = {
+            ...options.chart,
+            animation: {
+                duration: 200
+            }
+        };
+        return options;
+    }
+    const [chartOptions, setChartOptions] = useState(getChartOptions());
 
-    return <HighchartsReact highcharts={Highcharts} options={options} />;
+    useEffect(() => {
+        setChartOptions(null);
+        setChartOptions(getChartOptions());
+    }, [selectedGraphType]);
+
+    return (
+        <div style={{ width: '90%' }}>
+            <HighchartsReact highcharts={Highcharts} options={chartOptions} containerProps={{}} />;
+        </div>
+    );
 }
