@@ -11,7 +11,7 @@ services:
       - '5432:5432'
 
   app:
-    image: 'docker-spring-boot-postgres:latest'
+    image: .
     build:
         context: .
     ports:
