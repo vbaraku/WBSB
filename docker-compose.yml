@@ -1,32 +1,49 @@
 version: "3"
 
 services:
+#  db:
+#    image: 'postgres:alpine'
+#    container_name: db
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#    ports:
+#      - '5434:5434'
+
   db:
     image: 'postgres:alpine'
     container_name: db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: testttt
-    ports:
-      - '5432:5432'
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+#  app:
+#    image: 'docker-spring-boot-postgres:latest'
+#    build:
+#        context: .
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5434/test
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=postgres
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_ORDER_INSERTS=true
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_BATCH_SIZE=1000
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+#      - SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE=100MB
+#      - SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE=100MB
+##      - SPRING_DATASOURCE_HIKARI_DATA_SOURCE_PROPERTIES_USEUNICODE=true
+##      - SPRING_DATASOURCE_HIKARI_DATA_SOURCE_PROPERTIES_CHARACTERENCODING=UTF-8
+#      - SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE=5
 
   app:
     build:
-        context: .
-    ports:
-      - "8080:8080"
+      context: .
+    container_name: app
+    depends_on:
+      - db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/
       - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=testttt
+      - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_JPA_PROPERTIES_HIBERNATE_ORDER_INSERTS=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_BATCH_SIZE=1000
-      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
-      - SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE=100MB
-      - SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE=100MB
-#      - SPRING_DATASOURCE_HIKARI_DATA_SOURCE_PROPERTIES_USEUNICODE=true
-#      - SPRING_DATASOURCE_HIKARI_DATA_SOURCE_PROPERTIES_CHARACTERENCODING=UTF-8
-      - SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE=5
-    depends_on:
-      - db

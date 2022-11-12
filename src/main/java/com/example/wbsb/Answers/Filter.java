@@ -1,9 +1,5 @@
 package com.example.wbsb.Answers;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
 
