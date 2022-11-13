@@ -56,10 +56,4 @@ public class QuestionController {
 			List<Question> question = questionRepository.findAllByCountryAndLanguage(country,language);
 			return question.get(id);
 	}
-
-
-
-
-
-
 }

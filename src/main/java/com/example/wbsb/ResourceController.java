@@ -13,6 +13,10 @@ import java.io.File;
 @RestController
 public class ResourceController{
 
+    @GetMapping("")
+    public String getRoot() {
+        return "hello";
+    }
     @GetMapping("/files/{id}")
     public ResponseEntity<Resource> getPDF(@PathVariable String id) {
 
