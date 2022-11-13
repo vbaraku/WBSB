@@ -3,3 +3,5 @@ WORKDIR /TestApp
 COPY . .
 RUN mvn clean package -DskipTests
 CMD mvn spring-boot:run
+# -p 8080:8080
+
