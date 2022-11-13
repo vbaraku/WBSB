@@ -38,7 +38,7 @@ const App = () => {
     if (process.env.NODE_ENV === 'development') {
         baseURL = 'http://localhost:8080';
     } else {
-        baseURL = 'http://ec2-44-203-87-4.compute-1.amazonaws.com:8080/';
+        baseURL = 'http://ec2-3-224-154-253.compute-1.amazonaws.com:8080/';
     }
 
     axios.defaults.baseURL = baseURL;
