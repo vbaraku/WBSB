@@ -28,11 +28,20 @@ import publicaSansBold from './assets/fonts/PublicaSans-Bold.otf';
 // import { Auth0Provider } from 'contexts/Auth0Context';
 
 import createTheme from '@mui/material/styles/createTheme';
+import axios from 'axios';
 // ==============================|| APP ||============================== //
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
 
+    let baseURL = '';
+    if (process.env.NODE_ENV === 'development') {
+        baseURL = 'http://localhost:8080';
+    } else {
+        baseURL = 'http://ec2-44-203-87-4.compute-1.amazonaws.com:8080/';
+    }
+
+    axios.defaults.baseURL = baseURL;
     const theme = createTheme({
         typography: {
             fontFamily: 'Campton'
