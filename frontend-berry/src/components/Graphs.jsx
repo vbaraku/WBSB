@@ -31,12 +31,12 @@ export default function Graphs({ question, answers }) {
     //     }
     // }, [selectedGraphType]);
 
-    const displayChart = () => {
-        if (selectedGraphType === 'packedbubble') {
-            return <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />;
-        }
-        return <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />;
-    };
+    // const displayChart = () => {
+    //     console.log('displayChart');
+    //     if (selectedGraphType === 'packedbubble') {
+    //     }
+    //     return <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />;
+    // };
     const graphTypes = [
         {
             type: 'pie',
@@ -57,6 +57,9 @@ export default function Graphs({ question, answers }) {
         }
     ];
 
+    useEffect(() => {
+        console.log('question', question);
+    }, [question]);
     if (answers.length < 1) {
         return <InfinitySpin color="blue" />;
     }
@@ -86,7 +89,8 @@ export default function Graphs({ question, answers }) {
                     </Button>
                 ))}
             </div>
-            {displayChart()}
+            <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />
+            {/* {displayChart()} */}
         </div>
     );
 }

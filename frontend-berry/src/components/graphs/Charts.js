@@ -156,7 +156,7 @@ export default function Charts({ question, answers, selectedGraphType }) {
     useEffect(() => {
         setChartOptions(null);
         setChartOptions(getChartOptions());
-    }, [selectedGraphType]);
+    }, [selectedGraphType, answers, question]);
 
     return (
         <div style={{ width: '90%' }}>

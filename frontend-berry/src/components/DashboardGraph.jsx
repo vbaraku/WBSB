@@ -11,6 +11,8 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
     // TODO: add a context for the language || in other words, make the bottom thing dynamic (not always albanian)
     const [dict, setDictionary] = useState(albanianDict);
 
+    const [filtersLoaded, setFiltersLoaded] = useState(false);
+
     function updateLanguage() {
         if (selectedLanguage === 'SRB') {
             setDictionary(serbianDict);
@@ -75,13 +77,15 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
                     gender: dict.ALL,
                     age: dict.ALL
                 });
+                if (!filtersLoaded) setFiltersLoaded(true);
                 // setAnswers(response.data);
             });
     }, [selectedQuestion, country, selectedLanguage]);
 
     useEffect(() => {
         if (!selectedQuestion?.id) return;
-
+        if (!filtersLoaded) return;
+        console.log('filters', filters);
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
             if (value !== albanianDict.ALL && value !== englishDict.ALL && value !== serbianDict.ALL) {
                 acc[key] = value;
@@ -95,7 +99,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         axios.get('/api/answer', { params }).then((response) => {
             setAnswers(response.data);
         });
-    }, [filters, selectedQuestion, country]);
+    }, [filters, country, filtersLoaded]);
 
     return (
         <Box
