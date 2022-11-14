@@ -123,9 +123,10 @@ export default function Homepage() {
                     </Col>
                 </Row>
                 <div
+                    className="homepage-subbanner"
                     style={{
                         display: 'flex',
-                        width: '100%',
+                        flexWrap: 'wrap',
                         justifyContent: 'center',
                         color: 'white',
                         fontSize: '26px',
@@ -133,45 +134,45 @@ export default function Homepage() {
                     }}
                 >
                     <span
+                        className="spanText"
                         onClick={() => {
                             document.querySelector('#methodology-section').scrollIntoView({ behavior: 'smooth' });
                         }}
-                        style={{ margin: '20px', cursor: 'pointer' }}
                     >
                         {dictionary.METHODOLOGY}
                     </span>
 
                     <span
+                        className="spanText"
                         onClick={() => {
                             document.querySelector('#about-section').scrollIntoView({ behavior: 'smooth' });
                         }}
-                        style={{ margin: '20px', cursor: 'pointer' }}
                     >
                         {dictionary.ABOUT_WBSB}
                     </span>
 
                     <span
+                        className="spanText"
                         onClick={() => {
                             document.querySelector('#partner-section').scrollIntoView({ behavior: 'smooth' });
                         }}
-                        style={{ margin: '20px', cursor: 'pointer' }}
                     >
                         {dictionary.PARTNERS}
                     </span>
 
                     <span
+                        className="spanText"
                         onClick={() => {
                             document.querySelector('#donor-section').scrollIntoView({ behavior: 'smooth' });
                         }}
-                        style={{ margin: '20px', cursor: 'pointer' }}
                     >
                         {dictionary.DONOR}
                     </span>
                     <span
+                        className="spanText"
                         onClick={() => {
                             document.querySelector('#publication-section').scrollIntoView({ behavior: 'smooth' });
                         }}
-                        style={{ margin: '20px', cursor: 'pointer' }}
                     >
                         {dictionary.PUBLICATION}
                     </span>
@@ -179,7 +180,7 @@ export default function Homepage() {
             </Container>
             <Container id="methodology-section" fluid className="section" style={{ marginTop: '0px' }}>
                 <div style={{ maxWidth: '1240px' }}>
-                    <h1 style={{ marginBottom: 10, marginTop: 20, fontSize: '40px' }} className="">
+                    <h1 style={{ marginBottom: 10, marginTop: 20, fontSize: '40px' }} className="section-title">
                         {dictionary.METHODOLOGY}
                     </h1>
                     <hr />
@@ -191,32 +192,26 @@ export default function Homepage() {
                             className="banner-text"
                             style={{ display: 'flex', flexDirection: 'row' }}
                         >
-                            <div className="hidden">
-                                <Typography variant="body2" align="right" style={{ marginRight: '-50px', fontSize: '18px' }}>
+                            <div className="hidden methodologyd1">
+                                <Typography variant="body2" style={{ fontSize: '18px' }}>
                                     {dictionary.METHODOLOGY_DESC1}
                                 </Typography>
                             </div>
                         </Col>
-                        <Col lg={2}>
+                        <Col className="chip" lg={2}>
                             <Divider orientation="vertical">
                                 <Chip label={<ArrowLeftIcon />} />
                             </Divider>
                         </Col>
                     </Row>
                     <Row style={{ margin: 'auto', maxWidth: 1240 }}>
-                        <Col lg={{ span: 2, offset: 5 }}>
+                        <Col className="chip" lg={{ span: 2, offset: 5 }}>
                             <Divider orientation="vertical">
                                 <Chip label={<ArrowRightIcon />} />
                             </Divider>
                         </Col>
-                        <Col
-                            lg={{ span: 5 }}
-                            md={12}
-                            sm={12}
-                            className="banner-text"
-                            style={{ marginLeft: '-50px', display: 'flex', flexDirection: 'row' }}
-                        >
-                            <div className="hidden">
+                        <Col lg={{ span: 5 }} md={12} sm={12} className="banner-text" style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div className="hidden methodologyd2">
                                 <Typography variant="body2" style={{ fontSize: '18px' }}>
                                     {dictionary.METHODOLOGY_DESC2}
                                 </Typography>
@@ -231,27 +226,27 @@ export default function Homepage() {
                             className="banner-text"
                             style={{ display: 'flex', flexDirection: 'row' }}
                         >
-                            <div className="hidden">
-                                <Typography variant="body2" align="right" style={{ marginRight: '-50px', fontSize: '18px' }}>
+                            <div className="hidden methodologyd1">
+                                <Typography variant="body2" style={{ fontSize: '18px' }}>
                                     {dictionary.METHODOLOGY_DESC3}
                                 </Typography>
                             </div>
                         </Col>
-                        <Col lg={2}>
+                        <Col className="chip" lg={2}>
                             <Divider orientation="vertical">
                                 <Chip label={<ArrowLeftIcon />} />
                             </Divider>
                         </Col>
                     </Row>
                     <Row style={{ margin: 'auto', maxWidth: 1240 }}>
-                        <Col lg={{ span: 2, offset: 5 }}>
+                        <Col className="chip" lg={{ span: 2, offset: 5 }}>
                             <Divider orientation="vertical">
                                 <Chip label={<ArrowRightIcon />} />
                             </Divider>
                         </Col>
                         <Col lg={{ span: 5 }} md={12} sm={12} className="banner-text" style={{ display: 'flex', flexDirection: 'row' }}>
-                            <div className="hidden">
-                                <Typography variant="body2" style={{ marginLeft: '-50px', fontSize: '18px' }}>
+                            <div className="hidden methodologyd2">
+                                <Typography variant="body2" style={{ fontSize: '18px' }}>
                                     {dictionary.METHODOLOGY_DESC4}
                                 </Typography>
                             </div>
@@ -261,7 +256,7 @@ export default function Homepage() {
             </Container>
             <Container id="about-section" fluid className="section" style={{ marginTop: '0px' }}>
                 <div style={{ maxWidth: '1240px', textAlign: '' }}>
-                    <h1 style={{ marginBottom: 10, marginTop: 10, fontSize: '40px', textAlign: 'left' }} className="">
+                    <h1 style={{ marginBottom: 10, marginTop: 10, fontSize: '40px', textAlign: 'left' }} className="section-title">
                         {dictionary.ABOUT_WBSB}
                     </h1>
                     <hr />
@@ -286,7 +281,7 @@ export default function Homepage() {
             </Container>
             <Container id="partner-section" fluid className="partner-section" style={{ marginTop: '0px' }}>
                 <div style={{ maxWidth: '1240px', textAlign: '' }}>
-                    <h1 style={{ marginBottom: 10, fontSize: '40px' }} className="">
+                    <h1 style={{ marginBottom: 10, fontSize: '40px' }} className="section-title">
                         {dictionary.PARTNERS}
                     </h1>
                     <hr />
@@ -321,17 +316,23 @@ export default function Homepage() {
             </Container>
 
             <Container id="donor-section" fluid style={{ maxWidth: 1240, margin: 'auto', justifyContent: 'center' }}>
-                <h1 style={{ marginBottom: 30 }} className="">
+                <h1 style={{ marginBottom: 10 }} className="section-title">
                     {dictionary.DONOR}
                 </h1>
                 <hr />
 
                 <Row style={{ maxWidth: 1240, margin: 'auto' }}>
-                    <Col lg={6} md={12} sm={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <Col
+                        className="donor-image"
+                        lg={6}
+                        md={12}
+                        sm={12}
+                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+                    >
                         <img style={{ width: '100%' }} className="banner-image hidden" src={donor} alt="donor" />
                     </Col>
                     <Col
-                        className="hidden"
+                        className="hidden donor-text"
                         lg={6}
                         md={12}
                         sm={12}
@@ -348,9 +349,9 @@ export default function Homepage() {
             <Container
                 id="publication-section"
                 fluid
-                style={{ maxWidth: 1240, margin: 'auto', marginTop: '90px', justifyContent: 'center', marginBottom: '90px' }}
+                style={{ maxWidth: 1240, margin: 'auto', marginTop: '30px', justifyContent: 'center', marginBottom: '90px' }}
             >
-                <h1 style={{ marginBottom: 30 }} className="">
+                <h1 style={{ marginBottom: 10 }} className="section-title">
                     {dictionary.PUBLICATION}
                 </h1>
                 <hr />
@@ -364,7 +365,6 @@ export default function Homepage() {
                     </Link>
                 </div>
             </Container>
-            {/*  */}
         </div>
     );
 }

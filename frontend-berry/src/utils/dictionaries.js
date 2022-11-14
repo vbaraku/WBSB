@@ -122,7 +122,7 @@ const albanianDict = {
         'Faza e parë e tërheqjes së mostrës u bazua në njësitë administrative të drejtorive rajonale të Policisë së Kosovës, duke përfshirë tetë rajonet: Ferizaj, Gjakovë, Gjilan, Mitrovicë të Jugut, Mitrovicë të Veriut, Pejë, Prishtinë dhe Prizren.',
 
     METHODOLOGY_DESC4:
-        'Numri i anketimeve të kryera në secilin rajon u përcaktua në përpjesëtim me numrin e popullsisë për secilën komunë brenda rajoneve përkatëse bazuar në regjistrimin e popullsisë në Kosovë të vitit 2011. Brenda komunave, mostra u shtresua në mostër urbane/ rurale bazuar në numrin e amvisërive në secilën zonë. Për përzgjedhjen e amvisërive brenda lokaliteteve të mostruara u përdorën modele të rastësishme, ndërsa rastësia brenda amvisërive u bazua në metodën e ditëlindjes radhës së të rriturve.',
+        'Numri i anketimeve të kryera në secilin rajon u përcaktua në përpjesëtim me numrin e popullsisë për secilën komunë brenda rajoneve përkatëse bazuar në regjistrimin e popullsisë në Kosovë të vitit 2011. Brenda komunave, mostra u shtresua në mostër urbane / rurale bazuar në numrin e amvisërive në secilën zonë. Për përzgjedhjen e amvisërive brenda lokaliteteve të mostruara u përdorën modele të rastësishme, ndërsa rastësia brenda amvisërive u bazua në metodën e ditëlindjes radhës së të rriturve.',
 
     DONOR: 'Donatori',
 
@@ -220,10 +220,10 @@ const serbianDict = {
         'Upitnik za anketu se prvenstveno sastojao od zatvorenih pitanja u vidu Likertove skale od pet tačaka, a zatim od nekoliko otvorenih pitanja bez unapred definisanih opcija. Nacionalni uzorak za istraživanje uključivao je 1197 domaćinstava na Kosovu, 1132 u Albaniji i 1000 u Srbiji.',
 
     METHODOLOGY_DESC3:
-        'Prva faza izvlačenja uzorka bila je zasnovana na administrativnim/regionalnim podelama svake zemlje. Broj anketa sprovedenih u svakoj administrativnoj/regionalnoj oblasti izvučen je srazmerno broju stanovništva za svaku opštinu u okviru odgovarajuće oblasti na osnovu popisa stanovništva ili podataka Izborne komisije.',
+        'Prva faza izvlačenja uzorka bila je zasnovana na administrativnim / regionalnim podelama svake zemlje. Broj anketa sprovedenih u svakoj administrativnoj / regionalnoj oblasti izvučen je srazmerno broju stanovništva za svaku opštinu u okviru odgovarajuće oblasti na osnovu popisa stanovništva ili podataka Izborne komisije.',
 
     METHODOLOGY_DESC4:
-        'Unutar opština, uzorak je stratifikovan na urban/ruralan uzorak na osnovu broja domaćinstava u svakoj sredini. Za izabir domaćinstava unutar uzorkovanih lokacija korišćeni su slučajni obrasci, dok je randomizacija unutar domaćinstava zasnovana na metodi sledećeg rođendana odrasle osobe. Podaci su verifikovani u realnom vremenu preko terenskih koordinatora koji su obišli unapred definisani uzorak domaćinstava nakon završetka ankete u odgovarajućim domaćinstvima, putem telefonskog kontakta sa svim ispitanicima radi potvrde pridržavanja metodologije i nekih od ključnih odgovora i analizom logičke doslednost odgovora pri obradi i analizi podataka. Margina greške iznosi 3 procenta sa intervalom poverenja od 95 procenata.',
+        'Unutar opština, uzorak je stratifikovan na urban / ruralan uzorak na osnovu broja domaćinstava u svakoj sredini. Za izabir domaćinstava unutar uzorkovanih lokacija korišćeni su slučajni obrasci, dok je randomizacija unutar domaćinstava zasnovana na metodi sledećeg rođendana odrasle osobe. Podaci su verifikovani u realnom vremenu preko terenskih koordinatora koji su obišli unapred definisani uzorak domaćinstava nakon završetka ankete u odgovarajućim domaćinstvima, putem telefonskog kontakta sa svim ispitanicima radi potvrde pridržavanja metodologije i nekih od ključnih odgovora i analizom logičke doslednost odgovora pri obradi i analizi podataka. Margina greške iznosi 3 procenta sa intervalom poverenja od 95 procenata.',
 
     DONOR: 'Donator',
 
@@ -353,10 +353,10 @@ const englishDict = {
         'The questionnaire for the survey primarily consisted of closed-ended questions in the form of five-point Likert Scale, followed by several open-ended questions without predefined options. The national sample for the survey featured 1197 households in Kosovo, 1132 in Albania and 1000 in Serbia.',
 
     METHODOLOGY_DESC3:
-        'The first stage of drawing the sample was based in the administrative/regional divisions of each country.  The number of surveys conducted in each administrative/regional area was drawn in proportion to the number of populations for each municipality within the respective areas based on the population censuses or Election Commission data.',
+        'The first stage of drawing the sample was based in the administrative / regional divisions of each country.  The number of surveys conducted in each administrative / regional area was drawn in proportion to the number of populations for each municipality within the respective areas based on the population censuses or Election Commission data.',
 
     METHODOLOGY_DESC4:
-        'Within the municipalities, the sample was stratified into urban/rural sample based on the number of households in each area. Random patterns were used to select the households within the sampled locations, while the randomization within the households was based on the next adult birthday method. The data were verified in real time through field coordinators that visited a predefined sample of households after the completion of the survey in the respective households, through telephone contact with all respondents to confirm the adherence to the methodology and some of the key answers and by analyzing the logical consistency of the answers when processing and analyzing the data. The margin of error is 3 percent with a confidence interval of 95 percent.',
+        'Within the municipalities, the sample was stratified into urban / rural sample based on the number of households in each area. Random patterns were used to select the households within the sampled locations, while the randomization within the households was based on the next adult birthday method. The data were verified in real time through field coordinators that visited a predefined sample of households after the completion of the survey in the respective households, through telephone contact with all respondents to confirm the adherence to the methodology and some of the key answers and by analyzing the logical consistency of the answers when processing and analyzing the data. The margin of error is 3 percent with a confidence interval of 95 percent.',
 
     DONOR: 'Donor',
 

@@ -56,7 +56,9 @@ export default function Header() {
                 <TranslateIcon />
             </IconButton> */}
             {/* bootstrap select form  */}
-            <TranslateIcon fontSize="small" style={{ marginRight: 7, color: '#969A97' }} />
+            <div className="translateIcon">
+                <TranslateIcon fontSize="small" style={{ marginRight: 7, color: '#969A97' }} />
+            </div>
             <Box sx={{ marginRight: 3 }}>
                 <FormControl variant="standard">
                     {/* <InputLabel id="language-select-label">Language</InputLabel> */}
