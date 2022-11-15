@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import React, { useEffect, useState } from 'react';
 import Highcharts, { chart } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -15,7 +16,7 @@ export default function SingleQuestionChart() {
     console.log(question);
     useEffect(() => {
         axios
-            .get('/api/questions/1', {
+            .get('/api/questions/' + Math.floor(Math.random() * 220), {
                 params: {
                     language,
                     country: 'Kosovo'
@@ -167,9 +168,10 @@ export default function SingleQuestionChart() {
                 height: '350px',
                 marginTop: '30px',
                 marginBottom: '30px',
-                borderRadius: '25px',
+                borderRadius: '8px',
                 padding: '10px',
-                background: 'white'
+                background: 'white',
+                boxShadow: '0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 0%)'
             }}
         >
             <HighchartsReact highcharts={Highcharts} options={chartOptions} containerProps={{ style: { height: '100%' } }} />

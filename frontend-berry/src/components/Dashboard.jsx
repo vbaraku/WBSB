@@ -130,7 +130,7 @@ export default function Dashboard() {
                         {displaySecond ? (
                             <>
                                 <Col lg={6} md={12} sm={12}>
-                                    <div className="dashboard" style={{ marginTop: '20px' }}>
+                                    <div className="dashboard">
                                         <DashboardGraph
                                             country={selectedCountry}
                                             selectedQuestion={selectedQuestion}
@@ -160,7 +160,7 @@ export default function Dashboard() {
                                     onClick={() => {
                                         setDisplaySecond(true);
                                     }}
-                                    style={{ borderRadius: '0px 0px 12px 12px' }}
+                                    style={{ borderRadius: '0px 0px 12px 12px', marginLeft: '15px' }}
                                     endIcon={<AddIcon />}
                                 >
                                     {dictionary.COMPARE}

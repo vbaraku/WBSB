@@ -31,7 +31,7 @@ import donor from '../assets/images/donor.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.scss';
-import SwiperCore, { Autoplay } from 'swiper';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
 import SingleQuestionChart from './graphs/SingleQuestionChart';
 // import 'swiper/components/navigation/navigation.scss';
 // import 'swiper/components/pagination/pagination.scss';
@@ -99,6 +99,8 @@ export default function Homepage() {
                     </Col>
                     <Col lg={5} md={12} sm={12}>
                         <Swiper
+                            pagination
+                            modules={[Pagination]}
                             spaceBetween={50}
                             slidesPerView={1}
                             autoplay={{
@@ -107,18 +109,15 @@ export default function Homepage() {
                             onSlideChange={() => console.log('slide change')}
                             onSwiper={(swiper) => console.log(swiper)}
                         >
-                            <SwiperSlide>
+                            <SwiperSlide style={{ padding: '15px' }}>
                                 <SingleQuestionChart />
                             </SwiperSlide>
-                            {/* <SwiperSlide style={{ padding: '30px' }}>
+                            <SwiperSlide style={{ padding: '15px' }}>
                                 <SingleQuestionChart />
                             </SwiperSlide>
-                            <SwiperSlide style={{ padding: '30px' }}>
+                            <SwiperSlide style={{ padding: '15px' }}>
                                 <SingleQuestionChart />
                             </SwiperSlide>
-                            <SwiperSlide style={{ padding: '30px' }}>
-                                <SingleQuestionChart />
-                            </SwiperSlide> */}
                         </Swiper>
                     </Col>
                 </Row>
