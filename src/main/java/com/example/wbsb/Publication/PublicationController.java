@@ -2,12 +2,14 @@ package com.example.wbsb.Publication;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,14 +48,17 @@ public class PublicationController {
 
     @PostMapping(consumes = "multipart/form-data")
     @Transactional
-    public ResponseEntity<?> uploadReport(@RequestPart MultipartFile file, @RequestPart MultipartFile image, @RequestPart String title) {
+    public ResponseEntity<?> uploadReport(@RequestPart MultipartFile file, @RequestPart MultipartFile image,
+                                          @RequestPart String title ,String date) {
         try {
-            publicationService.uploadFile(file, title, image);
-        } catch (Exception io) {
-            return ResponseEntity.status(500).build();
+            //transform date to LocalDate with format yyyy-MM-dd
+            LocalDate localDate = LocalDate.parse(date);
+            publicationService.uploadFile(file,title,image, localDate);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(null);
-
     }
 
 

@@ -30,8 +30,8 @@ public class Publication {
     }
 
 
-    public Publication(String id, String title, String fileName) {
-        date = LocalDate.now();
+    public Publication(String id, String title, String fileName, LocalDate date) {
+        this.date = date;
         this.title = title;
         this.id = id;
         this.imagePath = fileName;
