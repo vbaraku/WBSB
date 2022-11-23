@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-onchange */
 import React, { useEffect, useState } from 'react';
 import { Input, Button, FormControl, InputLabel, Typography, TextField, Card, Divider } from '@mui/material';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';

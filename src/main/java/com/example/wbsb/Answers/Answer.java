@@ -32,6 +32,7 @@ public class Answer {
 
     String text;
 
+    Integer year;
     public Answer() {
     }
 
@@ -41,9 +42,10 @@ public class Answer {
 //		this.text = text;
 //	}
 
-    public Answer(Respondent respondent, Question question, String text) {
+    public Answer(Respondent respondent, Question question, String text, int year) {
         this.question = question;
         this.respondent = respondent;
+        this.year = year;
         this.text = text.replaceAll("^\"|\"$", "").trim();
     }
 
@@ -60,9 +62,16 @@ public class Answer {
         return text;
     }
 
-    public void setRating(String text) {
-        this.text = text;
+//    public void setRating(String text) {
+//        this.text = text;
+//    }
+
+    public int getYear() {
+        return year;
     }
 
+    public void setYear(int year) {
+        this.year = year;
+    }
 
 }

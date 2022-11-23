@@ -6,9 +6,11 @@ import java.io.Serializable;
 @Embeddable
 public class QuestionMeta implements Serializable {
     private String country;
+    private int year;
 
-    public QuestionMeta(String country) {
+    public QuestionMeta(String country, int year) {
         this.country = country;
+        this.year = year;
     }
 
     public QuestionMeta() {
@@ -22,5 +24,11 @@ public class QuestionMeta implements Serializable {
         this.country = country;
     }
 
+    public int getYear() {
+        return year;
+    }
 
+    public void setYear(int year) {
+        this.year = year;
+    }
 }

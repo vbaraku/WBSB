@@ -11,7 +11,7 @@ spring:
         characterEncoding: UTF-8
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         order_inserts: true

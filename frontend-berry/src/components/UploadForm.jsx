@@ -6,16 +6,25 @@ export default function UploadForm() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [country, setCountry] = useState('Kosovo');
     const [language, setLanguage] = useState('ALB');
+    const [year, setYear] = useState(2021);
+    const [loading, setLoading] = useState(false);
     const handleSubmit = (event) => {
+        setLoading(true);
         event.preventDefault();
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('country', country);
         formData.append('language', language);
+        formData.append('year', year);
         try {
-            axios.post('/api/answer', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+            axios
+                .post('/api/answer', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                })
+                .then((res) => {
+                    console.log(res);
+                    setLoading(false);
+                });
         } catch (error) {
             console.log(error);
         }
@@ -25,13 +34,17 @@ export default function UploadForm() {
         setSelectedFile(event.target.files[0]);
     };
 
+    const handleYearChange = (event) => {
+        setYear(event.target.value);
+    };
+
     useEffect(() => {
         console.log(selectedFile);
     }, [selectedFile]);
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '35%' }}>
                 <input type="file" accept=".csv" onChange={handleFileSelect} />
                 {/* <input
                     type="text"
@@ -49,6 +62,7 @@ export default function UploadForm() {
                         setLanguage(e.target.value);
                     }}
                 /> */}
+                Country
                 <select
                     name="country"
                     value={country}
@@ -60,6 +74,7 @@ export default function UploadForm() {
                     <option value="Serbia">Serbia</option>
                     <option value="Kosovo">Kosovo</option>
                 </select>
+                Language
                 <select
                     name="language"
                     value={language}
@@ -71,7 +86,22 @@ export default function UploadForm() {
                     <option value="SRB">Serbian</option>
                     <option value="ENG">English</option>
                 </select>
-                <button type="submit">Upload</button>
+                Year
+                <select
+                    name="year"
+                    value={year}
+                    onChange={(e) => {
+                        setYear(e.target.value);
+                    }}
+                >
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+                <button type="submit" disabled={loading}>
+                    Submit
+                </button>
+                {loading && <p>Loading...</p>}
             </form>
         </div>
     );

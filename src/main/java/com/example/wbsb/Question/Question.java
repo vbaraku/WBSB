@@ -41,6 +41,7 @@ public class Question {
 
     @Column(length = 1000)
     private String category;
+
     //Worth considering adding a year here, in case they want user to be able
     //to filter only questions of a specific year, rather than just answers
 
@@ -65,11 +66,11 @@ public class Question {
         this.language = language;
     }
 
-    public Question(String text, String category, String language, String country, int count) {
+    public Question(String text, String category, String language, String country, int count, int year) {
         this.setText(text);
         this.category = category;
         this.metaData = new HashSet<QuestionMeta>();
-        this.metaData.add(new QuestionMeta(country));
+        this.metaData.add(new QuestionMeta(country, year));
         this.count = count;
         this.id = UUID.randomUUID().toString();
 //        this.country = country;
@@ -85,6 +86,14 @@ public class Question {
         this.id = id;
         this.language = language;
     }
+
+//    public int getYear() {
+//        return year;
+//    }
+//
+//    public void setYear(int year) {
+//        this.year = year;
+//    }
 
     public String getId() {
         return id;

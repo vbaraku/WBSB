@@ -12,8 +12,8 @@ export default function Publications() {
     const { dictionary } = useLanguage();
 
     return (
-        <div className="homepage">
-            <Container id="publications" fluid style={{ maxWidth: 1000, margin: 'auto', marginTop: '90px', justifyContent: 'center' }}>
+        <div className="homepage" style={{ marginTop: '0' }}>
+            <Container id="publications" fluid style={{ maxWidth: 1000, margin: 'auto', paddingTop: '60px', justifyContent: 'center' }}>
                 <FormControl sx={{ marginLeft: '15px' }}>
                     <InputLabel id="publications-label">{dictionary.YEAR_LABEL}</InputLabel>
                     <h1>{dictionary.PUBLICATION}</h1>
