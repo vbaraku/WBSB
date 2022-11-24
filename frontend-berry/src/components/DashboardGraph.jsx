@@ -28,7 +28,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
     }
 
     const [filters, setFilters] = useState({
-        year: 2021,
+        year: dict.ALL,
         region: dict.ALL,
         regionType: dict.ALL,
         nationality: dict.ALL,
@@ -70,7 +70,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
                     ages
                 });
                 setFilters({
-                    year: 2021,
+                    year: dict.ALL,
                     region: dict.ALL,
                     regionType: dict.ALL,
                     nationality: dict.ALL,

@@ -8,6 +8,7 @@ export default function UploadForm() {
     const [language, setLanguage] = useState('ALB');
     const [year, setYear] = useState(2021);
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState([]);
     const handleSubmit = (event) => {
         setLoading(true);
         event.preventDefault();
@@ -24,6 +25,7 @@ export default function UploadForm() {
                 .then((res) => {
                     console.log(res);
                     setLoading(false);
+                    setData(res.data);
                 });
         } catch (error) {
             console.log(error);
@@ -39,8 +41,10 @@ export default function UploadForm() {
     };
 
     useEffect(() => {
-        console.log(selectedFile);
-    }, [selectedFile]);
+        axios.get('/api/answer/audit').then((resp) => {
+            setData(resp.data);
+        });
+    }, []);
 
     return (
         <div>
@@ -103,6 +107,9 @@ export default function UploadForm() {
                 </button>
                 {loading && <p>Loading...</p>}
             </form>
+            {data.map((el) => (
+                <div>{JSON.stringify(el)}</div>
+            ))}
         </div>
     );
 }

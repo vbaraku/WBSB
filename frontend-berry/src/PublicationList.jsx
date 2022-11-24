@@ -39,20 +39,9 @@ export default function PublicationList({ listSize, year }) {
     }
     return (
         <>
-            {getPublications().map((publication, index) => (
+            {/* {getPublications().map((publication, index) => (
                 <Col lg={4} md={6} sm={12} key={index} style={{ marginTop: '60px' }}>
-                    {/* <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src={reportImage} />
-                                <Card.Body>
-                                    <Card.Title>{publication.title}</Card.Title>
-                                    <Card.Text>{publication.text}</Card.Text>
-                                    <Card.Text>18 gusht 2022</Card.Text>
-
-                                    <Link to="te-dhenat">Raed more</Link>
-                                </Card.Body>
-                            </Card> */}
                     <Card className="publication-card">
-                        {/* <CardActionArea> */}
                         <CardMedia
                             // style={{ padding: '30px 30px 30px 30px' }}
                             component="img"
@@ -85,11 +74,9 @@ export default function PublicationList({ listSize, year }) {
                                 Download
                             </Link>
                         </CardContent>
-                        {/* </CardActionArea> */}
-                        {/* <CardActions /> */}
                     </Card>
                 </Col>
-            ))}
+            ))} */}
         </>
     );
 }
