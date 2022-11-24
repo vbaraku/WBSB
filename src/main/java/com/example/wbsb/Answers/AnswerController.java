@@ -71,48 +71,52 @@ public class AnswerController {
 
             List<Question> questions = insertQuestions(headers, language, country, year);
 
-            List<String> row;
-            List<Respondent> respondents = new ArrayList<>();
-            List<Answer> answers = new ArrayList<>();
-            while ((line = reader.readLine()) != null) {
-                row = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
-                Respondent respondent;
-                try {
-                    respondent = new Respondent(
-                            row.get(0),
-                            row.get(1),
-                            row.get(2),
-                            row.get(3),
-                            row.get(4),
-                            row.get(5),
-                            2021,
-                            country,
-                            language
-                    );
-                } catch (Exception e) {
-                    return ResponseEntity.status(400).body("Respondent data is not valid");
-                }
-                //TODO: Do something about the year above, maybe from form, idfk
-
-                int index = 6; // change to 7 if empty column maybe, or remove empty column in csv processing
-                for (Question question : questions) {
-                    if(headers.get(index).contains("Category:")){
-                        index++;
-                    }
-
-                    if (row.get(index).trim().equals("")) {
-                        index++;
-                        continue;
-                    }
-                    Answer answer = new Answer(respondent, question, row.get(index), year);
-                    index++;
-                    answers.add(answer);
-                }
-                respondents.add(respondent);
-            }
-
-            respondentRepository.saveAll(respondents);
-            answerRepository.saveAll(answers);
+            System.out.println(questions.size());
+//            List<String> row;
+//            List<Respondent> respondents = new ArrayList<>();
+//            List<Answer> answers = new ArrayList<>();
+//            while ((line = reader.readLine()) != null) {
+//                row = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
+//                Respondent respondent;
+//                try {
+//                    respondent = new Respondent(
+//                            row.get(0),
+//                            row.get(1),
+//                            row.get(2),
+//                            row.get(3),
+//                            row.get(4),
+//                            row.get(5),
+//                            year,
+//                            country,
+//                            language
+//                    );
+//                } catch (Exception e) {
+//                    return ResponseEntity.status(400).body("Respondent data is not valid");
+//                }
+//
+//                int index = 6; // change to 7 if empty column maybe, or remove empty column in csv processing
+//                try {
+//                    for (Question question : questions) {
+//                        if (headers.get(index).contains("Category:")) {
+//                            index++;
+//                        }
+//
+//                        if (row.get(index).trim().equals("")) {
+//                            index++;
+//                            continue;
+//                        }
+//                        Answer answer = new Answer(respondent, question, row.get(index), year);
+//                        index++;
+//                        answers.add(answer);
+//                    }
+//                } catch (Exception e) {
+//                    return ResponseEntity.status(400).body("Answer data is not valid");
+//                }
+//                respondents.add(respondent);
+//            }
+//
+//            respondentRepository.saveAll(respondents);
+//            answerRepository.saveAll(answers);
 
 
         } catch (IOException io) {
@@ -120,10 +124,14 @@ public class AnswerController {
         }
 
         auditRepository.save(new Audit(country,language,year));
-        return ResponseEntity.ok().build();
-//        Object obj = selectedFile;
-//        System.out.println(selectedFile.getOriginalFilename());
-//        return ResponseEntity.ok(selectedFile.getName());
+        List<Audit> audits = auditRepository.findAll();
+        return ResponseEntity.ok(audits);
+    }
+
+    @GetMapping("/audit")
+    public ResponseEntity<?> getAudit(){
+        List<Audit> audits = auditRepository.findAll();
+        return ResponseEntity.ok(audits);
     }
 
     private List<String> getDuplicate(List<String> list) {
@@ -163,54 +171,92 @@ public class AnswerController {
         //TODO: Inform client to add column between user/answer with category name
         headers = headers.subList(6, headers.size());
 
-        String currentCategory = "";
         List<Question> questions = new ArrayList<>();
 
         //1. If dataset exists in different language, zip them up
         List<Question> storedQuestions = questionRepository.findAllByCountryAndYear(country, year);
-
-        if (storedQuestions.size() > 0) {
-            matchByCountry(headers, language, country, year, currentCategory, questions, storedQuestions);
-        } else {
-            // 2. If dataset is new, insert all questions, but don't insert duplicates
-            List<Question> questionsByLanguage = questionRepository.findAllByLanguage(language);
-            HashMap<String, Question> storedQuestionsMap = new HashMap<>();
-
-            for (Question q : questionsByLanguage) {
-                storedQuestionsMap.put(q.getText(), q);
-            }
-            for (int i = 0; i<headers.size(); i++){
-                String element = headers.get(i);
-                element = element.replaceAll("^\"|\"$", "").trim();
-                if (element.contains("Category:")) {
-                    currentCategory = element.replace("Category: ", "");
-                    continue;
-                }
-                //If question doesn't exist, insert it
-                if(storedQuestionsMap.get(element) == null){
-                    questions.add(new Question(
-                            element,
-                            currentCategory,
-                            language,
-                            country,
-                            i,
-                            year));
-                }else{
-                    //If question exists, add meta info about it (country and year)
-                    Question q1 = storedQuestionsMap.get(element);
-                    q1.getMeta().add(new QuestionMeta(country, year));
-                    questions.add(q1);
-                }
-
-            }
+        // Remove duplicate IDs from stored questions
+        storedQuestions = removeDuplicateIds(storedQuestions);
+        if (storedQuestions.size() > 0) { //if dataset exists
+            questions = matchByCountry(headers, language, country, year, storedQuestions);
+        }else{
+            questions = headerToList(headers, language, country, year);
         }
-        questionRepository.saveAll(questions);
-        questionRepository.flush();
+        questions = matchByLanguage(questions, language, country, year);
+
+
+//        questionRepository.flush();
         return questions;
     }
 
-    private static void matchByCountry(List<String> headers, String language, String country, int year, String currentCategory, List<Question> questions, List<Question> storedQuestions) {
+    private List<Question> removeDuplicateIds(List<Question> questions){
+        if (questions.size() == 0) return questions;
+        Question q1 = questions.get(0);
+        // Remove questions with language other than q1's
+        questions = questions.stream().filter(q -> q.getLanguage().equals(q1.getLanguage())).collect(Collectors.toList());
+
+        return questions;
+    }
+    private List<Question> headerToList(List<String> headers, String language, String country, int year) {
+        List<Question> questions = new ArrayList<>();
+        String currentCategory = "";
+        for (int i = 0; i<headers.size(); i++){
+            String element = headers.get(i);
+            element = element.replaceAll("^\"|\"$", "").trim();
+            if (element.contains("Category:")) {
+                currentCategory = element.replace("Category: ", "");
+                continue;
+            }
+            questions.add(new Question(
+                    element,
+                    currentCategory,
+                    language,
+                    country,
+                    i,
+                    year));
+        }
+        return questions;
+    }
+    private List<Question> matchByLanguage(List<Question> questions, String language, String country, int year){
+        // 2. If dataset is new, insert all questions, but don't insert duplicates
+        List<Question> questionsByLanguage = questionRepository.findAllByLanguage(language);
+        HashMap<String, Question> storedQuestionsMap = new HashMap<>();
+        List<Question> newQuestions = new ArrayList<>();
+        List<Question> existingQuestions = new ArrayList<>();
+        int inIf = 0;
+        int inElse = 0;
+        for (Question q : questionsByLanguage) {
+            storedQuestionsMap.put(q.getText(), q);
+        }
+        for (int i = 0; i<questions.size(); i++) {
+            String element = questions.get(i).getText();
+            //If question doesn't exist, insert it
+            if (storedQuestionsMap.get(element) == null) {
+                newQuestions.add(questions.get(i));
+                inIf++;
+            } else {
+                //If question exists, add meta info about it (country and year)
+                existingQuestions.add(storedQuestionsMap.get(element));
+//                q1.getMeta().add(new QuestionMeta(country, year));
+//                newQuestions.add(q1);
+                inElse++;
+            }
+        }
+        System.out.println("Unique questions: " + inIf);
+        System.out.println("Repeated questions: " + inElse);
+        questions = questionRepository.saveAll(newQuestions);
+
+        existingQuestions.stream().forEach(q -> {
+            q.getMeta().add(new QuestionMeta(country, year));
+        });
+        return newQuestions;
+    }
+
+
+    private static List<Question> matchByCountry(List<String> headers, String language, String country, int year, List<Question> storedQuestions) {
+        List<Question> questions = new ArrayList<>();
         AtomicInteger count = new AtomicInteger(0);
+        String currentCategory = "";
         for (String element : headers) {
             element = element.replaceAll("^\"|\"$", "");
             if (element.contains("Category:")) {
@@ -227,9 +273,11 @@ public class AnswerController {
             questions.add(newQ);
         }
 
+        //Question 1 in english will be the same id as question 1 in albanian
         for (int i = 0; i < storedQuestions.size(); i++) {
             questions.get(i).setId(storedQuestions.get(i).getId());
         }
+        return questions;
     }
 
     @GetMapping

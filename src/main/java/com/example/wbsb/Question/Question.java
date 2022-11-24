@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 
 @Entity
@@ -52,7 +50,7 @@ public class Question {
      */
     @Column(name = "question_meta")
     @ElementCollection
-    private Set<QuestionMeta> metaData;
+    private List<QuestionMeta> metaData = new ArrayList<>();
 
 
     public Question() {
@@ -69,7 +67,6 @@ public class Question {
     public Question(String text, String category, String language, String country, int count, int year) {
         this.setText(text);
         this.category = category;
-        this.metaData = new HashSet<QuestionMeta>();
         this.metaData.add(new QuestionMeta(country, year));
         this.count = count;
         this.id = UUID.randomUUID().toString();
@@ -141,12 +138,12 @@ public class Question {
 //    }
 
     @JsonIgnore
-    public Set<QuestionMeta> getMeta() {
+    public List<QuestionMeta> getMeta() {
         return metaData;
     }
 
 
-    public void setCountries(Set<QuestionMeta> metaData) {
+    public void setCountries(List<QuestionMeta> metaData) {
         this.metaData = metaData;
     }
 
