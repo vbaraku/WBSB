@@ -28,6 +28,8 @@ export default function Dashboard() {
 
     const ref = useRef(null);
 
+    const chartComponent = useRef(null);
+
     const [drawerOpen, setDrawerOpen] = useState(false);
     const drawerWidth = 240;
     function findQuestionById(categoryArray, id) {
@@ -125,7 +127,13 @@ export default function Dashboard() {
                     </Row>
                     <Row>
                         <Col lg={displaySecond ? 6 : 12} md={12} sm={12}>
-                            <DashboardGraph country={selectedCountry} selectedQuestion={selectedQuestion} selectedLanguage={language} />
+                            <DashboardGraph
+                                ref={chartComponent}
+                                country={selectedCountry}
+                                selectedQuestion={selectedQuestion}
+                                selectedLanguage={language}
+                                displaySecond={displaySecond}
+                            />
                         </Col>
                         {displaySecond ? (
                             <>
@@ -135,6 +143,7 @@ export default function Dashboard() {
                                             country={selectedCountry}
                                             selectedQuestion={selectedQuestion}
                                             selectedLanguage={language}
+                                            // displaySecond={displaySecond}
                                         />
                                     </div>
                                     <div>
@@ -159,6 +168,8 @@ export default function Dashboard() {
                                     type="button"
                                     onClick={() => {
                                         setDisplaySecond(true);
+                                        console.log('v');
+                                        console.log(chartComponent.current);
                                     }}
                                     style={{ borderRadius: '0px 0px 12px 12px', marginLeft: '15px' }}
                                     endIcon={<AddIcon />}

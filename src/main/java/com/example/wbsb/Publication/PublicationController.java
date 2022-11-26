@@ -31,14 +31,15 @@ public class PublicationController {
     }
 
     @GetMapping
-    public List<Publication> getAllPublications(@RequestParam(required = false) Integer year) {
+    public List<Publication> getAllPublications(@RequestParam(required = false) Integer year, @RequestParam String language) {
         try {
             List<Publication> publications = new ArrayList<>();
 
-            publicationRepository.findAllByOrderByDateDesc().forEach(publications::add);
+            publicationRepository.findAllByLanguageOrderByDateDesc(language).forEach(publications::add);
             if (year != null) {
                 publications = publications.stream().filter(p-> p.getDate().getYear() == year).collect(Collectors.toList());
             }
+
             return publications;
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,11 +50,12 @@ public class PublicationController {
     @PostMapping(consumes = "multipart/form-data")
     @Transactional
     public ResponseEntity<?> uploadReport(@RequestPart MultipartFile file, @RequestPart MultipartFile image,
-                                          @RequestPart String title ,String date) {
+                                          @RequestPart String title ,String date, String language) {
         try {
             //transform date to LocalDate with format yyyy-MM-dd
+
             LocalDate localDate = LocalDate.parse(date);
-            publicationService.uploadFile(file,title,image, localDate);
+            publicationService.uploadFile(file,title,image, localDate, language);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

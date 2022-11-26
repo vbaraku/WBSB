@@ -35,7 +35,6 @@ public class Question {
     @Column(length = 5500, unique = true)
     private String text;
 
-    private int count;
 
     @Column(length = 1000)
     private String category;
@@ -48,9 +47,8 @@ public class Question {
      * matched with Q1 of Lang2. QuestionOrder stores the position in which a question
      * was placed in when inserted
      */
-    @Column(name = "question_meta")
-    @ElementCollection
-    private List<QuestionMeta> metaData = new ArrayList<>();
+    @OneToMany(mappedBy = "question")
+    private Set<QuestionMeta> metaData;
 
 
     public Question() {
@@ -64,11 +62,9 @@ public class Question {
         this.language = language;
     }
 
-    public Question(String text, String category, String language, String country, int count, int year) {
+    public Question(String text, String category, String language, String country, int year) {
         this.setText(text);
         this.category = category;
-        this.metaData.add(new QuestionMeta(country, year));
-        this.count = count;
         this.id = UUID.randomUUID().toString();
 //        this.country = country;
 //        this.id.language = language;
@@ -105,13 +101,6 @@ public class Question {
     }
 
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     public String getLanguage() {
         return language;
@@ -137,16 +126,6 @@ public class Question {
 //        this.id.language = language;
 //    }
 
-    @JsonIgnore
-    public List<QuestionMeta> getMeta() {
-        return metaData;
-    }
-
-
-    public void setCountries(List<QuestionMeta> metaData) {
-        this.metaData = metaData;
-    }
-
 
     public String getCategory() {
         return category;
@@ -166,11 +145,22 @@ public class Question {
 @Embeddable
 class QuestionId implements Serializable {
     @Id
-            @Column(length = 1000)
+    @Column(length = 1000)
     String id;
 
     @Id
     String language;
+
+    @Override
+    public boolean equals(Object obj) {
+        QuestionId other = (QuestionId) obj;
+        return this.id.equals(other.id) && this.language.equals(other.language);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, language);
+    }
 }
 
 

@@ -9,11 +9,16 @@ spring:
       data-source-properties:
         useUnicode: true
         characterEncoding: UTF-8
+      auto-commit: true
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         order_inserts: true
         jdbc:
           batch_size: 1000
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        generate_statistics: true
+#        format_sql: true
+#        show_sql: true

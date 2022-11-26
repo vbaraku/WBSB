@@ -20,10 +20,10 @@ public class PublicationService {
         this.publicationRepository = publicationRepository;
     }
 
-    public String uploadFile(MultipartFile file, String title, MultipartFile image, LocalDate date) throws IOException {
+    public String uploadFile(MultipartFile file, String title, MultipartFile image, LocalDate date, String language) throws IOException {
         String imageExtension = image.getOriginalFilename().split("\\.")[1];
         String uuid = UUID.randomUUID().toString();
-        Publication doc = new Publication(uuid, title, uuid+"."+imageExtension, date);
+        Publication doc = new Publication(uuid, title, uuid+"."+imageExtension, date, language);
 
         String fileLocation = new File("src\\main\\resources\\static\\uploads\\files").getAbsolutePath() + "\\" + uuid + ".pdf";
         String imageLocation = new File("src\\main\\resources\\static\\uploads\\images").getAbsolutePath() + "\\" +uuid + "." + imageExtension;

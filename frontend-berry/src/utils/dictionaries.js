@@ -1,4 +1,8 @@
 const albanianDict = {
+    DOWNLOAD: 'Shkarko',
+
+    RIGHTS: '© 2008 - 2022 QKSS | Të gjitha të drejtat e rezervuara',
+
     ALBANIAN: 'Shqip',
 
     ENGLISH: 'Anglisht',
@@ -131,6 +135,10 @@ const albanianDict = {
 };
 
 const serbianDict = {
+    DOWNLOAD: 'Preuzimanje',
+
+    RIGHTS: '© 2008 - 2022 QKSS | Sva prava zadržana',
+
     ALBANIAN: 'Albanski',
 
     ENGLISH: 'Engleski',
@@ -232,6 +240,10 @@ const serbianDict = {
 };
 
 const englishDict = {
+    DOWNLOAD: 'Download',
+
+    RIGHTS: '© 2008 - 2022 QKSS | All rights reserved',
+
     ALBANIAN: 'Albanian',
 
     ENGLISH: 'English',

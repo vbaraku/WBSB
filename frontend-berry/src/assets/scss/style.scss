@@ -42,7 +42,7 @@ body {
     }
 }
 
-.translateIcon{
+.translateIcon {
     @media screen and (max-width: 768px) {
         display: none;
     }
@@ -87,7 +87,7 @@ body {
     //box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 0%) !important;
 }
 
-.chip{
+.chip {
     @media screen and (max-width: 768px) {
         display: none;
     }
@@ -128,12 +128,12 @@ body {
     color: black;
     text-decoration: none;
 }
-.homepage-subbanner{
+.homepage-subbanner {
     @media screen and (max-width: 768px) {
     }
 }
 
-.spanText{
+.spanText {
     margin: 20px;
     cursor: pointer;
     @media screen and (max-width: 768px) {
@@ -224,6 +224,7 @@ body {
     border-radius: 6px;
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 0%);
     margin-bottom: 1em;
+    height: 100%;
     .publication-title {
         font-size: 1.5em;
         font-weight: 600;
@@ -416,4 +417,16 @@ body {
     text-decoration: none;
     background-color: #185faf;
     color: white !important;
+}
+
+.year-select {
+    background-color: transparent;
+    padding: 16.5px 32px 16.5px 14px;
+    border-radius: 4px;
+    option {
+        border: 1px solid #185faf;
+        border-radius: 4px;
+        margin-top: 15px;
+    }
+    //checked option
 }

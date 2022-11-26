@@ -14,7 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query("SELECT new Question(q.id, q.text, q.category, q.language) from Question q " +
             " join q.metaData md " +
             "where md.country = :country " +
-            "order by q.count")
+            "order by md.questionPosition")
     List<Question> findAllByCountry(@Param("country") String country);
 
 
@@ -22,7 +22,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             " join q.metaData md " +
             "where md.country = :country " +
             "and md.year = :year " +
-            "order by q.count")
+            "order by md.questionPosition")
     List<Question> findAllByCountryAndYear(@Param("country") String country, @Param("year") int year);
 
     List<Question> findAllByLanguage(String language);

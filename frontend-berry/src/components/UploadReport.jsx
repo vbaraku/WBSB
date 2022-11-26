@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Button, FormControl, InputLabel, Typography, TextField, Card, Divider } from '@mui/material';
+import { Input, Button, FormControl, InputLabel, Typography, TextField, Card, Divider, Select, MenuItem } from '@mui/material';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import axios from 'axios';
 // import dayjs from 'dayjs';
@@ -13,13 +13,14 @@ export default function UploadForm() {
     const [title, setTitle] = useState();
     // set default date to today in yyyy-mm-dd format
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+    const [language, setLanguage] = useState();
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('image', image);
         formData.append('date', date);
-
+        formData.append('language', language);
         formData.append('title', title);
         try {
             axios.post('/api/publication', formData, {
@@ -40,6 +41,10 @@ export default function UploadForm() {
 
     const handleDateChange = (newValue) => {
         setDate(newValue);
+    };
+
+    const handleLangChange = (newValue) => {
+        setLanguage(newValue);
     };
 
     useEffect(() => {
@@ -79,10 +84,21 @@ export default function UploadForm() {
                         }}
                     />
                     <Divider sx={{ margin: 3, width: '580px', marginLeft: -3 }} />
-                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
                     <Typography style={{ fontSize: '22px', fontWeight: '300' }}>Publication Date</Typography>
                     <input style={{ width: '300px' }} type="date" value={date} onChange={(e) => handleDateChange(e.target.value)} />
-                    {/* </LocalizationProvider> */}
+                    <Divider sx={{ margin: 3, width: '580px', marginLeft: -3 }} />
+                    <InputLabel id="select-language">Language</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={language}
+                        label="Language"
+                        onChange={handleLangChange}
+                    >
+                        <MenuItem value="ALB">Albanian</MenuItem>
+                        <MenuItem value="ENG">English</MenuItem>
+                        <MenuItem value="SRB">Serbian</MenuItem>
+                    </Select>
                     <Button type="submit" variant="contained" sx={{ width: '150px', margin: 'auto', marginTop: 3 }}>
                         Upload
                     </Button>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import FilterBar from './FilterBar';
 import { Button, Box, Divider } from '@mui/material';
 
-export default function DashboardGraph({ selectedQuestion, country, selectedLanguage }) {
+export default function DashboardGraph({ selectedQuestion, country, selectedLanguage, displaySecond }) {
     const [answers, setAnswers] = useState([]);
     // TODO: add a context for the language || in other words, make the bottom thing dynamic (not always albanian)
     const [dict, setDictionary] = useState(albanianDict);
@@ -117,7 +117,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
                 <FilterBar dict={dict} filters={filters} setFilters={setFilters} filterOptions={filterOptions} />
             </Box>
             <Divider style={{ width: '95%' }} />
-            <Graphs question={selectedQuestion} answers={answers} />
+            <Graphs question={selectedQuestion} answers={answers} displaySecond={displaySecond} />
         </Box>
     );
 }

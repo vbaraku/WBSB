@@ -1,30 +1,17 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Box, CardActionArea, CardMedia, CardContent, Chip, Typography, CardActions, Divider } from '@mui/material';
-import Carousel from 'react-bootstrap/Carousel';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Chip, Typography, CardActions, Divider } from '@mui/material';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import CircleIcon from '@mui/icons-material/Circle';
-import Charts from './graphs/Charts';
 // import image from '../assets/images/test.svg';
-import { ReactComponent as Logo } from '../assets/images/test.svg';
-import { CloudOff } from '@mui/icons-material';
-import Slider from 'react-slick';
+
 import logo from '../assets/images/logo.png';
 import csdgLogo from '../assets/images/logo-csdg.jpg';
 import bcspLogo from '../assets/images/logo-bcsp-orange.jpg';
 import { useLanguage, useLanguageUpdate } from '../LanguageContext';
-import reportImage from '../assets/images/report1.png';
-import axios from 'axios';
-import { AnimationOnScroll } from 'react-animation-on-scroll';
-import fileDownload from 'js-file-download';
 import qkssLogo from '../assets/images/qkss-logo.png';
 import PublicationList from 'PublicationList';
 import donor from '../assets/images/donor.png';
@@ -33,10 +20,6 @@ import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.scss';
 import SwiperCore, { Autoplay, Pagination } from 'swiper';
 import SingleQuestionChart from './graphs/SingleQuestionChart';
-// import 'swiper/components/navigation/navigation.scss';
-// import 'swiper/components/pagination/pagination.scss';
-// import 'swiper/components/effect-flip/effect-flip.scss';
-// import 'swiper/components/scrollbar/scrollbar.scss';
 
 export default function Homepage() {
     const { language, dictionary } = useLanguage();
@@ -52,7 +35,7 @@ export default function Homepage() {
             {
                 name: dictionary.PARTNER1,
                 logo: bcspLogo,
-                link: 'https://www.bcsp.org/',
+                link: 'https://bezbednost.org/en/',
                 description: dictionary.PARTNER1_DESC
             },
             {
@@ -363,6 +346,12 @@ export default function Homepage() {
                         {dictionary.READ_MORE} ➜
                     </Link>
                 </div>
+            </Container>
+            <Container fluid style={{ width: '100%', padding: 5 }}>
+                <Divider sx={{ bgcolor: '#044389', borderBottomWidth: '5px', width: '100%' }} />
+                <Typography variant="h5" style={{ marginLeft: 40, marginTop: 10, marginBottom: 10, padding: '5px 0px' }}>
+                    {dictionary.RIGHTS}
+                </Typography>
             </Container>
         </div>
     );

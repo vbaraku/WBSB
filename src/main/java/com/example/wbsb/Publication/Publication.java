@@ -17,6 +17,7 @@ public class Publication {
 
     private String imagePath;
 
+    private String language;
 
 //    @Column(length = 5500, unique = true)
 //    private String title;
@@ -30,19 +31,20 @@ public class Publication {
     }
 
 
-    public Publication(String id, String title, String fileName, LocalDate date) {
+    public Publication(String id, String title, String fileName, LocalDate date, String language) {
         this.date = date;
         this.title = title;
         this.id = id;
         this.imagePath = fileName;
+        this.language = language;
     }
 
-    public Publication(String id, LocalDate date, String fileName, String title) {
-        this.date = date;
-        this.title = title;
-        this.id = id;
-        this.imagePath = fileName;
-    }
+//    public Publication(String id, LocalDate date, String fileName, String title) {
+//        this.date = date;
+//        this.title = title;
+//        this.id = id;
+//        this.imagePath = fileName;
+//    }
 
 
 
@@ -72,6 +74,15 @@ public class Publication {
 
     public String getImagePath() {
         return imagePath;
+    }
+
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public void setImagePath(String fileName) {

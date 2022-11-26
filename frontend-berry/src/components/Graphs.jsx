@@ -17,7 +17,7 @@ import { InfinitySpin } from 'react-loader-spinner';
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
-export default function Graphs({ question, answers }) {
+export default function Graphs({ question, answers, displaySecond }) {
     const [selectedGraphType, setSelectedGraphType] = useState('column');
     // const [graph, setGraph] = useState(null);
 
@@ -89,7 +89,7 @@ export default function Graphs({ question, answers }) {
                     </Button>
                 ))}
             </div>
-            <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />
+            <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} displaySecond={displaySecond} />
             {/* {displayChart()} */}
         </div>
     );

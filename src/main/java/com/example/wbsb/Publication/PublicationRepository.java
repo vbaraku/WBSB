@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 public interface PublicationRepository extends JpaRepository<Publication, Long> {
     Publication findById(Integer fileId);
 
-    List<Publication> findAllByOrderByDateDesc();
+    List<Publication> findAllByLanguageOrderByDateDesc(String language);
     //		List<Question> findByThematicElementContaining(String thematicElement);
 //    Optional<Question> findById(Integer id);
 //    Optional<List<Publication>> findAllByDate_Year(Integer year);

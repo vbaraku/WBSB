@@ -20,6 +20,8 @@ public class WebConfiguration {
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", configuration);
+        source.registerCorsConfiguration("/files/**", configuration);
+
         source.registerCorsConfiguration("/login", configuration);
         return source;
     }

@@ -6,8 +6,10 @@ import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
-export default function Charts({ question, answers, selectedGraphType }) {
+export default function Charts({ question, answers, selectedGraphType, displaySecond }) {
     const { language, dictionary } = useLanguage();
+
+    const chartRef = React.createRef(null);
 
     Highcharts.setOptions({
         colors: [
@@ -23,6 +25,17 @@ export default function Charts({ question, answers, selectedGraphType }) {
             '#FFA3AF'
         ]
     });
+
+    const resizeChart = () => {
+        if (chartRef.current) {
+            chartRef.current.chart.reflow();
+        }
+    };
+
+    useEffect(() => {
+        resizeChart();
+        console.log('resize');
+    }, [displaySecond]);
 
     function getChartOptions() {
         let options = {
@@ -160,7 +173,7 @@ export default function Charts({ question, answers, selectedGraphType }) {
 
     return (
         <div style={{ width: '90%' }}>
-            <HighchartsReact highcharts={Highcharts} options={chartOptions} containerProps={{}} />;
+            <HighchartsReact ref={chartRef} highcharts={Highcharts} options={chartOptions} containerProps={{}} />;
         </div>
     );
 }
