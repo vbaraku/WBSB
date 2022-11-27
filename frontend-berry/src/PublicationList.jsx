@@ -14,7 +14,7 @@ export default function PublicationList({ listSize, year, setYears }) {
     if (process.env.NODE_ENV === 'development') {
         baseURL = 'http://localhost:8080';
     } else {
-        baseURL = 'https://r2bdb.herokuapp.com';
+        baseURL = 'http://ec2-3-224-154-253.compute-1.amazonaws.com:8080';
     }
 
     useEffect(() => {

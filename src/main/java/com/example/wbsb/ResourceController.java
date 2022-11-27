@@ -20,7 +20,7 @@ public class ResourceController{
     @GetMapping("/files/{id}")
     public ResponseEntity<Resource> getPDF(@PathVariable String id) {
 
-        String fileLocation = new File("src\\main\\resources\\static\\uploads\\files").getAbsolutePath() + "\\" + id;
+        String fileLocation = new File("src/main/resources/static/uploads/files").getAbsolutePath() + "/" + id;
         FileSystemResource resource = new FileSystemResource(fileLocation);
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(resource)
@@ -43,7 +43,7 @@ public class ResourceController{
     @GetMapping("/images/{fileName}")
     public ResponseEntity<Resource> getImage(@PathVariable String fileName) {
 
-        String fileLocation = new File("src\\main\\resources\\static\\uploads\\images").getAbsolutePath() +"\\"+ fileName;
+        String fileLocation = new File("src/main/resources/static/uploads/images").getAbsolutePath() +"/"+ fileName;
         FileSystemResource resource = new FileSystemResource(fileLocation);
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(resource)

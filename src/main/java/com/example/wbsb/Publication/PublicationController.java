@@ -67,7 +67,7 @@ public class PublicationController {
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadPdf(@PathVariable String id) {
 
-        String fileLocation = new File("src\\main\\resources\\static\\uploads").getAbsolutePath() + "\\publication" + id + ".pdf";
+        String fileLocation = new File("src/main/resources/static/uploads").getAbsolutePath() + "/publication" + id + ".pdf";
         FileSystemResource resource = new FileSystemResource(fileLocation);
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(resource)

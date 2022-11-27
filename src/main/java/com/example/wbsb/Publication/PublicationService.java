@@ -25,8 +25,8 @@ public class PublicationService {
         String uuid = UUID.randomUUID().toString();
         Publication doc = new Publication(uuid, title, uuid+"."+imageExtension, date, language);
 
-        String fileLocation = new File("src\\main\\resources\\static\\uploads\\files").getAbsolutePath() + "\\" + uuid + ".pdf";
-        String imageLocation = new File("src\\main\\resources\\static\\uploads\\images").getAbsolutePath() + "\\" +uuid + "." + imageExtension;
+        String fileLocation = new File("src/main/resources/static/uploads/files").getAbsolutePath() + "/" + uuid + ".pdf";
+        String imageLocation = new File("src/main/resources/static/uploads/images").getAbsolutePath() + "/" +uuid + "." + imageExtension;
         publicationRepository.save(doc);
         file.transferTo(new File(fileLocation));
         image.transferTo(new File(imageLocation));
