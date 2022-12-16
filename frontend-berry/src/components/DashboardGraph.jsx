@@ -51,7 +51,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
             return {
                 years: dict.YEARS,
                 regions: dict.KOSOVO_REGIONS,
-                regionTypes: dict.REGION_TYPES,
+                regionTypes: dict.REGION_TYPES_KS,
                 nationalities: dict.KOSOVO_NATIONALITIES,
                 genders: dict.GENDERS,
                 ages: [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+']
@@ -136,9 +136,12 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         params.questionId = selectedQuestion.id || 1;
         params.country = country;
         params.language = selectedLanguage;
-
         axios.get('/api/answer', { params }).then((response) => {
-            setAnswers(response.data);
+            if (response.data.length === 0) {
+                setAnswers(null);
+            } else {
+                setAnswers(response.data);
+            }
         });
     }, [filters, country, filtersLoaded]);
 

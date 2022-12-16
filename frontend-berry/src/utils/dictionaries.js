@@ -1,4 +1,5 @@
 const albanianDict = {
+    NO_ANSWERS: 'Nuk ka të dhëna për këto filtera',
     YEARS: ['Të gjitha', '2022', '2021'],
 
     DOWNLOAD: 'Shkarko',
@@ -42,7 +43,9 @@ const albanianDict = {
 
     SERBIA_REGIONS: ['Të gjitha', 'Beograd', 'Vojvodina', 'Serbi Juglindore', 'Serbia Qendrore dhe Perendimore'],
 
-    REGION_TYPES: ['Të gjitha', 'Rural', 'Urban'],
+    REGION_TYPES: ['Të gjitha', 'Rural', 'Urban', 'Suburban'],
+
+    REGION_TYPES_KS: ['Të gjitha', 'Rural', 'Urban'],
 
     KOSOVO_NATIONALITIES: ['Të gjitha', 'Ashkali', 'Boshnjak', 'Egjiptian', 'Malazez', 'Rom', 'Serb', 'Shqiptar', 'Turk', 'Tjeter'],
 
@@ -130,6 +133,7 @@ const albanianDict = {
 };
 
 const serbianDict = {
+    NO_ANSWERS: 'Nema podataka za ove filtere',
     YEARS: ['Sve', '2022', '2021'],
     DOWNLOAD: 'Preuzimanje',
 
@@ -193,7 +197,9 @@ const serbianDict = {
         'Vlora'
     ],
 
-    REGION_TYPES: ['Sve', 'Rural', 'Urban'],
+    REGION_TYPES: ['Sve', 'Rural', 'Urban', 'Suburban'],
+
+    REGION_TYPES_KS: ['Sve', 'Rural', 'Urban'],
 
     KOSOVO_NATIONALITIES: ['Sve', 'Albanska', 'Srbin', 'Crnogorci', 'Egipcani', 'Askalije', 'Turski', 'Bosnjaci', 'Roma', 'Drugo'],
 
@@ -260,6 +266,7 @@ const serbianDict = {
 };
 
 const englishDict = {
+    NO_ANSWERS: 'No data for these filters',
     YEARS: ['All', '2022', '2021'],
     DOWNLOAD: 'Download',
 
@@ -303,7 +310,9 @@ const englishDict = {
 
     SERBIA_REGIONS: ['All', 'Beograd', 'Vojvodina', 'Southeast Serbia', 'Central and Western Serbia'],
 
-    REGION_TYPES: ['All', 'Rural', 'Urban'],
+    REGION_TYPES: ['All', 'Rural', 'Urban', 'Suburban'],
+
+    REGION_TYPES_KS: ['All', 'Rural', 'Urban'],
 
     KOSOVO_NATIONALITIES: ['All', 'Serb', 'Albanian', 'Montenegrin', 'Egyptian', 'Ashkali', 'Turkish', 'Bosniak', 'Roma', 'Other'],
 
