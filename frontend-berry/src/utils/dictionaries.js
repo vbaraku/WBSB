@@ -78,22 +78,17 @@ const albanianDict = {
 
     ABOUT_WBSB_DESC1:
         'Barometri i Sigurisë i Ballkanit Perëndimor (BSBP) është një nismë e re rajonale e inicuar nga QKSS në vitin 2020 si pasardhëse e programit të QKSS Barometri i Sigurisë së Kosovës i implementuar në Kosovë për tetë vite me radhë.',
-
     ABOUT_WBSB_DESC2:
         'BSBP shërben si një instrument për të matur perceptimet e qytetarëve të Shqipërisë, Kosovës dhe Serbisë për çështje të ndryshme të lidhura me sigurinë, sundimin e ligjit, drejtësinë, bashkëpunimin rajonal dhe ndërtimin e paqes. Për më tepër, BSBP identifikon kërcënimet dhe sfidat e ndryshme ekzistuese dhe ato me potencial rritjeje siç perceptohen nga qytetarët e të tre vendeve.',
-
     ABOUT_WBSB_DESC3:
         'Qëllimi i përgjithshëm i projektit është të përdorë matjen e opinionit publik si një instrument të besueshëm të kërkimit të llogaridhënies dhe avokimit, dhe të ndikojë pozitivisht në trajektoren e zhvillimeve kyçe lokale dhe rajonale të sigurisë, politikës të jashtme dhe zbatimit të ligjit në vendet e Ballkanit Perëndimor.',
-
     ABOUT_WBSB_DESC4:
         'Për më tepër, projekti synon të lehtësojë dhe promovojë bashkëpunimin rajonal dhe afrimin e shoqërive të Ballkanit Perëndimor duke ekspozuar, trajtuar dhe luftuar stereotipet ndërkulturore përmes sigurimit dhe ofrimit të të dhënave konkrete të matshme dhe të besueshme në temat përkatëse.',
-
     PARTNERS: 'Partnerët',
     PARTNER0: 'Qendra Kosovare për Studime të Sigurisë (QKSS)',
 
     PARTNER0_DESC:
-        'Qendra Kosovare për Studime të Sigurisë është një qendër e pavarur hulumtuese e politikave e themeluar në prill 2008 me seli në Prishtinë, Kosovë. QKSS i është përkushtuar zhvillimit dhe reformave të sektorit të sigurisë në Kosovë dhe në Ballkanin Perëndimor. Ajo promovon në mënyrë proaktive parimin e qeverisjes së mirë, integritetit dhe qëndrueshmërisë.',
-
+        'Qendra Kosovare për Studime të Sigurisë është një qendër e pavarur hulumtuese e politikave e themeluar në prill 2008 me seli në Prishtinë, Kosovë. QKSS i është përkushtuar zhvillimit dhe reformave të sektorit të sigurisë në Kosovë dhe në Ballkanin Perëndimor. Ajo promovon në mënyrë proaktive parimin e qeverisjes së mirë, integritetit dhe qëndrueshmërisë. QKSS është udhëheqëse e programit të BSBP nga viti 2020.',
     PARTNER1: 'Qendra e Beogradit për Politikat e Sigurisë (BCSP)',
 
     PARTNER1_DESC:
@@ -119,16 +114,15 @@ const albanianDict = {
     METHODOLOGY: 'Metodologjia',
 
     METHODOLOGY_DESC1:
-        'Te dhenat e Barometrit te Sigurise te Ballkanit Perendimor jane marrur permes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën. Hulumtimi në terren u krye në periudhën 17-25 shtator 2021.',
-
+        'Te dhenat e Barometrit te Sigurise te Ballkanit Perendimor jane marë permes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën, Shqipërinë dhe Serbinë. Hulumtimi në terren u krye në pjesën e dytë të Shtatorit, 2022.',
     METHODOLOGY_DESC2:
-        'Pyetësori i anketës përbëhej kryesisht nga pyetje të mbyllura në formë të shkallës Likert me pesë pikë, të pasuara nga disa pyetje të hapura pa opsione të paracaktuara. Mostra kombëtare për anketën përfshinte 1,197 amvisëri në Kosovë, 1132 në Shqipëri dhe 1000 në Serbi.',
+        'Pyetësori i anketës përbëhej kryesisht nga pyetje të mbyllura në formë të shkallës Likert me pesë pikë, të pasuara nga disa pyetje të hapura pa opsione të paracaktuara. Mostra kombëtare për anketën përfshinte 1134 amvisëri në Kosovë, 1124 në Shqipëri dhe 1020 në Serbi.',
     METHODOLOGY_DESC3:
-        'Faza e parë e tërheqjes së mostrës u bazua në njësitë administrative të drejtorive rajonale të Policisë së Kosovës, duke përfshirë tetë rajonet: Ferizaj, Gjakovë, Gjilan, Mitrovicë të Jugut, Mitrovicë të Veriut, Pejë, Prishtinë dhe Prizren.',
-
+        'Faza e pare e tërheqjes së mostrës u bazua në njësitë administrative/rajonale të secilit shtet. Numri I anketave të bëra në secilën njësi administrative është marrë duke u bazuar në regjistrimet e popullsisë të shtetit apo në të dhënat e Komisionit të Zgjedhjeve.',
     METHODOLOGY_DESC4:
-        'Numri i anketimeve të kryera në secilin rajon u përcaktua në përpjesëtim me numrin e popullsisë për secilën komunë brenda rajoneve përkatëse bazuar në regjistrimin e popullsisë në Kosovë të vitit 2011. Brenda komunave, mostra u shtresua në mostër urbane / rurale bazuar në numrin e amvisërive në secilën zonë. Për përzgjedhjen e amvisërive brenda lokaliteteve të mostruara u përdorën modele të rastësishme, ndërsa rastësia brenda amvisërive u bazua në metodën e ditëlindjes radhës së të rriturve.',
-
+        'Në komuna, mostra është ndarë në mostër urbane/suburbane/rurale të bazuar në numrin e amviserive në secilën zone, ndërsa rastësia për brenda amviserive është caktuar me metodën e ditëlindjes më të afërt të personave të rritur.',
+    METHODOLOGY_DESC5:
+        'Të dhënat janë verifikuar në kohë reale nga koordinatorët e terrenit, që shikuan një mostër të paracaktuar të amvisërive, pas përfundimit të anketave në ato shtëpi, përmes kontaktimit me telefon me respodentët për të konfirmuar zbatimin e metodologjisë dhe disa nga përgjigjet kyçe, dhe duke analizuar konsistencën logjike të përgjigjeve për gjatë analizimit të të dhënave. Marzhi i gabimit është 3 për qind, ndërsa intervali i besueshmërisë 95 për qind.',
     DONOR: 'Donatori',
 
     DONATOR:
@@ -215,21 +209,17 @@ const serbianDict = {
 
     ABOUT_WBSB_DESC1:
         'Barometar bezbednosti na Zapadnom Balkanu (BBZB) je nova regionalna inicijativa koju je KCBS pokrenuo 2020 godine, kao naslednik programa Barometar bezbednosti na Kosovu KCBS koji se sprovodio na Kosovu osam godina zaredom.',
-
     ABOUT_WBSB_DESC3:
         'BBZB služi kao instrument za ocenu percepcije javnosti u Albaniji, na Kosovu i u Srbiji. Projekat se fokusira na širok spektar pitanja bezbednosti, vladavine prava, pravde, regionalne saradnje i izgradnje mira i utvrđivanja različitih postojećih i novih pretnji i izazova koje vide građani tri zemlje.',
-
     ABOUT_WBSB_DESC4:
         'Štaviše, projekat ima za cilj da olakša regionalnu saradnju i približavanje društava Zapadnog Balkana otkrivanjem, bavljenjem i borbom protiv interkulturalnih stereotipa pružanjem konkretnih ocenjivih i verodostojnih podataka o relevantnim temama.',
-
     ABOUT_WBSB_DESC2: '',
 
     PARTNERS: 'Partneri',
     PARTNER0: 'Kosovski Centar za Bezbednosne Studije (KCBS)',
 
     PARTNER0_DESC:
-        'Kosovski centar za bezbednosne studije je nezavisni centar za istraživanje politike osnovan u aprilu 2008. godine, sa sedištem u Prištini, Kosovo. KCBS je posvećen razvoju i reformi sektora bezbednosti na Kosovu i Zapadnom Balkanu. Proaktivno promoviše načelo dobrog upravljanja, integriteta i otpornosti.',
-
+        'Kosovski centar za bezbednosne studije je nezavisni centar za istraživanje politike osnovan u Aprilu 2008. godine, sa sedištem u Prištini, Kosovo. KCBS je posvećen razvoju i reformi sektora bezbednosti na Kosovu i Zapadnom Balkanu. Proaktivno promoviše načelo dobrog upravljanja, integriteta i otpornosti  . KCBS je lider programa BBZB od 2020.',
     PARTNER1: 'Beogradski centar za bezbednosnu politiku (BCBP)',
 
     PARTNER1_DESC:
@@ -254,17 +244,15 @@ const serbianDict = {
     METHODOLOGY: 'Metodologija',
 
     METHODOLOGY_DESC1:
-        'Istraživanje Barometra bezbednosti na Zapadnom Balkanu (BBZB) sprovedeno je kroz razgovor licem u lice sa nasumično izabranim ispitanicima širom Kosova, Albanije i Srbije. Terensko istraživanje je sprovedeno u drugoj polovini septembra 2021. godine.',
-
+        'Istraživanje Barometra bezbednosti na Zapadnom Balkanu (BBZB) sprovedeno je kroz razgovor licem u lice sa nasumično izabranim ispitanicima širom Kosova, Albanije i Srbije. Terensko istraživanje je sprovedeno u drugoj polovini Septembra 2022. godine.',
     METHODOLOGY_DESC2:
-        'Upitnik za anketu se prvenstveno sastojao od zatvorenih pitanja u vidu Likertove skale od pet tačaka, a zatim od nekoliko otvorenih pitanja bez unapred definisanih opcija. Nacionalni uzorak za istraživanje uključivao je 1197 domaćinstava na Kosovu, 1132 u Albaniji i 1000 u Srbiji.',
-
+        'Upitnik za anketu se prvenstveno sastojao od zatvorenih pitanja u vidu Likertove skale od pet tačaka, a zatim od nekoliko otvorenih pitanja bez unapred definisanih opcija. Nacionalni uzorak za istraživanje uključivao je 1134 domaćinstava na Kosovu, 1124 u Albaniji i 1020 u Srbiji.',
     METHODOLOGY_DESC3:
         'Prva faza izvlačenja uzorka bila je zasnovana na administrativnim / regionalnim podelama svake zemlje. Broj anketa sprovedenih u svakoj administrativnoj / regionalnoj oblasti izvučen je srazmerno broju stanovništva za svaku opštinu u okviru odgovarajuće oblasti na osnovu popisa stanovništva ili podataka Izborne komisije.',
-
     METHODOLOGY_DESC4:
-        'Unutar opština, uzorak je stratifikovan na urban / ruralan uzorak na osnovu broja domaćinstava u svakoj sredini. Za izabir domaćinstava unutar uzorkovanih lokacija korišćeni su slučajni obrasci, dok je randomizacija unutar domaćinstava zasnovana na metodi sledećeg rođendana odrasle osobe. Podaci su verifikovani u realnom vremenu preko terenskih koordinatora koji su obišli unapred definisani uzorak domaćinstava nakon završetka ankete u odgovarajućim domaćinstvima, putem telefonskog kontakta sa svim ispitanicima radi potvrde pridržavanja metodologije i nekih od ključnih odgovora i analizom logičke doslednost odgovora pri obradi i analizi podataka. Margina greške iznosi 3 procenta sa intervalom poverenja od 95 procenata.',
-
+        'Unutar opština, uzorak je stratifikovan na urban/suburban/ruralan uzorak na osnovu broja domaćinstava u svakoj sredini. Za izabir domaćinstava unutar uzorkovanih lokacija korišćeni su slučajni obrasci, dok je randomizacija unutar domaćinstava zasnovana na metodi sledećeg rođendana odrasle osobe.',
+    METHODOLOGY_DESC5:
+        'Podaci su verifikovani u realnom vremenu preko terenskih koordinatora koji su obišli unapred definisani uzorak domaćinstava nakon završetka ankete u odgovarajućim domaćinstvima, putem telefonskog kontakta sa svim ispitanicima radi potvrde pridržavanja metodologije i nekih od ključnih odgovora i analizom logičke doslednost odgovora pri obradi i analizi podataka. Margina greške iznosi 3 procenta sa intervalom poverenja od 95 procenata.',
     DONOR: 'Donator',
 
     DONATOR:
@@ -351,22 +339,17 @@ const englishDict = {
 
     ABOUT_WBSB_DESC1:
         'The Western Balkans Security Barometer (WBSB) is a new regional initiative launched by KCSS in 2020, as a successor of KCSS’s program Kosovo Security Barometer implemented in Kosovo for eight consecutive years.',
-
     ABOUT_WBSB_DESC2:
         'WBSB serves as an instrument to measure public perceptions in Albania, Kosovo and Serbia. The project focuses on a wide range of security, rule of law, justice, regional cooperation and peacebuilding issues and identifies various existing and emerging threats and challenges as perceived by the citizens of the three countries.',
-
     ABOUT_WBSB_DESC3:
         'The overall goal of the project is to utilize the public perception measurement into a credible accountability seeking and advocacy instrument, capable of positively influencing the trajectory of the key domestic and regional security, foreign policy and rule of law developments in the Western Balkans countries.',
-
     ABOUT_WBSB_DESC4:
         'Furthermore, the project aims to facilitate the regional cooperation and the rapprochement of WB societies by exposing, addressing, and combating inter-cultural stereotypes by providing concrete measurable and credible data in relevant topics.',
-
     PARTNERS: 'Partners',
     PARTNER0: 'Kosovar Centre for Security Studies (KCSS)',
 
     PARTNER0_DESC:
-        'Kosovar Centre for Security Studies is an independent policy research centre founded in April 2008 based in Prishtina, Kosovo. KCSS is dedicated to security sector development and reform in Kosovo and Western Balkans. It proactively promotes principle of good governance, integrity and resilience.',
-
+        'Kosovar Centre for Security Studies is an independent policy research centre founded in April 2008 based in Prishtina, Kosovo. KCSS is dedicated to security sector development and reform in Kosovo and Western Balkans. It proactively promotes principle of good governance, integrity and resilience. KCSS leads the WBSB program since 2020.',
     PARTNER1: 'Belgrade Centre for Security Policy (BCSP)',
 
     PARTNER1_DESC:
@@ -392,17 +375,15 @@ const englishDict = {
     METHODOLOGY: 'Methodology',
 
     METHODOLOGY_DESC1:
-        'The Western Balkans Security Barometer (WBSB) survey was conducted through face-to-face interviews with randomly selected respondents throughout Kosovo, Albania and Serbia. The field research was conducted in the second part of September 2021.',
-
+        'The Western Balkans Security Barometer (WBSB) survey was conducted through face-to-face interviews with randomly selected respondents throughout Kosovo, Albania, and Serbia. The field research was conducted in the second part of September 2022.',
     METHODOLOGY_DESC2:
-        'The questionnaire for the survey primarily consisted of closed-ended questions in the form of five-point Likert Scale, followed by several open-ended questions without predefined options. The national sample for the survey featured 1197 households in Kosovo, 1132 in Albania and 1000 in Serbia.',
-
+        'The questionnaire for the survey primarily consisted of closed-ended questions in the form of five-point Likert Scale, followed by several open-ended questions without predefined options. The national sample for the survey featured 1134 households in Kosovo, 1124 in Albania and 1020 in Serbia.',
     METHODOLOGY_DESC3:
-        'The first stage of drawing the sample was based in the administrative / regional divisions of each country.  The number of surveys conducted in each administrative / regional area was drawn in proportion to the number of populations for each municipality within the respective areas based on the population censuses or Election Commission data.',
-
+        'The first stage of drawing the sample was based in the administrative / regional divisions of each country. The number of surveys conducted in each administrative / regional area was drawn in proportion to the number of populations for each municipality within the respective areas based on the population censuses or Election Commission data.',
     METHODOLOGY_DESC4:
-        'Within the municipalities, the sample was stratified into urban / rural sample based on the number of households in each area. Random patterns were used to select the households within the sampled locations, while the randomization within the households was based on the next adult birthday method. The data were verified in real time through field coordinators that visited a predefined sample of households after the completion of the survey in the respective households, through telephone contact with all respondents to confirm the adherence to the methodology and some of the key answers and by analyzing the logical consistency of the answers when processing and analyzing the data. The margin of error is 3 percent with a confidence interval of 95 percent.',
-
+        'Within the municipalities, the sample was stratified into urban/suburban/rural sample based on the number of households in each area. Random patterns were used to select the households within the sampled locations, while the randomization within the households was based on the next adult birthday method.',
+    METHODOLOGY_DESC5:
+        'The data were verified in real time through field coordinators that visited a predefined sample of households after the completion of the survey in the respective households, through telephone contact with all respondents to confirm the adherence to the methodology and some of the key answers and by analyzing the logical consistency of the answers when processing and analyzing the data. The margin of error is 3 percent with a confidence interval of 95 percent.',
     DONOR: 'Donor',
 
     DONATOR:
