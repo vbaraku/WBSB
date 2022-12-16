@@ -85,6 +85,8 @@ public class AnswerController {
             while ((line = reader.readLine()) != null) {
                 row = Arrays.asList(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"));
                 Respondent respondent;
+                if(row.size() < 6)
+                    System.out.println(row);
                 try {
                     respondent = new Respondent(
                             row.get(0),
@@ -98,6 +100,7 @@ public class AnswerController {
                             language
                     );
                 } catch (Exception e) {
+                    e.printStackTrace();
                     return ResponseEntity.status(400).body("Respondent data is not valid");
                 }
 
@@ -145,10 +148,11 @@ public class AnswerController {
         Map<String, Integer> stringCount = new HashMap<>();
         List<String> duplicates = new ArrayList<>();
         for (String element : list) {
-            if (stringCount.containsKey(element)) {
-                duplicates.add(element);
-            }else{
+            if (stringCount.get(element) == null) {
                 stringCount.put(element, 1);
+            }else{
+                duplicates.add(element);
+
             }
         }
         return duplicates;
@@ -193,13 +197,10 @@ public class AnswerController {
 //        List<QuestionMeta> questionMetas = questions.stream().map(q -> new QuestionMeta(country,year,language, q)).collect(Collectors.toList());
         List<QuestionMeta> questionMetas = new ArrayList<>();
         for (int i = 0; i < questions.size(); i++) {
-            QuestionMeta questionMeta = new QuestionMeta(country,year,language, questions.get(i),i);
+            QuestionMeta questionMeta = new QuestionMeta(country,year, questions.get(i),i);
             questionMetas.add(questionMeta);
         }
 
-        if(country.equals("Kosovo") && language.equals("ENG")){
-            return questions;
-        }
         questionMetaRepository.saveAll(questionMetas);
         questionRepository.flush();
         return questions;
@@ -232,6 +233,8 @@ public class AnswerController {
         }
         return questions;
     }
+
+
     private List<Question> matchByLanguage(List<Question> questions, String language, String country, int year){
         // 2. If dataset is new, insert all questions, but don't insert duplicates
         List<Question> questionsByLanguage = questionRepository.findAllByLanguage(language);
@@ -254,19 +257,19 @@ public class AnswerController {
 
                 Question q = storedQuestionsMap.get(element);
                 if(!q.getId().equals(questions.get(i).getId())){
-                    System.out.println("ID mismatch");
+       /*             System.out.println("ID mismatch");
                     System.out.println(q.getId());
-                    System.out.println(questions.get(i).getId());
+                    System.out.println(questions.get(i).getId());*/
                 }
                 newQuestions.add(q);
                 inElse++;
             }
         }
-        System.out.println("Unique questions: " + inIf);
-        System.out.println("Repeated questions: " + inElse);
-        System.out.println("Total questions before saveall: " + questionRepository.findAll().size());
+//        System.out.println("Unique questions: " + inIf);
+//        System.out.println("Repeated questions: " + inElse);
+//        System.out.println("Total questions before saveall: " + questionRepository.findAll().size());
         List<Question> questions1 = questionRepository.saveAll(newQuestions);
-        System.out.println("Total questions after saveall: " + questionRepository.findAll().size());
+//        System.out.println("Total questions after saveall: " + questionRepository.findAll().size());
 
         questionRepository.flush();
         return questions1;

@@ -36,56 +36,97 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         age: dict.ALL
     });
 
-    const [filterOptions, setFilterOptions] = useState({
-        years: [],
-        regions: [],
-        regionTypes: [],
-        nationalities: [],
-        genders: [],
-        ages: ['18-25', '26-35', '36-45', '46-55', '56-65', '65+', dict.ALL] || []
-    });
+    function getFilters() {
+        if (!dict) return {};
+        if (country === 'Kosovo') {
+            const filters = {
+                years: dict.YEARS,
+                regions: dict.KOSOVO_REGIONS,
+                regionTypes: dict.REGION_TYPES,
+                nationalities: dict.KOSOVO_NATIONALITIES,
+                genders: dict.GENDERS,
+                ages: [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+']
+            };
+            console.log(filters);
+            return {
+                years: dict.YEARS,
+                regions: dict.KOSOVO_REGIONS,
+                regionTypes: dict.REGION_TYPES,
+                nationalities: dict.KOSOVO_NATIONALITIES,
+                genders: dict.GENDERS,
+                ages: [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+']
+            };
+        }
+        if (country === 'Albania') {
+            return {
+                years: dict.YEARS,
+                regions: dict.ALBANIA_REGIONS,
+                regionTypes: dict.REGION_TYPES,
+                nationalities: dict.ALBANIA_NATIONALITIES,
+                genders: dict.GENDERS,
+                ages: [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+']
+            };
+        }
+        const filters = {
+            years: dict.YEARS,
+            regions: dict.SERBIA_REGIONS,
+            regionTypes: dict.REGION_TYPES,
+            nationalities: dict.SERBIA_NATIONALITIES,
+            genders: dict.GENDERS,
+            ages: [dict.ALL, '18-25', '26-35', '36-45', '46-55', '56-65', '65+']
+        };
+        console.log('filters', filters);
+        return filters;
+    }
+
+    const [filterOptions, setFilterOptions] = useState(getFilters());
+
+    useEffect(() => {
+        setFilterOptions(getFilters());
+    }, [dict, country]);
 
     useEffect(() => {
         if (!selectedQuestion?.id) return;
-        axios
-            .get('/api/answer/filters', {
-                params: {
-                    country,
-                    language: selectedLanguage,
-                    questionId: selectedQuestion.id
-                }
-            })
-            .then((response) => {
-                const dict = updateLanguage();
-                const ages = filterOptions.ages;
-                ages.pop();
-                ages.push(dict.ALL);
-                setFilterOptions({
-                    ...filterOptions,
-                    years: response.data.years.concat(dict.ALL),
-                    regions: response.data.regions.concat(dict.ALL),
-                    regionTypes: response.data.regionTypes.concat(dict.ALL),
-                    nationalities: response.data.nationalities.concat(dict.ALL),
-                    genders: response.data.genders.concat(dict.ALL),
-                    ages
-                });
-                setFilters({
-                    year: dict.ALL,
-                    region: dict.ALL,
-                    regionType: dict.ALL,
-                    nationality: dict.ALL,
-                    gender: dict.ALL,
-                    age: dict.ALL
-                });
-                if (!filtersLoaded) setFiltersLoaded(true);
-                // setAnswers(response.data);
-            });
+        // axios
+        //     .get('/api/answer/filters', {
+        //         params: {
+        //             country,
+        //             language: selectedLanguage,
+        //             questionId: selectedQuestion.id
+        //         }
+        //     })
+        //     .then((response) => {
+        //         console.log('here');
+        //         console.log(response.data);
+        //     });
+        const dict = updateLanguage();
+        const ages = filterOptions.ages;
+        ages.pop();
+        ages.push(dict.ALL);
+        // setFilterOptions({
+        //     ...filterOptions,
+        //     years: response.data.years.concat(dict.ALL),
+        //     regions: response.data.regions.concat(dict.ALL),
+        //     regionTypes: response.data.regionTypes.concat(dict.ALL),
+        //     nationalities: response.data.nationalities.concat(dict.ALL),
+        //     genders: response.data.genders.concat(dict.ALL),
+        //     ages
+        // });
+        setFilters({
+            year: dict.ALL,
+            region: dict.ALL,
+            regionType: dict.ALL,
+            nationality: dict.ALL,
+            gender: dict.ALL,
+            age: dict.ALL
+        });
+        if (!filtersLoaded) setFiltersLoaded(true);
+        // setAnswers(response.data);
     }, [selectedQuestion, country, selectedLanguage]);
 
     useEffect(() => {
         if (!selectedQuestion?.id) return;
         if (!filtersLoaded) return;
-        console.log('filters', filters);
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
             if (value !== albanianDict.ALL && value !== englishDict.ALL && value !== serbianDict.ALL) {
                 acc[key] = value;

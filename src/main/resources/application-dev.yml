@@ -8,7 +8,7 @@ spring:
       maximum-pool-size: 5
       data-source-properties:
         useUnicode: true
-        characterEncoding: UTF-8
+        characterEncoding: UTF-16
       auto-commit: true
   jpa:
     hibernate:

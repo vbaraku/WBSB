@@ -12,7 +12,6 @@ public class QuestionMeta  {
     private String country;
     private int year;
 
-    private String language;
     private int questionPosition;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,11 +21,10 @@ public class QuestionMeta  {
     })
     private Question question;
 
-    public QuestionMeta(String country, int year, String language, Question question, int questionPosition) {
+    public QuestionMeta(String country, int year, Question question, int questionPosition) {
         this.country = country;
         this.year = year;
         this.question = question;
-        this.language = language;
         this.questionPosition = questionPosition;
     }
 
@@ -58,8 +56,5 @@ public class QuestionMeta  {
         this.question = question;
     }
 
-    public String getLanguage() {
-        return language;
-    }
 
 }

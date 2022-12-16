@@ -39,7 +39,7 @@ const App = () => {
         baseURL = 'http://localhost:8080';
         // baseURL = 'http://ec2-3-224-154-253.compute-1.amazonaws.com:8080/';
     } else {
-        baseURL = 'http://ec2-3-224-154-253.compute-1.amazonaws.com:8080/';
+        baseURL = 'http://ec2-3-70-65-63.eu-central-1.compute.amazonaws.com:8080/';
     }
 
     axios.defaults.baseURL = baseURL;
@@ -71,8 +71,8 @@ const App = () => {
                         <Routes>
                             <Route path="/te-dhenat" element={<Dashboard />} />
 
-                            <Route path="/upload" element={<UploadForm />} />
-                            <Route path="/upload-report" element={<UploadReport />} />
+                            {/* <Route path="/upload" element={<UploadForm />} /> */}
+                            {/* <Route path="/upload-report" element={<UploadReport />} /> */}
                             <Route path="/publikime" element={<Publications />} />
                             <Route path="/" element={<Homepage />} />
                         </Routes>

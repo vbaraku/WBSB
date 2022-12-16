@@ -9,9 +9,9 @@ export default function UploadForm() {
     const [year, setYear] = useState(2021);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
-    const handleSubmit = (event) => {
-        setLoading(true);
-        event.preventDefault();
+    const [queue, setQueue] = useState([]);
+
+    function sendFile(country, language, year, selectedFile) {
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('country', country);
@@ -26,12 +26,35 @@ export default function UploadForm() {
                     console.log(res);
                     setLoading(false);
                     setData(res.data);
+                    if (queue.length > 0) {
+                        const { selectedFile, country, language, year } = queue[0];
+                        sendFile(country, language, year, selectedFile);
+                        setQueue(queue.slice(1));
+                    }
                 });
         } catch (error) {
             console.log(error);
         }
-    };
+    }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (loading) {
+            setQueue([...queue, { selectedFile, country, language, year }]);
+            return;
+        }
+
+        setLoading(true);
+
+        if (queue.length > 0) {
+            const { selectedFile, country, language, year } = queue[0];
+            sendFile(country, language, year, selectedFile);
+            setQueue(queue.slice(1));
+        } else {
+            sendFile(country, language, year, selectedFile);
+        }
+    };
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0]);
     };
@@ -102,9 +125,7 @@ export default function UploadForm() {
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
                 </select>
-                <button type="submit" disabled={loading}>
-                    Submit
-                </button>
+                <button type="submit">Submit</button>
                 {loading && <p>Loading...</p>}
             </form>
             {data.map((el) => (

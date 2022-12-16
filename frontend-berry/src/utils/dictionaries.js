@@ -1,4 +1,6 @@
 const albanianDict = {
+    YEARS: ['Të gjitha', '2022', '2021'],
+
     DOWNLOAD: 'Shkarko',
 
     RIGHTS: '© 2008 - 2022 QKSS | Të gjitha të drejtat e rezervuara',
@@ -21,35 +23,34 @@ const albanianDict = {
 
     EXPLORE: 'Eksploroni të dhënat',
 
-    KOSOVO_REGIONS: ['Të gjitha', 'Gjilan', 'Prishtinë', 'Pejë', 'Prizren', 'Ferizaj', 'Mitrovicë', 'Gjakovë', 'Mitrovica e Veriut'],
-
+    KOSOVO_REGIONS: ['Të gjitha', 'Ferizaj', 'Gjakove', 'Gjilan', 'Mitrovica e Veriut', 'Mitrovice', 'Peje', 'Prishtine', 'Prizren'],
     ALBANIA_REGIONS: [
         'Të gjitha',
         'Berat',
-        'Durrës',
+        'Diber',
+        'Durres',
         'Elbasan',
         'Fier',
-        'Gjirokastër',
-        'Korçë',
-        'Kukës',
-        'Lezhë',
-        'Dibër',
-        'Shkodër',
-        'Tiranë',
-        'Vlorë'
+        'Gjirokaster',
+        'Korce',
+        'Kukes',
+        'Lezhe',
+        'Shkoder',
+        'Tirane',
+        'Vlore'
     ],
 
-    SERBIA_REGIONS: ['Të gjitha', 'Beograd', 'Vojvodina', 'Serbi juglindore', 'Serbia Qendrore dhe Perendimore'],
+    SERBIA_REGIONS: ['Të gjitha', 'Beograd', 'Vojvodina', 'Serbi Juglindore', 'Serbia Qendrore dhe Perendimore'],
 
     REGION_TYPES: ['Të gjitha', 'Rural', 'Urban'],
 
-    KOSOVO_NATIONALITIES: ['Të gjitha', 'Serb', 'Shqiptare', 'Malazez', 'Egjiptian', 'Ashkali', 'Turk', 'Boshnjak', 'Rom', 'Tjetër'],
+    KOSOVO_NATIONALITIES: ['Të gjitha', 'Ashkali', 'Boshnjak', 'Egjiptian', 'Malazez', 'Rom', 'Serb', 'Shqiptar', 'Turk', 'Tjeter'],
 
-    ALBANIA_NATIONALITIES: ['Të gjitha', 'Shqiptare', 'Greke', 'Maqedonase', 'Arumune', 'Tjetër'],
+    ALBANIA_NATIONALITIES: ['Të gjitha', 'Arumune', 'Greke', 'Maqedonase', 'Shqiptare', 'Tjeter'],
 
     SERBIA_NATIONALITIES: ['Të gjitha', 'Serb', 'Slovak', 'Kroat', 'Hungarez', 'Boshnjak', 'Rom', 'Refuzoj te përgjigjem', 'Tjetër'],
 
-    GENDERS: ['Të gjitha', 'Mashkull', 'Femër', 'Tjetër'],
+    GENDERS: ['Të gjitha', 'Femer', 'Mashkull', 'Tjeter'],
 
     YEAR_LABEL: 'Viti',
 
@@ -135,6 +136,7 @@ const albanianDict = {
 };
 
 const serbianDict = {
+    YEARS: ['Sve', '2022', '2021'],
     DOWNLOAD: 'Preuzimanje',
 
     RIGHTS: '© 2008 - 2022 QKSS | Sva prava zadržana',
@@ -176,6 +178,36 @@ const serbianDict = {
     DATA: 'Data',
 
     HOME: 'Podaci',
+
+    SERBIA_REGIONS: ['Sve', 'Beograd', 'Vojvodina', 'Jugoistocna Srbija', 'Centralno zapadna Srbija'],
+
+    KOSOVO_REGIONS: ['Sve', 'Gnjilane', 'Pristina', 'Pec', 'Prizren', 'Urosavec', 'Mitrovica', 'Djakovica', 'Severna Mitrovica'],
+
+    ALBANIA_REGIONS: [
+        'Sve',
+        'Berat',
+        'Durres',
+        'Elbasan',
+        'Fier',
+        'Gjirokaster',
+        'Korca',
+        'Kukes',
+        'Lezha',
+        'Diber',
+        'Shkoder',
+        'Tirana',
+        'Vlora'
+    ],
+
+    REGION_TYPES: ['Sve', 'Rural', 'Urban'],
+
+    KOSOVO_NATIONALITIES: ['Sve', 'Albanska', 'Srbin', 'Crnogorci', 'Egipcani', 'Askalije', 'Turski', 'Bosnjaci', 'Roma', 'Drugo'],
+
+    ALBANIA_NATIONALITIES: ['Sve', 'Albanska', 'Grcki', 'Makedonsi', 'Arumune', 'Drugo'],
+
+    SERBIA_NATIONALITIES: ['Sve', 'Srbin', 'Slovak/inja', 'Hrvat', 'Madjar/ica', 'Bosnjaci', 'Rom/kinja', 'Obdijam da odgovorim', 'Drugo'],
+
+    GENDERS: ['Sve', 'Zenski', 'Mushki', 'Drugo'],
 
     PUBLICATION: 'Publikacije',
 
@@ -240,6 +272,7 @@ const serbianDict = {
 };
 
 const englishDict = {
+    YEARS: ['All', '2022', '2021'],
     DOWNLOAD: 'Download',
 
     RIGHTS: '© 2008 - 2022 QKSS | All rights reserved',

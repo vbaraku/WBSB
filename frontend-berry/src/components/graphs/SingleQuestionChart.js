@@ -4,6 +4,7 @@ import Highcharts, { chart } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
 import axios from 'axios';
+import { InfinitySpin } from 'react-loader-spinner';
 
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
@@ -13,7 +14,8 @@ export default function SingleQuestionChart() {
     const [question, setQuestion] = useState({ text: '' });
     const [answers, setAnswers] = useState([]);
     const selectedGraphType = 'column';
-    console.log(question);
+    console.log(answers);
+
     useEffect(() => {
         axios
             .get('/api/questions/' + Math.floor(Math.random() * 220), {
@@ -159,7 +161,11 @@ export default function SingleQuestionChart() {
     }, [question, answers]);
 
     if (!question.id && !answers.length) {
-        return <div />;
+        return (
+            <div style={{ display: 'flex', 'justify-content': 'center', 'align-items': 'center', height: '350px' }}>
+                <InfinitySpin color="white" />
+            </div>
+        );
     }
     return (
         <div
