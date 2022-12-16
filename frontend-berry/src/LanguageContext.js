@@ -21,7 +21,7 @@ export const useLanguageUpdate = () => {
 };
 
 export default function ThemeProvider({ children }) {
-    const [language, setLanguage] = useState(localStorage.getItem('language') || 'albanian');
+    const [language, setLanguage] = useState(localStorage.getItem('language') || 'ALB');
 
     function getDictionary(language) {
         if (language === 'ALB') {
