@@ -234,6 +234,26 @@ export default function Homepage() {
                             </div>
                         </Col>
                     </Row>
+                    <Row style={{ margin: 'auto', maxWidth: 1240 }}>
+                        <Col
+                            lg={{ span: 5, offset: 0 }}
+                            md={12}
+                            sm={12}
+                            className="banner-text"
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                        >
+                            <div className="hidden methodologyd1">
+                                <Typography variant="body2" style={{ fontSize: '18px' }}>
+                                    {dictionary.METHODOLOGY_DESC5}
+                                </Typography>
+                            </div>
+                        </Col>
+                        <Col className="chip" lg={2}>
+                            <Divider orientation="vertical">
+                                <Chip label={<ArrowLeftIcon />} />
+                            </Divider>
+                        </Col>
+                    </Row>
                 </div>
             </Container>
             <Container id="about-section" fluid className="section" style={{ marginTop: '0px' }}>
