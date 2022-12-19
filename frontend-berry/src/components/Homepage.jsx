@@ -369,7 +369,10 @@ export default function Homepage() {
             </Container>
             <Container fluid style={{ width: '100%', padding: 5 }}>
                 <Divider sx={{ bgcolor: '#044389', borderBottomWidth: '5px', width: '100%' }} />
-                <Typography variant="h5" style={{ marginLeft: 40, marginTop: 10, marginBottom: 10, padding: '5px 0px' }}>
+                <Typography variant="h5" style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, padding: '5px 0px' }}>
+                    <a href="https://qkss.org/">
+                        <img style={{ width: '155px', marginRight: 10 }} src={qkssLogo} alt="QKSS Logo" />
+                    </a>
                     {dictionary.RIGHTS}
                 </Typography>
             </Container>

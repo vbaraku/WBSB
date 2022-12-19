@@ -20,7 +20,7 @@ const albanianDict = {
 
     ALL: 'Të gjitha',
 
-    TITLE: 'Barometri i sigurisë 2022 është ketu!',
+    TITLE: 'Barometri i sigurisë 2022 është këtu!',
 
     EXPLORE: 'Eksploroni të dhënat',
 
@@ -117,11 +117,11 @@ const albanianDict = {
     METHODOLOGY: 'Metodologjia',
 
     METHODOLOGY_DESC1:
-        'Te dhenat e Barometrit te Sigurise te Ballkanit Perendimor jane marë permes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën, Shqipërinë dhe Serbinë. Hulumtimi në terren u krye në pjesën e dytë të Shtatorit, 2022.',
+        'Të dhënat e Barometrit të Sigurisë së Ballkanit Perëndimor jane marrë permes intervistave sy më sy me të anketuar të përzgjedhur rastësisht në mbarë Kosovën, Shqipërinë dhe Serbinë. Hulumtimi në terren u krye në pjesën e dytë të Shtatorit, 2022.',
     METHODOLOGY_DESC2:
         'Pyetësori i anketës përbëhej kryesisht nga pyetje të mbyllura në formë të shkallës Likert me pesë pikë, të pasuara nga disa pyetje të hapura pa opsione të paracaktuara. Mostra kombëtare për anketën përfshinte 1134 amvisëri në Kosovë, 1124 në Shqipëri dhe 1020 në Serbi.',
     METHODOLOGY_DESC3:
-        'Faza e pare e tërheqjes së mostrës u bazua në njësitë administrative/rajonale të secilit shtet. Numri I anketave të bëra në secilën njësi administrative është marrë duke u bazuar në regjistrimet e popullsisë të shtetit apo në të dhënat e Komisionit të Zgjedhjeve.',
+        'Faza e pare e tërheqjes së mostrës u bazua në njësitë administrative/rajonale të secilit shtet. Numri i anketave të bëra në secilën njësi administrative është marrë duke u bazuar në regjistrimet e popullsisë të shtetit apo në të dhënat e Komisionit të Zgjedhjeve.',
     METHODOLOGY_DESC4:
         'Në komuna, mostra është ndarë në mostër urbane/suburbane/rurale të bazuar në numrin e amviserive në secilën zone, ndërsa rastësia për brenda amviserive është caktuar me metodën e ditëlindjes më të afërt të personave të rritur.',
     METHODOLOGY_DESC5:
