@@ -160,7 +160,7 @@ export default function SingleQuestionChart() {
         setChartOptions(getChartOptions());
     }, [question, answers]);
 
-    if (!question.id && !answers.length) {
+    if (!(question.id && answers.length)) {
         return (
             <div style={{ display: 'flex', 'justify-content': 'center', 'align-items': 'center', height: '350px' }}>
                 <InfinitySpin color="white" />
