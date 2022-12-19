@@ -7,8 +7,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Box } from '@mui/material';
 import { Row, Col } from 'react-bootstrap';
+import { useLanguage } from 'LanguageContext';
 
-export default function FilterBar({ dict, filters, setFilters, filterOptions }) {
+export default function FilterBar({ filters, setFilters, filterOptions }) {
     // const years = [dict.ALL, 2021] || [];
     // const regions = dict.ALBANIA_REGIONS || [];
     // const regionTypes = dict.REGION_TYPES || [];
@@ -21,6 +22,8 @@ export default function FilterBar({ dict, filters, setFilters, filterOptions }) 
     //     regionType: regionTypes[0]
     // });
 
+    const languageContext = useLanguage();
+    const dict = languageContext.dictionary;
     const handleChange = (filter, value) => {
         setFilters({ ...filters, [filter]: value });
     };

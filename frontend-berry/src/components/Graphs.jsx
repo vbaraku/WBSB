@@ -9,7 +9,7 @@ import { useLanguage, useLanguageUpdate } from '../LanguageContext';
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
-export default function Graphs({ question, answers, displaySecond }) {
+export default function Graphs({ question, answers, displaySecond, loading }) {
     const { language, dictionary } = useLanguage();
     const [selectedGraphType, setSelectedGraphType] = useState('column');
     // const [graph, setGraph] = useState(null);
@@ -53,15 +53,20 @@ export default function Graphs({ question, answers, displaySecond }) {
     useEffect(() => {
         console.log('question', question);
     }, [question]);
+
+    if (answers?.length < 1 || loading) {
+        return (
+            <div style={{ height: '200px', display: 'flex', 'align-items': 'center' }}>
+                <InfinitySpin color="blue" />
+            </div>
+        );
+    }
     if (answers == null) {
         return (
             <div style={{ height: '200px', display: 'flex', 'align-items': 'center' }}>
                 {dictionary.NO_ANSWERS} <SearchOffIcon style={{ marginLeft: 10 }} fontSize="large" />
             </div>
         );
-    }
-    if (answers.length < 1) {
-        return <InfinitySpin color="blue" />;
     }
 
     return (

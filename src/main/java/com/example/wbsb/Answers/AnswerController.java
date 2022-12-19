@@ -66,7 +66,7 @@ public class AnswerController {
     public ResponseEntity<?> uploadCSV(@RequestPart MultipartFile file, @RequestPart String country, @RequestPart String language, @RequestPart(name = "year") String yearString) {
         int year = Integer.parseInt(yearString);
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "UTF-8"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "ISO-8859-1"));
             String line = reader.readLine();
             List<String> headers = Arrays.asList(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
 
@@ -178,8 +178,6 @@ public class AnswerController {
     }
 
     private List<Question> insertQuestions(List<String> headers, String language, String country, int year) throws IOException {
-        //TODO: Discuss with client about adding filters/demographics (needs developer intervention)
-        //TODO: Inform client to add column between user/answer with category name
         headers = headers.subList(6, headers.size());
 
         List<Question> questions = new ArrayList<>();
@@ -217,11 +215,12 @@ public class AnswerController {
     private List<Question> headerToList(List<String> headers, String language, String country, int year) {
         List<Question> questions = new ArrayList<>();
         String currentCategory = "";
+        int categoryIndex = 1;
         for (int i = 0; i<headers.size(); i++){
             String element = headers.get(i);
             element = element.replaceAll("^\"|\"$", "").trim();
             if (element.contains("Category:")) {
-                currentCategory = element.replace("Category: ", "");
+                currentCategory = element.replace("Category: ", String.format("%02d", categoryIndex++)+"-") ;
                 continue;
             }
             questions.add(new Question(
@@ -280,10 +279,12 @@ public class AnswerController {
         List<Question> questions = new ArrayList<>();
         AtomicInteger count = new AtomicInteger(0);
         String currentCategory = "";
+        int categoryIndex = 1;
         for (String element : headers) {
             element = element.replaceAll("^\"|\"$", "");
+
             if (element.contains("Category:")) {
-                currentCategory = element.replace("Category: ", "");
+                currentCategory = element.replace("Category: ", String.format("%02d", categoryIndex++)+"-");
                 continue;
             }
             Question newQ = new Question(

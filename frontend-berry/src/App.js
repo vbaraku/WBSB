@@ -35,6 +35,7 @@ const App = () => {
     const customization = useSelector((state) => state.customization);
 
     let baseURL = '';
+    const inProduction = process.env.NODE_ENV === 'production';
     if (process.env.NODE_ENV === 'development') {
         baseURL = 'http://localhost:8080';
         // baseURL = 'http://ec2-3-224-154-253.compute-1.amazonaws.com:8080/';
@@ -46,20 +47,6 @@ const App = () => {
     const theme = createTheme({
         typography: {
             fontFamily: 'Campton'
-        },
-        components: {
-            // MuiCssBaseline: {
-            //     styleOverrides: `
-            //         @font-face {
-            //         font-family: 'Publica Sans Light';
-            //         font-style: normal;
-            //         font-display: swap;
-            //         font-weight: 400;
-            //         src: local('Publica Sans Light'), url(${publicaSans}) format('opentype');
-            //         unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
-            //         }
-            //     `
-            // }
         }
     });
     return (
@@ -70,7 +57,7 @@ const App = () => {
                     <Container fluid style={{ height: '100%' }}>
                         <Routes>
                             <Route path="/te-dhenat" element={<Dashboard />} />
-
+                            {inProduction ? <Route path="/upload" element={<UploadForm />} /> : null}
                             {/* <Route path="/upload" element={<UploadForm />} /> */}
                             {/* <Route path="/upload-report" element={<UploadReport />} /> */}
                             <Route path="/publikime" element={<Publications />} />

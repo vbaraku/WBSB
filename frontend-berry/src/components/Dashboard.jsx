@@ -48,11 +48,76 @@ export default function Dashboard() {
         setSelectedQuestion(categoryArray[0]?.questions[0]);
     }
 
+    function mergeCategories(questions) {
+        // The data comes in the form of an array of categories, each category has an array of questions
+        // Some categories have the same name, but start with 3 different first characters. These need to be merged. The first 3 characters dictate the order of the categories
+
+        // First, we need to find the categories that need to be merged
+        console.log(questions);
+        const categoriesToMerge = {};
+        for (let i = 0; i < questions.length; i += 1) {
+            const category = questions[i].category;
+            if (categoriesToMerge[category.substring(3)]) {
+                categoriesToMerge[category.substring(3)].questions.push(questions[i]);
+            } else {
+                categoriesToMerge[category.substring(3)] = {
+                    order: category.substring(0, 3),
+                    questions: [questions[i]]
+                };
+            }
+        }
+
+        // Now we need to merge the arrays in the same key
+
+        Object.keys(categoriesToMerge).forEach((key) => {
+            if (categoriesToMerge[key].length > 1) {
+                const mergedQuestions = [];
+                categoriesToMerge[key].forEach((category) => {
+                    mergedQuestions.push(...category.questions);
+                });
+                categoriesToMerge[key] = {
+                    order: categoriesToMerge[key][0].category.substring(0, 3),
+                    questions: mergedQuestions
+                };
+            }
+        });
+
+        // Sort the categories by the order property
+        const sortedCategories = Object.values(categoriesToMerge).sort((a, b) => {
+            if (a.order < b.order) {
+                return -1;
+            }
+            if (a.order > b.order) {
+                return 1;
+            }
+            return 0;
+        });
+
+        // // Remove the first 3 characters from the category names
+        sortedCategories.forEach((category) => {
+            category.questions.forEach((question) => {
+                question.category = question.category.substring(3);
+            });
+        });
+
+        // Return the data to an array of categories, with each category having an array of questions
+
+        questions = sortedCategories.map((category) => ({
+            category: category.questions[0].category,
+            questions: category.questions[0].questions
+        }));
+
+        console.log(questions);
+
+        return questions;
+    }
+
     useEffect(() => {
         console.log('useEffect');
         axios.get('/api/questions', { params: { country: selectedCountry, language } }).then((response) => {
-            setQuestions(response.data);
-            findQuestionById(response.data, selectedQuestion?.id);
+            const data = mergeCategories(response.data);
+            setQuestions(data);
+            findQuestionById(data, selectedQuestion?.id);
         });
     }, [language, selectedCountry]);
 

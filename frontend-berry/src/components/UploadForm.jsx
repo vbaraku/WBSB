@@ -20,7 +20,8 @@ export default function UploadForm() {
         try {
             axios
                 .post('/api/answer', formData, {
-                    headers: { 'Content-Type': 'multipart/form-data' }
+                    // eslint-disable-next-line prettier/prettier
+                    headers: { 'Content-Type': 'multipart/form-data'}
                 })
                 .then((res) => {
                     console.log(res);

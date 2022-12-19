@@ -7,12 +7,11 @@ spring:
     hikari:
       maximum-pool-size: 5
       data-source-properties:
-        useUnicode: true
-        characterEncoding: UTF-16
+        characterEncoding: ISO-8859-1
       auto-commit: true
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         order_inserts: true

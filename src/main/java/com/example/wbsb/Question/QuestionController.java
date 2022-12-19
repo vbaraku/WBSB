@@ -57,6 +57,10 @@ public class QuestionController {
 				questionDTO.setQuestions(entry.getValue());
 				questionDTOs.add(questionDTO);
 			}
+
+			//sort questions by category (categories have a number in the beginning)
+			questionDTOs.sort(Comparator.comparing(CategoryDTO::getCategory));
+
 			return questionDTOs;
 		} catch (Exception e) {
 			e.printStackTrace();
