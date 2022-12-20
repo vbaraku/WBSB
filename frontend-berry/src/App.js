@@ -40,7 +40,8 @@ const App = () => {
         baseURL = 'http://localhost:8080';
         // baseURL = 'http://ec2-3-224-154-253.compute-1.amazonaws.com:8080/';
     } else {
-        baseURL = 'http://ec2-3-70-65-63.eu-central-1.compute.amazonaws.com:8080/';
+        // baseURL = 'http://ec2-3-70-65-63.eu-central-1.compute.amazonaws.com:8080/';
+        baseURL = '/';
     }
 
     axios.defaults.baseURL = baseURL;
