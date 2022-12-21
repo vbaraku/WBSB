@@ -9,6 +9,7 @@
 @font-face {
     font-family: 'Publica Sans';
     src: local('Publica Sans'), url(../fonts/PublicaSans-Medium.otf) format('opentype');
+    src: local('Publica Sans'), url(../fonts/PublicaSans-Medium.woff) format('woff');
 }
 
 @font-face {
@@ -19,6 +20,7 @@
 @font-face {
     font-family: 'Campton';
     src: local('Campton'), url(../fonts/CamptonLight.otf) format('opentype');
+    src: local('Campton'), url(../fonts/CamptonLight.woff) format('woff');
 }
 
 body {
