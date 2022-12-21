@@ -44,7 +44,7 @@ public class Respondent {
         this.municipality = municipality.trim();
         this.gender = gender.trim();
         try{
-            this.age = Integer.parseInt(age.trim());
+            this.age = Integer.parseInt(age.trim().substring(0,2));
         }catch(NumberFormatException e){
             this.age = 0;
         }

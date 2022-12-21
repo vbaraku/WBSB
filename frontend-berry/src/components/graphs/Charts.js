@@ -173,7 +173,7 @@ export default function Charts({ question, answers, selectedGraphType, displaySe
 
     return (
         <div style={{ width: '90%' }}>
-            <HighchartsReact ref={chartRef} highcharts={Highcharts} options={chartOptions} containerProps={{}} />;
+            <HighchartsReact ref={chartRef} highcharts={Highcharts} options={chartOptions} containerProps={{}} />
         </div>
     );
 }
