@@ -22,21 +22,14 @@ public class QuestionController {
 	public List<CategoryDTO> getAllQuestions(@RequestParam String country, @RequestParam String language) {
 		try {
 			HashMap<String,Question> questionMap = new HashMap<>();
-			questionRepository.findAllByCountryAndLanguage(country, language).forEach(element -> {
+			questionRepository.findAllByLanguage(language).forEach(element -> {
 				questionMap.put(element.getText(), element);
 			});
 
-			HashMap<String,Question> questionMap2 = new HashMap<>();
-			questionRepository.findAllByCountryAndLanguageAndYear(country, language, 2022).forEach(element -> {
-				questionMap2.put(element.getText(), element);
-			});
 			//remove questions with the same text property
 			LinkedList<Question> questions = questionMap.values().stream().collect(Collectors.toCollection(LinkedList::new));
-			LinkedList<Question> questions2 = questionMap2.values().stream().collect(Collectors.toCollection(LinkedList::new));
-
 			LinkedHashMap<String, List<Question>> questionsByCategory = new LinkedHashMap<>();
 			System.out.println(questions.size());
-			System.out.println(questions2.size());
 
 			questions.stream().forEach(question ->
 			{
