@@ -25,7 +25,6 @@ export default function Graphs({ question, answers, displaySecond, loading }) {
     // }, [selectedGraphType]);
 
     // const displayChart = () => {
-    //     console.log('displayChart');
     //     if (selectedGraphType === 'packedbubble') {
     //     }
     //     return <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} />;
@@ -49,10 +48,6 @@ export default function Graphs({ question, answers, displaySecond, loading }) {
             label: 'stacked bar'
         }
     ];
-
-    useEffect(() => {
-        console.log('question', question);
-    }, [question]);
 
     if (answers?.length < 1 || loading) {
         return (

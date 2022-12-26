@@ -19,10 +19,10 @@ public class QuestionController {
 		this.questionRepository = questionRepository;
 	}
 	@GetMapping
-	public List<CategoryDTO> getAllQuestions(@RequestParam String country, @RequestParam String language) {
+	public List<CategoryDTO> getAllQuestions(@RequestParam String language) {
 		try {
 			HashMap<String,Question> questionMap = new HashMap<>();
-			questionRepository.findAllByLanguage(language).forEach(element -> {
+			questionRepository.findAllByLanguageOrderByText(language).forEach(element -> {
 				questionMap.put(element.getText(), element);
 			});
 
@@ -66,4 +66,9 @@ public class QuestionController {
 			List<Question> question = questionRepository.findAllByCountryAndLanguage(country,language);
 			return question.get(id);
 	}
+
+//	@GetMapping(path = "/details")
+//	public List<String> getQuestionById(@RequestParam String id, @RequestParam String language) {
+//		return question;
+//	}
 }

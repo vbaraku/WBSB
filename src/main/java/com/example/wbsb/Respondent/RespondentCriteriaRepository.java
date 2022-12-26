@@ -27,7 +27,6 @@ public class RespondentCriteriaRepository {
         CriteriaQuery<BreakdownQuery> criteriaQuery = cb.createQuery(BreakdownQuery.class);
         Root<Respondent> respondentRoot = criteriaQuery.from(Respondent.class);
 
-
         Join<Respondent, Answer> answers = respondentRoot.join("answers", JoinType.INNER);
 //        Join<Questions, Answers> questions = answers.join("question", JoinType.INNER);
         Predicate predicate = getPredicate(respondentCriteria, respondentRoot, answers);

@@ -36,7 +36,7 @@ export default function SingleQuestionChart() {
                         }
                     })
                     .then((res) => {
-                        setAnswers(res.data);
+                        setAnswers(res.data.breakdown);
                     });
             });
     }, [language]);

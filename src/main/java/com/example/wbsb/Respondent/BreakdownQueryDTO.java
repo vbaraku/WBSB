@@ -4,6 +4,7 @@ public class BreakdownQueryDTO {
     private Float percentage;
     private String category;
 
+
     public BreakdownQueryDTO(Float percentage, String category) {
         this.percentage = percentage;
         this.category = category;

@@ -53,9 +53,6 @@ export default function Homepage() {
         setPartners(updatePartners());
     }, [language]);
     useEffect(() => {
-        setPartners(updatePartners());
-    }, [language]);
-    useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -89,8 +86,6 @@ export default function Homepage() {
                             autoplay={{
                                 delay: 8000
                             }}
-                            onSlideChange={() => console.log('slide change')}
-                            onSwiper={(swiper) => console.log(swiper)}
                         >
                             <SwiperSlide style={{ padding: '15px' }}>
                                 <SingleQuestionChart />

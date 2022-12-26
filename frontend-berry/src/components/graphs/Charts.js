@@ -34,7 +34,6 @@ export default function Charts({ question, answers, selectedGraphType, displaySe
 
     useEffect(() => {
         resizeChart();
-        console.log('resize');
     }, [displaySecond]);
 
     function getChartOptions() {

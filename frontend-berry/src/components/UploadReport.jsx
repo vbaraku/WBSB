@@ -47,10 +47,6 @@ export default function UploadForm() {
         setLanguage(newValue);
     };
 
-    useEffect(() => {
-        console.log(selectedFile);
-    }, [selectedFile]);
-
     return (
         <div className="homepage" style={{ paddingTop: '50px' }}>
             <Card style={{ margin: 'auto', padding: '15px', maxWidth: '600px' }}>

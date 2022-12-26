@@ -16,7 +16,8 @@ import { Audio } from 'react-loader-spinner';
 export default function Dashboard() {
     const { language, dictionary } = useLanguage();
     const { height, width } = useWindowDimensions();
-    const countries = ['Albania', 'Kosovo', 'Serbia'];
+    const [countries, setCountries] = useState(['Albania', 'Kosovo', 'Serbia']);
+    const [countryMask, setCountryMask] = useState([true, true, true]);
     const countriesLabel = [dictionary.ALBANIA, dictionary.KOSOVO, dictionary.SERBIA];
     const [displaySecond, setDisplaySecond] = useState(false);
     const [questions, setQuestions] = useState([]);
@@ -26,6 +27,11 @@ export default function Dashboard() {
 
     // const [selectedLanguage, setSelectedLanguage] = useState('ALB');
 
+    useEffect(() => {
+        if (countryMask[countries.indexOf(selectedCountry)] === false) {
+            setSelectedCountry(countries[countryMask.indexOf(true)]);
+        }
+    }, [countryMask]);
     const ref = useRef(null);
 
     const chartComponent = useRef(null);
@@ -33,17 +39,21 @@ export default function Dashboard() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const drawerWidth = 240;
     function findQuestionById(categoryArray, id) {
-        if (!id) {
-            setSelectedQuestion(categoryArray[0]?.questions[0]);
-            return;
-        }
+        let question = {};
         for (let i = 0; i < categoryArray.length; i += 1) {
             for (let j = 0; j < categoryArray[i].questions.length; j += 1) {
                 if (categoryArray[i].questions[j].id === id) {
-                    setSelectedQuestion(categoryArray[i].questions[j]);
+                    question = categoryArray[i].questions[j];
+                    setSelectedQuestion(question);
+
                     return;
                 }
             }
+        }
+
+        if (!id) {
+            setSelectedQuestion(categoryArray[0]?.questions[0]);
+            return;
         }
         setSelectedQuestion(categoryArray[0]?.questions[0]);
     }
@@ -53,7 +63,6 @@ export default function Dashboard() {
         // Some categories have the same name, but start with 3 different first characters. These need to be merged. The first 3 characters dictate the order of the categories
 
         // First, we need to find the categories that need to be merged
-        console.log(questions);
         const categoriesToMerge = {};
         for (let i = 0; i < questions.length; i += 1) {
             const category = questions[i].category;
@@ -107,23 +116,33 @@ export default function Dashboard() {
             questions: category.questions[0].questions
         }));
 
-        console.log(questions);
+        // for each category in questions, sort the questions by the text property
+
+        questions.forEach((category) => {
+            category.questions.sort((a, b) => {
+                if (a.text < b.text) {
+                    return -1;
+                }
+                if (a.text > b.text) {
+                    return 1;
+                }
+                return 0;
+            });
+        });
 
         return questions;
     }
 
     useEffect(() => {
-        console.log('useEffect');
-        axios.get('/api/questions', { params: { country: selectedCountry, language } }).then((response) => {
+        axios.get('/api/questions', { params: { language } }).then((response) => {
             const data = mergeCategories(response.data);
             setQuestions(data);
             findQuestionById(data, selectedQuestion?.id);
         });
-    }, [language, selectedCountry]);
+    }, [language]);
 
     useEffect(() => {
         document.addEventListener('click', (e) => {
-            console.log(e.target.classList);
             if (!(ref?.current?.contains(e.target) || e.target.classList?.contains('category'))) {
                 setDrawerOpen(false);
             }
@@ -179,16 +198,19 @@ export default function Dashboard() {
                 </Button>
                 <Box className="data-section" style={{ zIndez: 3 }}>
                     <Row className="country-select">
-                        {countries.map((country, index) => (
-                            <Button
-                                variant="contained"
-                                type="button"
-                                className={`btn country-option ${selectedCountry === country ? 'selected-country' : ''}`}
-                                onClick={() => setSelectedCountry(country)}
-                            >
-                                {countriesLabel[index]}
-                            </Button>
-                        ))}
+                        {countries.map(
+                            (country, index) =>
+                                countryMask[index] && (
+                                    <Button
+                                        variant="contained"
+                                        type="button"
+                                        className={`btn country-option ${selectedCountry === country ? 'selected-country' : ''}`}
+                                        onClick={() => setSelectedCountry(country)}
+                                    >
+                                        {countriesLabel[index]}
+                                    </Button>
+                                )
+                        )}
                     </Row>
                     <Row>
                         <Col lg={displaySecond ? 6 : 12} md={12} sm={12}>
@@ -198,6 +220,8 @@ export default function Dashboard() {
                                 selectedQuestion={selectedQuestion}
                                 selectedLanguage={language}
                                 displaySecond={displaySecond}
+                                countryMask={countryMask}
+                                setCountryMask={setCountryMask}
                             />
                         </Col>
                         {displaySecond ? (
@@ -233,8 +257,6 @@ export default function Dashboard() {
                                     type="button"
                                     onClick={() => {
                                         setDisplaySecond(true);
-                                        console.log('v');
-                                        console.log(chartComponent.current);
                                     }}
                                     style={{ borderRadius: '0px 0px 12px 12px', marginLeft: '15px' }}
                                     endIcon={<AddIcon />}

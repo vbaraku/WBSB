@@ -6,12 +6,11 @@ import FilterBar from './FilterBar';
 import { Button, Box, Divider } from '@mui/material';
 import { useLanguage } from '../LanguageContext';
 
-export default function DashboardGraph({ selectedQuestion, country, selectedLanguage, displaySecond }) {
+export default function DashboardGraph({ selectedQuestion, country, selectedLanguage, displaySecond, countryMask, setCountryMask }) {
     const [answers, setAnswers] = useState([]);
     const { dictionary } = useLanguage();
 
     const [loading, setLoading] = useState(true);
-    const [filtersLoaded, setFiltersLoaded] = useState(false);
     const [requestTime, setRequestTime] = useState(0);
 
     const [filters, setFilters] = useState({
@@ -62,24 +61,22 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         setFilterOptions(getFilters());
     }, [dictionary, country]);
 
+    function editCountryMask(data) {
+        const countries = data.countries;
+        const arr = [false, false, false];
+        if (countries.includes('Albania')) {
+            arr[0] = true;
+        }
+        if (countries.includes('Kosovo')) {
+            arr[1] = true;
+        }
+        if (countries.includes('Serbia')) {
+            arr[2] = true;
+        }
+        setCountryMask(arr);
+    }
     useEffect(() => {
         if (!selectedQuestion?.id) return;
-        // const dictionary = updateLanguage();
-        setFilters({
-            year: 2022,
-            region: dictionary.ALL,
-            regionType: dictionary.ALL,
-            nationality: dictionary.ALL,
-            gender: dictionary.ALL,
-            age: dictionary.ALL
-        });
-        if (!filtersLoaded) setFiltersLoaded(true);
-        // setAnswers(response.data);
-    }, [selectedQuestion, country, selectedLanguage]);
-
-    useEffect(() => {
-        if (!selectedQuestion?.id) return;
-        if (!filtersLoaded) return;
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
             if (value !== dictionary.ALL) {
                 acc[key] = value;
@@ -93,14 +90,18 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         setRequestTime(Date.now());
 
         axios.get('/api/answer', { params }).then((response) => {
-            if (response.data.length === 0) {
+            if (response.data.breakdown.length === 0) {
                 setAnswers(null);
+                editCountryMask(response.data);
             } else {
-                setAnswers(response.data);
+                setAnswers(response.data.breakdown);
+                if (setCountryMask) {
+                    editCountryMask(response.data);
+                }
             }
             setLoading(false);
         });
-    }, [filters, country, filtersLoaded]);
+    }, [filters, country, selectedQuestion]);
 
     return (
         <Box

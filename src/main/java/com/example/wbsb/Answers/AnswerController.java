@@ -10,11 +10,8 @@ import java.util.stream.Collectors;
 
 import com.example.wbsb.Audit.Audit;
 import com.example.wbsb.Audit.AuditRepository;
-import com.example.wbsb.Question.QuestionMeta;
-import com.example.wbsb.Question.QuestionMetaRepository;
+import com.example.wbsb.Question.*;
 import com.example.wbsb.Respondent.*;
-import com.example.wbsb.Question.Question;
-import com.example.wbsb.Question.QuestionRepository;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,9 +223,7 @@ public class AnswerController {
             questions.add(new Question(
                     element,
                     currentCategory,
-                    language,
-                    country,
-                    year));
+                    language));
         }
         return questions;
     }
@@ -290,9 +285,7 @@ public class AnswerController {
             Question newQ = new Question(
                     element,
                     currentCategory,
-                    language,
-                    country,
-                    year);
+                    language);
             questions.add(newQ);
         }
 
@@ -305,7 +298,7 @@ public class AnswerController {
     }
 
     @GetMapping
-    public List<BreakdownQueryDTO> getAnswerBreakdown(
+    public ResponseEntity<?> getAnswerBreakdown(
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String regionType,
@@ -318,7 +311,9 @@ public class AnswerController {
     ) {
         try {
             RespondentCriteria criteria = new RespondentCriteria(year, region, regionType, nationality, gender, age, country, language, questionId);
-            return respondentCriteriaRepository.getBreakdown(criteria);
+            List<String> countries = questionRepository.findQuestionByIdAndLang(questionId, language);
+            List<BreakdownQueryDTO> dto =  respondentCriteriaRepository.getBreakdown(criteria);
+            return ResponseEntity.ok().body(new BreakdownResponse(countries, dto));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

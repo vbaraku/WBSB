@@ -99,7 +99,6 @@ const LinkWrapper = ({ to, children }) => {
 const DropdownWrapper = ({ title, to, children }) => {
     const path = useLocation().pathname;
     const [show, setShow] = useState(false);
-    console.log(path, to, path.includes(to));
     const showDropdown = (e) => {
         setShow(true);
     };

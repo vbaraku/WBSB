@@ -26,100 +26,27 @@ export default function ResponsiveDrawer({
 }) {
     const { height, width } = useWindowDimensions();
 
-    const [countryValues] = useState(englishDict.COUNTRIES);
-
-    const languages = ['ALB', 'ENG', 'SRB'];
-    const countries = albanianDict.COUNTRIES;
-
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-    console.log(selectedLanguage);
+    // const handleDrawerToggle = () => {
+    //     setMobileOpen(!mobileOpen);
+    // };
+    // console.log(selectedLanguage);
 
     // const [open, setOpen] = React.useState(false);
-
-    const handleCountryChange = (index) => {
-        setSelectedCountry(countryValues[index]);
-    };
-
-    const handleLanguageChange = (value) => {
-        setSelectedLanguage(value);
-    };
     // const drawer = (
 
     // );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    // const container = window !== undefined ? () => window().document.body : undefined;
 
-    const displayDrawer = () => {
-        if (window.innerWidth > 400) {
-            return 'block';
-        }
-        return 'none';
-    };
+    // const displayDrawer = () => {
+    //     if (window.innerWidth > 400) {
+    //         return 'block';
+    //     }
+    //     return 'none';
+    // };
     return (
         <Box style={{ display: 'flex', flexDirection: 'column' }}>
-            {/* <AppBar
-                // position=""
-                sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` }
-                }}
-                md={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` }
-                }}
-            > */}
-            {/* <Toolbar> */}
-
-            {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {countries.map((page, index) => (
-                            <Button
-                                variant="contained"
-                                size="Large"
-                                key={page}
-                                sx={{
-                                    marginLeft: 1.5,
-                                    color: 'white',
-                                    backgroundColor: selectedCountry === countryValues[index] ? '#2E7193' : '',
-                                    '&.MuiButtonBase-root:hover': {
-                                        bgcolor: 'transparent'
-                                    }
-                                }}
-                                onClick={() => {
-                                    handleCountryChange(index);
-                                }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
-                    </Box> */}
-            {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {languages.map((language) => (
-                            <Button
-                                variant="contained"
-                                size="Large"
-                                key={language}
-                                sx={{
-                                    marginLeft: 1.5,
-                                    color: 'white',
-                                    backgroundColor: selectedLanguage === language,
-                                    '&.MuiButtonBase-root:hover': {
-                                        bgcolor: 'transparent'
-                                    }
-                                }}
-                                onClick={(e) => {
-                                    handleLanguageChange(language);
-                                }}
-                            >
-                                {language}
-                            </Button>
-                        ))}
-                    </Box> */}
-            {/* </Toolbar> */}
-            {/* </AppBar> */}
-
             <Box
                 component="nav"
                 sx={{ position: '', width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

@@ -17,7 +17,18 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             "order by md.questionPosition")
     List<Question> findAllByCountry(@Param("country") String country);
 
+    @Query("SELECT md.country from Question q " +
+            " join q.metaData md "
+            + "where q.language = :language "
+            + "and q.id = :id ")
+    List<String> findQuestionByIdAndLang(String id, String language);
 
+    @Query("SELECT md.country from Question q " +
+            " join q.metaData md "
+            + "where q.language = :language "
+            + "and q.id = :id "
+            + "and md.year = :year ")
+    List<String> findQuestionByIdAndLangAndYear(String id, String language, int year);
     @Query("SELECT new Question(q.id, q.text, q.category, q.language) from Question q " +
             " join q.metaData md " +
             "where md.country = :country " +
@@ -25,9 +36,16 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             "order by md.questionPosition")
     List<Question> findAllByCountryAndYear(@Param("country") String country, @Param("year") int year);
 
+
     List<Question> findAllByLanguage(String language);
 
+    List<Question> findAllByLanguageOrderByText(String language);
 
+
+    @Query(
+            value = "SELECT distinct md.country FROM Question q " +
+                    "join q.metaData md where q.id = :id")
+    List<String> getCountriesByID(String id);
 
     @Query("SELECT new Question(q.id,  q.text, q.category, q.language) from Question q " +
             "join q.metaData md " +

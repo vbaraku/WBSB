@@ -62,13 +62,21 @@ public class Question {
         this.language = language;
     }
 
-    public Question(String text, String category, String language, String country, int year) {
+    public Question(String text, String category, String language) {
         this.setText(text);
         this.category = category;
         this.id = UUID.randomUUID().toString();
 //        this.country = country;
 //        this.id.language = language;
         this.language = language;
+    }
+
+    public Question(String id, String text, String category, String language, Set<QuestionMeta> md){
+        this.id = id;
+        this.text = text;
+        this.category = category;
+        this.language = language;
+        this.metaData = md;
     }
 
     private void setText(String text) {

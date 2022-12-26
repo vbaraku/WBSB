@@ -24,7 +24,6 @@ export default function UploadForm() {
                     headers: { 'Content-Type': 'multipart/form-data'}
                 })
                 .then((res) => {
-                    console.log(res);
                     setLoading(false);
                     setData(res.data);
                     if (queue.length > 0) {
