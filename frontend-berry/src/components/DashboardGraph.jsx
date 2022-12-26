@@ -78,6 +78,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
     useEffect(() => {
         if (!selectedQuestion?.id) return;
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
+            console.log(dictionary.ALL);
             if (value !== dictionary.ALL) {
                 acc[key] = value;
             }
@@ -90,7 +91,7 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         setRequestTime(Date.now());
 
         axios.get('/api/answer', { params }).then((response) => {
-            if (response.data.breakdown.length === 0) {
+            if (response.data?.breakdown?.length === 0) {
                 setAnswers(null);
                 editCountryMask(response.data);
             } else {

@@ -58,67 +58,38 @@ export default function Dashboard() {
         setSelectedQuestion(categoryArray[0]?.questions[0]);
     }
 
-    function mergeCategories(questions) {
+    function mergeCategories(categories) {
         // The data comes in the form of an array of categories, each category has an array of questions
         // Some categories have the same name, but start with 3 different first characters. These need to be merged. The first 3 characters dictate the order of the categories
 
         // First, we need to find the categories that need to be merged
         const categoriesToMerge = {};
-        for (let i = 0; i < questions.length; i += 1) {
-            const category = questions[i].category;
+        console.log(categories);
+        for (let i = 0; i < categories.length; i += 1) {
+            const category = categories[i].category;
             if (categoriesToMerge[category.substring(3)]) {
-                categoriesToMerge[category.substring(3)].questions.push(questions[i]);
+                categoriesToMerge[category.substring(3)].questions = categoriesToMerge[category.substring(3)].questions.concat(
+                    categories[i].questions
+                );
             } else {
-                categoriesToMerge[category.substring(3)] = {
-                    order: category.substring(0, 3),
-                    questions: [questions[i]]
-                };
+                categoriesToMerge[category.substring(3)] = categories[i];
             }
         }
 
-        // Now we need to merge the arrays in the same key
+        console.log(categoriesToMerge);
 
-        Object.keys(categoriesToMerge).forEach((key) => {
-            if (categoriesToMerge[key].length > 1) {
-                const mergedQuestions = [];
-                categoriesToMerge[key].forEach((category) => {
-                    mergedQuestions.push(...category.questions);
-                });
-                categoriesToMerge[key] = {
-                    order: categoriesToMerge[key][0].category.substring(0, 3),
-                    questions: mergedQuestions
-                };
-            }
-        });
-
-        // Sort the categories by the order property
+        // Now we need to sort the categories by the category name
         const sortedCategories = Object.values(categoriesToMerge).sort((a, b) => {
-            if (a.order < b.order) {
+            if (a.category < b.category) {
                 return -1;
             }
-            if (a.order > b.order) {
+            if (a.category > b.category) {
                 return 1;
             }
             return 0;
         });
 
-        // // Remove the first 3 characters from the category names
         sortedCategories.forEach((category) => {
-            category.questions.forEach((question) => {
-                question.category = question.category.substring(3);
-            });
-        });
-
-        // Return the data to an array of categories, with each category having an array of questions
-
-        questions = sortedCategories.map((category) => ({
-            category: category.questions[0].category,
-            questions: category.questions[0].questions
-        }));
-
-        // for each category in questions, sort the questions by the text property
-
-        questions.forEach((category) => {
             category.questions.sort((a, b) => {
                 if (a.text < b.text) {
                     return -1;
@@ -130,7 +101,12 @@ export default function Dashboard() {
             });
         });
 
-        return questions;
+        // remove the first 3 characters from the category name
+        sortedCategories.forEach((category) => {
+            category.category = category.category.substring(3);
+        });
+
+        return sortedCategories;
     }
 
     useEffect(() => {

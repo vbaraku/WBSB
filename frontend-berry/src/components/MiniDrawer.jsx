@@ -81,6 +81,7 @@ export default function ResponsiveDrawer({
 
 const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
     const [open, setOpen] = useState(false);
+    console.log(category);
     return (
         <>
             <ListItemButton

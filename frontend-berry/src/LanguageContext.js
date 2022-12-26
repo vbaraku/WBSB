@@ -43,6 +43,7 @@ export default function ThemeProvider({ children }) {
         const dictionary = getDictionary(language);
         setDictionary(dictionary);
         localStorage.setItem('language', language);
+        window.location.reload();
     }, []);
 
     return (
