@@ -56,6 +56,7 @@ public class PublicationController {
 
             LocalDate localDate = LocalDate.parse(date);
             publicationService.uploadFile(file,title,image, localDate, language);
+            System.out.println("File uploaded successfully");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

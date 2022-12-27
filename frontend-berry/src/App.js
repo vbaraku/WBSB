@@ -59,8 +59,8 @@ const App = () => {
                         <Routes>
                             <Route path="/te-dhenat" element={<Dashboard />} />
                             {inProduction ? <Route path="/upload" element={<UploadForm />} /> : null}
-                            {/* <Route path="/upload" element={<UploadForm />} /> */}
-                            {/* <Route path="/upload-report" element={<UploadReport />} /> */}
+                            {!inProduction && <Route path="/upload" element={<UploadForm />} />}
+                            {!inProduction && <Route path="/upload-report" element={<UploadReport />} />}
                             <Route path="/publikime" element={<Publications />} />
                             <Route path="/" element={<Homepage />} />
                         </Routes>

@@ -43,8 +43,9 @@ export default function UploadForm() {
         setDate(newValue);
     };
 
-    const handleLangChange = (newValue) => {
-        setLanguage(newValue);
+    const handleLangChange = (e) => {
+        console.log(e);
+        setLanguage(e.target.value);
     };
 
     return (
