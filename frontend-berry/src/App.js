@@ -23,16 +23,20 @@ import Footer from 'components/Footer';
 import publicaSans from './assets/fonts/PublicaSans-Light.otf';
 import camptonLight from './assets/fonts/CamptonLight.otf';
 import publicaSansBold from './assets/fonts/PublicaSans-Bold.otf';
+import { useEffect } from 'react';
 
 // import { JWTProvider } from 'contexts/JWTContext';
 // import { Auth0Provider } from 'contexts/Auth0Context';
 
 import createTheme from '@mui/material/styles/createTheme';
 import axios from 'axios';
+import ReactGA from 'react-ga';
 // ==============================|| APP ||============================== //
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
+    const TRACKING_ID = 'UA-253190644-1'; // OUR_TRACKING_ID
+    ReactGA.initialize(TRACKING_ID);
 
     let baseURL = '';
     const inProduction = process.env.NODE_ENV === 'production';
@@ -50,6 +54,11 @@ const App = () => {
             fontFamily: 'Campton'
         }
     });
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    }, []);
+
     return (
         <>
             <LanguageProvider>
