@@ -10,7 +10,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import logo from '../assets/images/logo.png';
 import csdgLogo from '../assets/images/logo-csdg.jpg';
-import bcspLogo from '../assets/images/logo-bcsp-orange.jpg';
+import bcspLogo from '../assets/images/logo-bcsp.png';
 import { useLanguage, useLanguageUpdate } from '../LanguageContext';
 import qkssLogo from '../assets/images/qkss-logo.png';
 import PublicationList from 'PublicationList';
