@@ -12,7 +12,7 @@ import Container from 'react-bootstrap/Container';
 import Homepage from 'components/Homepage';
 import LanguageProvider from './LanguageContext';
 import Publications from 'components/Publications';
-
+import OrderQuestions from 'components/OrderQuestions';
 // import './assets/scss/style.scss';
 import style from './assets/scss/style.scss';
 // routing
@@ -71,6 +71,7 @@ const App = () => {
                             {!inProduction && <Route path="/upload" element={<UploadForm />} />}
                             {!inProduction && <Route path="/upload-report" element={<UploadReport />} />}
                             <Route path="/publikime" element={<Publications />} />
+                            <Route path="/rendit" element={<OrderQuestions />} />
                             <Route path="/" element={<Homepage />} />
                         </Routes>
                     </Container>
