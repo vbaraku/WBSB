@@ -2,16 +2,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Chip, Typography, CardActions, Divider } from '@mui/material';
-import { Container, Col, Row, Card, Button } from 'react-bootstrap';
+import { Chip, Typography, Divider } from '@mui/material';
+import { Container, Col, Row } from 'react-bootstrap';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-// import image from '../assets/images/test.svg';
 
 import logo from '../assets/images/logo.png';
 import csdgLogo from '../assets/images/logo-csdg.jpg';
 import bcspLogo from '../assets/images/logo-bcsp.png';
-import { useLanguage, useLanguageUpdate } from '../LanguageContext';
+import { useLanguage } from '../LanguageContext';
 import qkssLogo from '../assets/images/qkss-logo.png';
 import PublicationList from 'PublicationList';
 import donor from '../assets/images/donor.png';
@@ -293,6 +292,7 @@ export default function Homepage() {
                                 lg={4}
                                 md={6}
                                 sm={12}
+                                key={index}
                                 // style={{ maxWidth: '35%', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
                             >
                                 <div className="img-wrapper">

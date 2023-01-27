@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { Card, CardMedia, CardContent, Typography } from '@mui/material';
 import fileDownload from 'js-file-download';
 import { Link } from 'react-router-dom';
@@ -39,7 +39,6 @@ export default function PublicationList({ listSize, year, setYears }) {
     }
 
     function getPublications() {
-        console.log(year);
         if (year && year !== 0 && year !== '0') {
             return publications.filter((pub) => pub.date.slice(0, 4) === String(year));
         }

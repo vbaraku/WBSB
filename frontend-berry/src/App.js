@@ -1,8 +1,5 @@
-import { useSelector } from 'react-redux';
-
 import { ThemeProvider } from '@mui/material/styles';
-import { Box, CssBaseline, StyledEngineProvider } from '@mui/material';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import UploadForm from './components/UploadForm';
 import UploadReport from './components/UploadReport';
 // import QuestionNav from './components/QuestionNav';
@@ -14,15 +11,11 @@ import LanguageProvider from './LanguageContext';
 import Publications from 'components/Publications';
 import OrderQuestions from 'components/OrderQuestions';
 // import './assets/scss/style.scss';
-import style from './assets/scss/style.scss';
+import './assets/scss/style.scss';
 // routing
 
 // import Box from '@mui/material';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
-import publicaSans from './assets/fonts/PublicaSans-Light.otf';
-import camptonLight from './assets/fonts/CamptonLight.otf';
-import publicaSansBold from './assets/fonts/PublicaSans-Bold.otf';
 import { useEffect } from 'react';
 
 // import { JWTProvider } from 'contexts/JWTContext';
@@ -34,7 +27,6 @@ import ReactGA from 'react-ga';
 // ==============================|| APP ||============================== //
 
 const App = () => {
-    const customization = useSelector((state) => state.customization);
     const TRACKING_ID = 'UA-253190644-1'; // OUR_TRACKING_ID
     ReactGA.initialize(TRACKING_ID);
 
@@ -76,7 +68,6 @@ const App = () => {
                         </Routes>
                     </Container>
                 </ThemeProvider>
-                {/* <Footer /> */}
             </LanguageProvider>
         </>
     );

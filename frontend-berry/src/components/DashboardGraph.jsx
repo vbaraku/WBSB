@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Graphs from './Graphs';
-import MiniDrawer from './MiniDrawer';
 import axios from 'axios';
 import FilterBar from './FilterBar';
-import { Button, Box, Divider } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { useLanguage } from '../LanguageContext';
 
-export default function DashboardGraph({ selectedQuestion, country, selectedLanguage, displaySecond, countryMask, setCountryMask }) {
+export default function DashboardGraph({ selectedQuestion, country, selectedLanguage, displaySecond, setCountryMask }) {
     const [answers, setAnswers] = useState([]);
     const { dictionary } = useLanguage();
 
     const [loading, setLoading] = useState(true);
-    const [requestTime, setRequestTime] = useState(0);
 
     const [filters, setFilters] = useState({
         year: 2022,
@@ -78,7 +76,6 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
     useEffect(() => {
         if (!selectedQuestion?.id) return;
         const params = Object.entries(filters).reduce((acc, [key, value]) => {
-            console.log(dictionary.ALL);
             if (value !== dictionary.ALL) {
                 acc[key] = value;
             }
@@ -88,7 +85,6 @@ export default function DashboardGraph({ selectedQuestion, country, selectedLang
         params.country = country;
         params.language = selectedLanguage;
         setLoading(true);
-        setRequestTime(Date.now());
 
         axios.get('/api/answer', { params }).then((response) => {
             if (response.data?.breakdown?.length === 0) {

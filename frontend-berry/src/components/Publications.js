@@ -1,16 +1,13 @@
 /* eslint-disable jsx-a11y/no-onchange */
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { Card, CardMedia, CardContent, Typography, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import fileDownload from 'js-file-download';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import { FormControl } from '@mui/material';
 import PublicationList from 'PublicationList';
 import { useLanguage } from 'LanguageContext';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export default function Publications() {
     const [year, setYear] = useState(0);
-    const { language, dictionary } = useLanguage();
+    const { dictionary } = useLanguage();
     const [years, setYears] = useState([]);
 
     return (
@@ -21,24 +18,6 @@ export default function Publications() {
                     <div style={{ flex: 1 }} />
 
                     <FormControl>
-                        {/* <InputLabel id="publications-label">{dictionary.YEAR_LABEL}</InputLabel> */}
-                        {/* <Select
-                            value={year}
-                            labelId="publications-label"
-                            id="publication-label-select"
-                            label={dictionary.YEAR_LABEL}
-                            onChange={(e) => {
-                                setYear(e.target.value);
-                            }}
-                            MenuProps={{
-                                disableScrollLock: true
-                            }}
-                        >
-                            <MenuItem value={0}>{dictionary.ALL}</MenuItem>
-
-                            <MenuItem value={2021}>2021</MenuItem>
-                            <MenuItem value={2022}>2022</MenuItem>
-                        </Select> */}
                         <select value={year} className="year-select" onChange={(e) => setYear(e.target.value)}>
                             <option value={0}>{dictionary.ALL} </option>
                             {years.map((year) => (

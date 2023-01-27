@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Button } from 'react-bootstrap';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -9,42 +7,13 @@ import ListItemText from '@mui/material/ListItemText';
 import { ListSubheader } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Collapse from '@mui/material/Collapse';
-import { albanianDict, englishDict, serbianDict } from '../utils/dictionaries';
 import useWindowDimensions from '../utils/useWindowDimensions';
 
 const drawerWidth = 240;
 
-export default function ResponsiveDrawer({
-    categories,
-    selectedQuestion,
-    setSelectedQuestion,
-    selectedCountry,
-    setSelectedCountry,
-    selectedLanguage,
-    setSelectedLanguage,
-    drawerOpen
-}) {
-    const { height, width } = useWindowDimensions();
+export default function ResponsiveDrawer({ categories, selectedQuestion, setSelectedQuestion, drawerOpen }) {
+    const { width } = useWindowDimensions();
 
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    // const handleDrawerToggle = () => {
-    //     setMobileOpen(!mobileOpen);
-    // };
-    // console.log(selectedLanguage);
-
-    // const [open, setOpen] = React.useState(false);
-    // const drawer = (
-
-    // );
-
-    // const container = window !== undefined ? () => window().document.body : undefined;
-
-    // const displayDrawer = () => {
-    //     if (window.innerWidth > 400) {
-    //         return 'block';
-    //     }
-    //     return 'none';
-    // };
     return (
         <Box style={{ display: 'flex', flexDirection: 'column' }}>
             <Box
@@ -81,7 +50,6 @@ export default function ResponsiveDrawer({
 
 const Category = ({ category, setSelectedQuestion, selectedQuestion }) => {
     const [open, setOpen] = useState(false);
-    console.log(category);
     return (
         <>
             <ListItemButton

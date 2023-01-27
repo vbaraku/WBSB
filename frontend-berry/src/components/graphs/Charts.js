@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Highcharts, { chart } from 'highcharts';
+import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
+import { useLanguage } from '../../LanguageContext';
 
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
 export default function Charts({ question, answers, selectedGraphType, displaySecond }) {
-    const { language, dictionary } = useLanguage();
+    const { dictionary } = useLanguage();
 
     const chartRef = React.createRef(null);
 
@@ -172,7 +172,7 @@ export default function Charts({ question, answers, selectedGraphType, displaySe
 
     return (
         <div style={{ width: '90%' }}>
-            <HighchartsReact ref={chartRef} highcharts={Highcharts} options={chartOptions} containerProps={{}} />
+            <HighchartsReact ref={chartRef} highcharts={Highcharts} options={chartOptions} />
         </div>
     );
 }

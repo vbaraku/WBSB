@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-onchange */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function UploadForm() {
@@ -21,7 +21,7 @@ export default function UploadForm() {
             axios
                 .post('/api/answer', formData, {
                     // eslint-disable-next-line prettier/prettier
-                    headers: { 'Content-Type': 'multipart/form-data'}
+                    headers: { 'Content-Type': 'multipart/form-data' }
                 })
                 .then((res) => {
                     setLoading(false);
@@ -57,10 +57,6 @@ export default function UploadForm() {
     };
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0]);
-    };
-
-    const handleYearChange = (event) => {
-        setYear(event.target.value);
     };
 
     useEffect(() => {

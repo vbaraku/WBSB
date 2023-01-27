@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Input, Button, FormControl, InputLabel, Typography, TextField, Card, Divider, Select, MenuItem } from '@mui/material';
-// import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { useState } from 'react';
+import { Input, Button, InputLabel, Typography, Card, Divider, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
-// import dayjs from 'dayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 export default function UploadForm() {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -44,7 +39,6 @@ export default function UploadForm() {
     };
 
     const handleLangChange = (e) => {
-        console.log(e);
         setLanguage(e.target.value);
     };
 

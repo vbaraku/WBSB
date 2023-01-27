@@ -1,8 +1,8 @@
 /* eslint-disable prefer-template */
-import React, { useEffect, useState } from 'react';
-import Highcharts, { chart } from 'highcharts';
+import { useEffect, useState } from 'react';
+import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
+import { useLanguage } from '../../LanguageContext';
 import axios from 'axios';
 import { InfinitySpin } from 'react-loader-spinner';
 
@@ -10,11 +10,10 @@ require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
 export default function SingleQuestionChart() {
-    const { language, dictionary } = useLanguage();
+    const { language } = useLanguage();
     const [question, setQuestion] = useState({ text: '' });
     const [answers, setAnswers] = useState([]);
     const selectedGraphType = 'column';
-    console.log(answers);
 
     useEffect(() => {
         axios
@@ -57,7 +56,6 @@ export default function SingleQuestionChart() {
                 type: selectedGraphType
             },
             series: {
-                // name: 'Answers',
                 data: answers.map((el) => ({
                     name: el.category,
                     y: el.percentage
@@ -162,7 +160,7 @@ export default function SingleQuestionChart() {
 
     if (!(question.id && answers.length)) {
         return (
-            <div style={{ display: 'flex', 'justify-content': 'center', 'align-items': 'center', height: '350px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '350px' }}>
                 <InfinitySpin color="white" />
             </div>
         );

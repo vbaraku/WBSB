@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Highcharts from 'highcharts';
 import Charts from './graphs/Charts';
 import Button from '@mui/material/Button';
 import { InfinitySpin } from 'react-loader-spinner';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
-import { useLanguage, useLanguageUpdate } from '../LanguageContext';
+import { useLanguage } from '../LanguageContext';
 
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 
 export default function Graphs({ question, answers, displaySecond, loading }) {
-    const { language, dictionary } = useLanguage();
+    const { dictionary } = useLanguage();
     const [selectedGraphType, setSelectedGraphType] = useState('column');
     // const [graph, setGraph] = useState(null);
 
@@ -51,14 +51,14 @@ export default function Graphs({ question, answers, displaySecond, loading }) {
 
     if (answers?.length < 1 || loading) {
         return (
-            <div style={{ height: '200px', display: 'flex', 'align-items': 'center' }}>
+            <div style={{ height: '200px', display: 'flex', alignItems: 'center' }}>
                 <InfinitySpin color="blue" />
             </div>
         );
     }
     if (answers == null) {
         return (
-            <div style={{ height: '200px', display: 'flex', 'align-items': 'center' }}>
+            <div style={{ height: '200px', display: 'flex', alignItems: 'center' }}>
                 {dictionary.NO_ANSWERS} <SearchOffIcon style={{ marginLeft: 10 }} fontSize="large" />
             </div>
         );
@@ -90,7 +90,6 @@ export default function Graphs({ question, answers, displaySecond, loading }) {
                 ))}
             </div>
             <Charts question={question} answers={answers} selectedGraphType={selectedGraphType} displaySecond={displaySecond} />
-            {/* {displayChart()} */}
         </div>
     );
 }

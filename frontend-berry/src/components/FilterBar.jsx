@@ -1,27 +1,11 @@
-import React from 'react';
-
-import QuestionNav from './QuestionNav';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { Box } from '@mui/material';
 import { Row, Col } from 'react-bootstrap';
 import { useLanguage } from 'LanguageContext';
 
 export default function FilterBar({ filters, setFilters, filterOptions }) {
-    // const years = [dict.ALL, 2021] || [];
-    // const regions = dict.ALBANIA_REGIONS || [];
-    // const regionTypes = dict.REGION_TYPES || [];
-    // const nationalities = dict.ALBANIA_NATIONALITIES || [];
-    // const genders = dict.GENDERS || [];
-
-    // const [filterOptions, setFilterOptions] = React.useState({
-    //     year: years[0],
-    //     region: regions[0],
-    //     regionType: regionTypes[0]
-    // });
-
     const languageContext = useLanguage();
     const dict = languageContext.dictionary;
     const handleChange = (filter, value) => {

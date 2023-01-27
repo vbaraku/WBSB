@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { albanianDict, serbianDict, englishDict } from 'utils/dictionaries';
 
 const LanguageContext = React.createContext();

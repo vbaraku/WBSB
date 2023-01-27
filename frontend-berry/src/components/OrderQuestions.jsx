@@ -1,21 +1,7 @@
-import { Button, Box, Divider } from '@mui/material';
-import React, { useState, useEffect, useRef } from 'react';
-import { useLanguage } from '../LanguageContext';
-
+import { Button, Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 export default function OrderQuestions() {
-    const { language, dictionary } = useLanguage();
-    // const { height, width } = useWindowDimensions();
-    // const [countries, setCountries] = useState(['Albania', 'Kosovo', 'Serbia']);
-    // const [countryMask, setCountryMask] = useState([true, true, true]);
-    // const countriesLabel = [dictionary.ALBANIA, dictionary.KOSOVO, dictionary.SERBIA];
-    // const [displaySecond, setDisplaySecond] = useState(false);
-    // const [questions, setQuestions] = useState([]);
-    // const [selectedQuestion, setSelectedQuestion] = useState({});
-    // const [selectedCountry, setSelectedCountry] = useState('Kosovo');
-    // const [selectedCountryLabel, setSelectedCountryLabel] = useState(dictionary.KOSOVO);
-
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -45,17 +31,7 @@ export default function OrderQuestions() {
         { id: 3, name: 'Sa i besoni Administrates se Komunes', category: 'Besimi ne institucione', order: 99 }
     ];
 
-    // const [selectedLanguage, setSelectedLanguage] = useState('ALB');
-
     const drawerWidth = 240;
-
-    useEffect(() => {
-        // axios.get('/api/questions', { params: { language } }).then((response) => {
-        //     const data = mergeCategories(response.data);
-        //     setQuestions(data);
-        //     findQuestionById(data, selectedQuestion?.id);
-        // });
-    }, [language]);
 
     return (
         <Box sx={{ display: 'flex' }}>

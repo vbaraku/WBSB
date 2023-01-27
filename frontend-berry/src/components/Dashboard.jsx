@@ -1,5 +1,5 @@
-import { Button, Box, Divider } from '@mui/material';
-import React, { useState, useEffect, useRef } from 'react';
+import { Button, Box } from '@mui/material';
+import { useState, useEffect, useRef } from 'react';
 import DashboardGraph from './DashboardGraph';
 import MiniDrawer from './MiniDrawer';
 import axios from 'axios';
@@ -8,22 +8,18 @@ import AddIcon from '@mui/icons-material/Add';
 import { Row, Col } from 'react-bootstrap';
 import useWindowDimensions from 'utils/useWindowDimensions';
 import MenuIcon from '@mui/icons-material/Menu';
-import { borderRadius, maxWidth } from '@mui/system';
 import { useLanguage } from '../LanguageContext';
-
-import { Audio } from 'react-loader-spinner';
 
 export default function Dashboard() {
     const { language, dictionary } = useLanguage();
-    const { height, width } = useWindowDimensions();
-    const [countries, setCountries] = useState(['Albania', 'Kosovo', 'Serbia']);
+    const { width } = useWindowDimensions();
+    const [countries] = useState(['Albania', 'Kosovo', 'Serbia']);
     const [countryMask, setCountryMask] = useState([true, true, true]);
     const countriesLabel = [dictionary.ALBANIA, dictionary.KOSOVO, dictionary.SERBIA];
     const [displaySecond, setDisplaySecond] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [selectedQuestion, setSelectedQuestion] = useState({});
     const [selectedCountry, setSelectedCountry] = useState('Kosovo');
-    const [selectedCountryLabel, setSelectedCountryLabel] = useState(dictionary.KOSOVO);
 
     // const [selectedLanguage, setSelectedLanguage] = useState('ALB');
 
@@ -64,7 +60,6 @@ export default function Dashboard() {
 
         // First, we need to find the categories that need to be merged
         const categoriesToMerge = {};
-        console.log(categories);
         for (let i = 0; i < categories.length; i += 1) {
             const category = categories[i].category;
             if (categoriesToMerge[category.substring(3)]) {
@@ -75,8 +70,6 @@ export default function Dashboard() {
                 categoriesToMerge[category.substring(3)] = categories[i];
             }
         }
-
-        console.log(categoriesToMerge);
 
         // Now we need to sort the categories by the category name
         const sortedCategories = Object.values(categoriesToMerge).sort((a, b) => {
