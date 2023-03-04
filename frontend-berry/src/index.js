@@ -2,15 +2,12 @@ import ReactDOM from 'react-dom';
 
 // third party
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 // project imports
 import * as serviceWorker from 'serviceWorker';
 import App from 'App';
-import { store, persister } from 'store';
 
 // style + assets
 import 'assets/scss/style.scss';
@@ -19,13 +16,9 @@ import config from 'config';
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(
-    <Provider store={store}>
-        <PersistGate loading={null} persistor={persister}>
-            <BrowserRouter basename={config.basename}>
-                <App />
-            </BrowserRouter>
-        </PersistGate>
-    </Provider>,
+    <BrowserRouter basename={config.basename}>
+        <App />
+    </BrowserRouter>,
     document.getElementById('root')
 );
 

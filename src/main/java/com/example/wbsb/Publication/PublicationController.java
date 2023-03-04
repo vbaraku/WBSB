@@ -7,6 +7,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,11 +25,15 @@ public class PublicationController {
     PublicationRepository publicationRepository;
     PublicationService publicationService;
 
+    private Environment env;
+
+
     @Autowired
     public PublicationController(PublicationRepository publicationRepository,
-                                 PublicationService publicationService) {
+                                 PublicationService publicationService, Environment env) {
         this.publicationRepository = publicationRepository;
         this.publicationService = publicationService;
+        this.env = env;
     }
 
     @GetMapping
@@ -50,7 +56,11 @@ public class PublicationController {
     @PostMapping(consumes = "multipart/form-data")
     @Transactional
     public ResponseEntity<?> uploadReport(@RequestPart MultipartFile file, @RequestPart MultipartFile image,
-                                          @RequestPart String title ,String date, String language) {
+                                          @RequestPart String title ,String date, String language, String passcode) {
+        String realPasscode = env.getProperty("passcode");
+        if(!passcode.equals(realPasscode)){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         try {
             //transform date to LocalDate with format yyyy-MM-dd
 

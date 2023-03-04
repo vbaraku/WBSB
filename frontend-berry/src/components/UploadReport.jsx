@@ -9,6 +9,7 @@ export default function UploadForm() {
     // set default date to today in yyyy-mm-dd format
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
     const [language, setLanguage] = useState();
+    const [passCode, setPassCode] = useState();
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -17,6 +18,7 @@ export default function UploadForm() {
         formData.append('date', date);
         formData.append('language', language);
         formData.append('title', title);
+        formData.append('passcode', passCode);
         try {
             axios.post('/api/publication', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
@@ -72,6 +74,16 @@ export default function UploadForm() {
                         value={title}
                         onChange={(e) => {
                             setTitle(e.target.value);
+                        }}
+                    />
+                    <Typography style={{ fontSize: '22px', fontWeight: '300' }}>Passcode</Typography>
+
+                    <Input
+                        sx={{ width: '300px' }}
+                        name="passCode"
+                        value={passCode}
+                        onChange={(e) => {
+                            setPassCode(e.target.value);
                         }}
                     />
                     <Divider sx={{ margin: 3, width: '580px', marginLeft: -3 }} />
