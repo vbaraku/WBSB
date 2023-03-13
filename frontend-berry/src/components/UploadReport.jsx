@@ -91,13 +91,7 @@ export default function UploadForm() {
                     <input style={{ width: '300px' }} type="date" value={date} onChange={(e) => handleDateChange(e.target.value)} />
                     <Divider sx={{ margin: 3, width: '580px', marginLeft: -3 }} />
                     <InputLabel id="select-language">Language</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={language}
-                        label="Language"
-                        onChange={handleLangChange}
-                    >
+                    <Select labelId="demo-simple-select-label" id="demo-simple-select" value={language} onChange={handleLangChange}>
                         <MenuItem value="ALB">Albanian</MenuItem>
                         <MenuItem value="ENG">English</MenuItem>
                         <MenuItem value="SRB">Serbian</MenuItem>

@@ -20,6 +20,7 @@ export default function OrderQuestions() {
             field: 'order',
             headerName: 'Renditja',
             type: 'number',
+            align: 'left',
             width: 110,
             editable: true
         }
