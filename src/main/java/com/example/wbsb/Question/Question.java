@@ -4,6 +4,7 @@ package com.example.wbsb.Question;
 
 import com.example.wbsb.Answers.Answer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,6 +33,7 @@ public class Question {
     private Set<Answer> answers;
 
 
+
     @Column(length = 5500, unique = true)
     private String text;
 
@@ -39,14 +41,13 @@ public class Question {
     @Column(length = 1000)
     private String category;
 
-    //Worth considering adding a year here, in case they want user to be able
-    //to filter only questions of a specific year, rather than just answers
+    //Order of question in frontend
+    @Column(columnDefinition = "int default 0", nullable = false)
+    private int rank;
 
 
-    /*The only way to match two language datasets is to ensure that Q1 of Lang1 is
-     * matched with Q1 of Lang2. QuestionOrder stores the position in which a question
-     * was placed in when inserted
-     */
+
+
     @OneToMany(mappedBy = "question")
     private Set<QuestionMeta> metaData;
 
@@ -96,6 +97,13 @@ public class Question {
 //        this.year = year;
 //    }
 
+    public int getRank(){
+        return rank;
+    }
+
+    public void setRank(int rank){
+        this.rank = rank;
+    }
     public String getId() {
         return id;
     }

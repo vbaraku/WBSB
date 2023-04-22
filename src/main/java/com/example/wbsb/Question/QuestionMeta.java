@@ -12,6 +12,7 @@ public class QuestionMeta  {
     private String country;
     private int year;
 
+    //This questionPosition is used to sync for insertion, not related to frontend
     private int questionPosition;
 
     @ManyToOne(fetch = FetchType.LAZY)

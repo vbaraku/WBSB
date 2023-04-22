@@ -36,8 +36,17 @@ export const useLanguageUpdate = () => {
     return context;
 };
 
+const getLanguageFromLocalStorage = () => {
+    const language = localStorage.getItem('language');
+    // check if language is in ['ALB', 'SRB', 'ENG']
+    if (language === 'ALB' || language === 'SRB' || language === 'ENG') {
+        return language;
+    }
+    return 'ALB';
+};
+
 export default function ThemeProvider({ children }) {
-    const [language, setLanguage] = useState(localStorage.getItem('language') || 'ALB');
+    const [language, setLanguage] = useState(getLanguageFromLocalStorage());
 
     async function getDictionary(language) {
         console.log(language);

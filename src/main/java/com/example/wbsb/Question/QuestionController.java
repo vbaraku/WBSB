@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -60,6 +62,22 @@ public class QuestionController {
 			return null;
 		}
 	}
+
+	@PostMapping("/order")
+	@Transactional
+	public ResponseEntity<?> changeOrder(@RequestBody Object[] changes){
+		HashMap[] changesArray = Arrays.copyOf(changes, changes.length, HashMap[].class);
+		for (HashMap change : changesArray){
+			String id = change.get("id").toString();
+			int rank = Integer.parseInt(change.get("value").toString());
+			System.out.println(id + " " + rank);
+			questionRepository.updateRank(id, rank);
+		}
+//		questionRepository./*/
+		return ResponseEntity.ok().build();
+	}
+
+
 
 	@GetMapping(path = "/{id}")
 	public Question getQuestion(@RequestParam String country, @RequestParam String language, @PathVariable int id) {

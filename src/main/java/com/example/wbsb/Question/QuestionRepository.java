@@ -4,18 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import javax.transaction.Transactional;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     //		List<Question> findByThematicElementContaining(String thematicElement);
 //    Optional<Question> findById(Integer id);
-
-    @Query("SELECT new Question(q.id, q.text, q.category, q.language) from Question q " +
-            " join q.metaData md " +
-            "where md.country = :country " +
-            "order by md.questionPosition")
-    List<Question> findAllByCountry(@Param("country") String country);
 
     @Query("SELECT md.country from Question q " +
             " join q.metaData md "
@@ -23,6 +20,10 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             + "and q.id = :id ")
     List<String> findQuestionByIdAndLang(String id, String language);
 
+    @Modifying
+//    @Transactional
+    @Query("UPDATE Question q SET q.rank = :rank WHERE q.id = :id")
+    void updateRank(String id, int rank);
     @Query("SELECT md.country from Question q " +
             " join q.metaData md "
             + "where q.language = :language "

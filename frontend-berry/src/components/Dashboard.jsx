@@ -99,6 +99,19 @@ export default function Dashboard() {
             category.category = category.category.substring(3);
         });
 
+        // now sort the questions by the question rank
+        sortedCategories.forEach((category) => {
+            category.questions.sort((a, b) => {
+                if (a.rank < b.rank) {
+                    return -1;
+                }
+                if (a.rank > b.rank) {
+                    return 1;
+                }
+                return 0;
+            });
+        });
+
         return sortedCategories;
     }
 

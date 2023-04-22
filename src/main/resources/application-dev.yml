@@ -18,6 +18,11 @@ spring:
         jdbc:
           batch_size: 1000
         dialect: org.hibernate.dialect.PostgreSQLDialect
-#        generate_statistics: true
-#        format_sql: true
-#        show_sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 361463634645-k1brd3lmdc06n66761o6hmi903onipaj.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: "{baseUrl}/oauth2/callback/google"

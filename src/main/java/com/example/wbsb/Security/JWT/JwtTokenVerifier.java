@@ -5,10 +5,13 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 //import jdk.internal.joptsimple.internal.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.security.Keys;
 
@@ -23,8 +26,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+//@Component
+//@Order(1)
 public class JwtTokenVerifier extends OncePerRequestFilter {
 
+    @Autowired
+    private JWTGoogleVerifier jwtGoogleVerifier;
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -38,28 +45,34 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         }
         String token = authorizationHeader.replace("Bearer ", "");
 
+
         try {
-            String key = "securesecuresecuresecuresecuresecuresecuresecure";
-            SecretKey secureKey = Keys.hmacShaKeyFor(key.getBytes());
 
-            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(secureKey).build().parseClaimsJws(token);
+            boolean confirm = jwtGoogleVerifier.validateToken(token);
+            System.out.println(confirm);
 
-            Claims body = claimsJws.getBody();
-            String username = body.getSubject();
+//            return;
+//            String key = "securesecuresecuresecuresecuresecuresecuresecure";
+//            SecretKey secureKey = Keys.hmacShaKeyFor(key.getBytes());
+//
+//            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(secureKey).build().parseClaimsJws(token);
+//
+//            Claims body = claimsJws.getBody();
+//            String username = body.getSubject();
+//
+//            List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");
+//
+//            Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
+//                    .map(m -> new SimpleGrantedAuthority(m.get("authority")))
+//                    .collect(Collectors.toSet());
+//            Authentication authentication = new UsernamePasswordAuthenticationToken(
+//                    username,
+//                    null,
+//                    simpleGrantedAuthorities
+//
+//            );
 
-            List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");
-
-            Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
-                    .map(m -> new SimpleGrantedAuthority(m.get("authority")))
-                    .collect(Collectors.toSet());
-            Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    username,
-                    null,
-                    simpleGrantedAuthorities
-
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (JwtException e) {
             throw new IllegalStateException(String.format("Token %s cannot be trusted", token));
         }
