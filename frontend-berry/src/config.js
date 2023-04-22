@@ -10,6 +10,7 @@ const config = {
     presetColor: 'default', // default, theme1, theme2, theme3, theme4, theme5, theme6
     i18n: 'en', // 'en' - English, 'fr' - French, 'ro' - Romanian, 'zh' - Chinese
     rtlLayout: false,
+    googleClientId: '361463634645-k1brd3lmdc06n66761o6hmi903onipaj.apps.googleusercontent.com',
     jwt: {
         secret: 'SECRET-KEY',
         timeout: '1 days'

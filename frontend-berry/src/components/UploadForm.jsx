@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/no-onchange */
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { GoogleLogin } from '@react-oauth/google';
+// import { useGoogleLogin } from 'react-google-login';
 
 export default function UploadForm() {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -10,6 +12,12 @@ export default function UploadForm() {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [queue, setQueue] = useState([]);
+
+    // useEffect(() => {
+    //     // remove no-def rule
+    //     // eslint-disable-next-line no-undef
+    //     console.log('here', google);
+    // }, []);
 
     function sendFile(country, language, year, selectedFile) {
         const formData = new FormData();
@@ -67,24 +75,17 @@ export default function UploadForm() {
 
     return (
         <div>
+            <GoogleLogin
+                onSuccess={(resp) => {
+                    console.log(resp);
+                }}
+                onError={() => {
+                    alert('err');
+                }}
+            />
+            hello
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '35%' }}>
                 <input type="file" accept=".csv" onChange={handleFileSelect} />
-                {/* <input
-                    type="text"
-                    name="country"
-                    value={country}
-                    onChange={(e) => {
-                        setCountry(e.target.value);
-                    }}
-                /> */}
-                {/* <input
-                    type="select"
-                    name="language"
-                    value={language}
-                    onChange={(e) => {
-                        setLanguage(e.target.value);
-                    }}
-                /> */}
                 Country
                 <select
                     name="country"

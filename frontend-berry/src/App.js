@@ -34,9 +34,7 @@ const App = () => {
     const inProduction = process.env.NODE_ENV === 'production';
     if (process.env.NODE_ENV === 'development') {
         baseURL = 'http://localhost:8080';
-        // baseURL = 'http://ec2-3-70-65-63.eu-central-1.compute.amazonaws.com/';
     } else {
-        // baseURL = 'http://ec2-3-70-65-63.eu-central-1.compute.amazonaws.com:8080/';
         baseURL = '/';
     }
 

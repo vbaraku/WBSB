@@ -12,13 +12,16 @@ import App from 'App';
 // style + assets
 import 'assets/scss/style.scss';
 import config from 'config';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(
-    <BrowserRouter basename={config.basename}>
-        <App />
-    </BrowserRouter>,
+    <GoogleOAuthProvider clientId={config.googleClientId}>
+        <BrowserRouter basename={config.basename}>
+            <App />
+        </BrowserRouter>
+    </GoogleOAuthProvider>,
     document.getElementById('root')
 );
 
