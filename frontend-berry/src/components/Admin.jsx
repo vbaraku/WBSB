@@ -18,11 +18,11 @@ export default function Admin() {
             */}
             <h1>Admin subdirectories</h1>:
             <ul>
-                <li>
+                {/* <li>
                     <Link to="/admin" aria-disabled>
                         Upload data through CSVs (Currently not implemented, needs testing)
                     </Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/admin/order-questions">Change order of questions</Link>
                 </li>
@@ -52,7 +52,9 @@ const Login = () => {
                 const token = resp.data;
                 const decoded = jwtDecode(token);
                 document.cookie = `token=${token}; expires=${new Date(decoded.exp * 1000).toUTCString()} path=/`;
-                alert('success');
+                // alert('success');
+                // navigate('/admin');
+                window.location.reload();
             })
             .catch((err) => {
                 alert('You are not authorized to access this page');

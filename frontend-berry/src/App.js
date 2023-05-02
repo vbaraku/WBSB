@@ -19,6 +19,8 @@ import './assets/scss/style.scss';
 import Header from 'components/Header';
 import { useEffect } from 'react';
 
+import { useCookies } from 'react-cookie';
+
 // import { JWTProvider } from 'contexts/JWTContext';
 // import { Auth0Provider } from 'contexts/Auth0Context';
 
@@ -32,6 +34,7 @@ const App = () => {
     const TRACKING_ID = 'UA-253190644-1'; // OUR_TRACKING_ID
     ReactGA.initialize(TRACKING_ID);
 
+    const [cookies] = useCookies(['token']);
     let baseURL = '';
     const inProduction = process.env.NODE_ENV === 'production';
     if (process.env.NODE_ENV === 'development') {
@@ -41,6 +44,20 @@ const App = () => {
     }
 
     axios.defaults.baseURL = baseURL;
+
+    // attach token to every request if it exists as Authorization header
+    axios.interceptors.request.use(
+        (config) => {
+            const token = cookies.token;
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        },
+        (error) => {
+            Promise.reject(error);
+        }
+    );
     const theme = createTheme({
         typography: {
             fontFamily: 'Campton'

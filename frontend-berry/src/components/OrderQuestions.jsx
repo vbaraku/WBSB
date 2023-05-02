@@ -58,6 +58,7 @@ export default function OrderQuestions() {
     const handleSave = () => {
         axios.post('/api/questions/order', changes).then((response) => {
             console.log(response);
+            alert('Changes saved');
         });
     };
 

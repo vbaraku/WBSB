@@ -57,10 +57,6 @@ public class PublicationController {
     @Transactional
     public ResponseEntity<?> uploadReport(@RequestPart MultipartFile file, @RequestPart MultipartFile image,
                                           @RequestPart String title ,String date, String language, String passcode) {
-        String realPasscode = env.getProperty("passcode");
-        if(!passcode.equals(realPasscode)){
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
         try {
             //transform date to LocalDate with format yyyy-MM-dd
 
