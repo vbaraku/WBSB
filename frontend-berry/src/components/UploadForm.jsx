@@ -2,7 +2,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { GoogleLogin } from '@react-oauth/google';
-// import { useGoogleLogin } from 'react-google-login';
+import jwtDecode from 'jwt-decode';
+// import useNavigate react
+import { useNavigate } from 'react-router-dom';
 
 export default function UploadForm() {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -12,6 +14,7 @@ export default function UploadForm() {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [queue, setQueue] = useState([]);
+    const navigate = useNavigate();
 
     // useEffect(() => {
     //     // remove no-def rule
@@ -75,15 +78,6 @@ export default function UploadForm() {
 
     return (
         <div>
-            <GoogleLogin
-                onSuccess={(resp) => {
-                    console.log(resp);
-                }}
-                onError={() => {
-                    alert('err');
-                }}
-            />
-            hello
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '35%' }}>
                 <input type="file" accept=".csv" onChange={handleFileSelect} />
                 Country

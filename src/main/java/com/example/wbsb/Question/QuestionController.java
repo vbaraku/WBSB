@@ -81,12 +81,7 @@ public class QuestionController {
 
 	@GetMapping(path = "/{id}")
 	public Question getQuestion(@RequestParam String country, @RequestParam String language, @PathVariable int id) {
-			List<Question> question = questionRepository.findAllByCountryAndLanguage(country,language);
-			return question.get(id);
+		List<Question> question = questionRepository.findAllByCountryAndLanguage(country, language);
+		return question.get(id);
 	}
-
-//	@GetMapping(path = "/details")
-//	public List<String> getQuestionById(@RequestParam String id, @RequestParam String language) {
-//		return question;
-//	}
 }

@@ -10,6 +10,7 @@ import Homepage from 'components/Homepage';
 import LanguageProvider from './LanguageContext';
 import Publications from 'components/Publications';
 import OrderQuestions from 'components/OrderQuestions';
+import Admin from 'components/Admin';
 // import './assets/scss/style.scss';
 import './assets/scss/style.scss';
 // routing
@@ -24,6 +25,7 @@ import { useEffect } from 'react';
 import createTheme from '@mui/material/styles/createTheme';
 import axios from 'axios';
 import ReactGA from 'react-ga';
+import PrivateRoute from 'components/PrivateRoute';
 // ==============================|| APP ||============================== //
 
 const App = () => {
@@ -57,11 +59,36 @@ const App = () => {
                     <Container fluid style={{ height: '100%' }}>
                         <Routes>
                             <Route path="/te-dhenat" element={<Dashboard />} />
-                            <Route path="/upload-report-qkss-sec" element={<UploadReport />} />
-                            {!inProduction && <Route path="/upload" element={<UploadForm />} />}
-                            {!inProduction && <Route path="/upload-report" element={<UploadReport />} />}
+                            {/* <Route path="/upload-report-qkss-sec" element={<UploadReport />} /> */}
+                            {/* <PrivateRoute path="/upload-report" element={<UploadReport />} /> */}
+                            {/* <Route
+                                path="/admin/upload-data"
+                                element={
+                                    <PrivateRoute>
+                                        <UploadForm />
+                                    </PrivateRoute>
+                                }
+                            /> */}
+                            <Route
+                                path="/admin/upload-report"
+                                element={
+                                    <PrivateRoute>
+                                        <UploadReport />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/admin/order-questions"
+                                element={
+                                    <PrivateRoute>
+                                        <OrderQuestions />
+                                    </PrivateRoute>
+                                }
+                            />
+
+                            <Route path="/admin" element={<Admin />} />
+                            {/* <PrivateRoute path="/rendit" element={<OrderQuestions />} /> */}
                             <Route path="/publikime" element={<Publications />} />
-                            <Route path="/rendit" element={<OrderQuestions />} />
                             <Route path="/" element={<Homepage />} />
                         </Routes>
                     </Container>

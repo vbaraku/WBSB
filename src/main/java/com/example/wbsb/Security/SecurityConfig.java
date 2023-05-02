@@ -3,10 +3,12 @@ package com.example.wbsb.Security;
 //import com.example.demo.DRUser.DRUserService;
 import com.example.wbsb.Security.JWT.JwtTokenVerifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -20,9 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-//                .ad   dFilter(new JwtTokenVerifier())
                 .authorizeRequests()
-                .antMatchers("/api/questions/**").permitAll();
+                .anyRequest().permitAll()
+                .and()
+                .addFilterBefore(new JwtTokenVerifier(), BasicAuthenticationFilter.class);
     }
 
 //
