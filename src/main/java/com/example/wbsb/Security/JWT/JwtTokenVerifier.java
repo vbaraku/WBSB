@@ -93,7 +93,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 // Get profile information from payload
                 String email = payload.getEmail();
                 System.out.println(email);
-                String[] adminEmails = {"arditymeri7@gmail.com", "wbsbkcss@gmail.com"};
+                String[] adminEmails = {"arditymeri7@gmail.com", "wbsbkcss@gmail.com", "vijon.b@gmail.com"};
                 ArrayList<String> adminEmailsList = new ArrayList<String>(Arrays.asList(adminEmails));
                 if (!adminEmailsList.contains(email)) {
                     System.out.println("Not an admin");
