@@ -88,11 +88,8 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
                 // Print user identifier
                 String userId = payload.getSubject();
-                System.out.println("User ID: " + userId);
-
                 // Get profile information from payload
                 String email = payload.getEmail();
-                System.out.println(email);
                 String[] adminEmails = {"arditymeri7@gmail.com", "wbsbkcss@gmail.com", "vijon.b@gmail.com"};
                 ArrayList<String> adminEmailsList = new ArrayList<String>(Arrays.asList(adminEmails));
                 if (!adminEmailsList.contains(email)) {
